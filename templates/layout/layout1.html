@@ -34,6 +34,43 @@
     pointer-events: none;
 }
 
+ul, #myUL {
+    list-style-type: none;
+  }
+  
+  #myUL {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .box {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+  }
+  
+  .box::before {
+    content: "\2610";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .check-box::before {
+    content: "\2611"; 
+    color: dodgerblue;
+  }
+  
+  .nested {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  }
+
 </style>
 <body>
   <!-- Top Bar -->
@@ -80,8 +117,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav" style="color: white;">
-          <li><a class="nav-link" href="">Home</a></li>
-          <li><a class="nav-link" href="">View Data</a></li>
+          <li><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+          <li><a class="nav-link" href="{{ url_for('home') }}">View Data</a></li>
           <li><a class="nav-link" href="">Add Data</a></li>
           <li><a class="nav-link" href="">About</a></li>
         </ul>
@@ -103,6 +140,51 @@
       <div class="row">
             <div class="col-md-3 filter">
             Filter
+            <div class="dropdown">
+                <button class="btn btn-primary" type="button">Dropdown Example
+                    </button>
+                <ul id="myUL">
+                    <li><span class="box">Beverages</span>
+                        <ul class="nested">
+                            <li><span class="box">Water</span>
+                                <ul class="nested"></ul>
+                            </li>
+                            <li><span class="box">Coffee</span>
+                                <ul class="nested"></ul>
+                            </li>
+                            <li><span class="box">Tea</span>
+                                <ul class="nested">
+                                    <li><span class="box">Black Tea</span>
+                                        <ul class="nested"></ul>
+                                    </li>
+                                    <li><span class="box">White Tea</span>
+                                        <ul class="nested"></ul>
+                                    </li>
+                                    <li><span class="box">Green Tea</span>
+                                        <ul class="nested">
+                                            <li>Sencha</li>
+                                            <li>Gyokuro</li>
+                                            <li>Matcha</li>
+                                            <li>Pi Lo Chun</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>  
+                        </ul>
+                    </li>
+                </ul>
+              </div>
+              <script>
+                var toggler = document.getElementsByClassName("box");
+                var i;
+                
+                for (i = 0; i < toggler.length; i++) {
+                  toggler[i].addEventListener("click", function() {
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("check-box");
+                  });
+                }
+                </script>
             </div>
         <div class="col-md-9">
            <!-- Breadcrumb -->
@@ -110,8 +192,8 @@
             <div class="container">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">      
-                    <li><a class="nav-link filter" href="">Table</a></li>
-                    <li><a class="nav-link filter" href="">Gallery</a></li>
+                    <li><a class="nav-link filter" href="{{ url_for('home') }}">Table</a></li>
+                    <li><a class="nav-link filter" href="{{ url_for('images_grid') }}">Gallery</a></li>
                     <li><a class="nav-link filter" href="">Map</a></li>
                     <li><a class="nav-link filter" href="">Analysis</a></li>
                     <li><a class="nav-link disable-links" href="">Download</a></li>
