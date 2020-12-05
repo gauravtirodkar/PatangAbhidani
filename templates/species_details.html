@@ -19,22 +19,30 @@
         <th scope="col">Country/Area</th>
         <th scope="col">Co-ordinates</th>
         <th scope="col">Date</th>
+        <th scope="col">Genus</th>
+        <th scope="col">Species</th>
       </tr>
     </thead>
     <tbody>
       
       <tr>
-        <form action="" method="POST">
-          <td name="sname"> </td>
-          <td name="country"></td>
-          <td name="coords"></td>
-          <td name="date"></td>
-        </form>
+          <form action="" method="POST">
+            <td name="sname"></td>
+            <td name="country"></td>
+            <td name="coords"></td>
+            <td name="date"></td>
+            <td name="genus"></td>
+            <td name="species"></td>
+          </form>
       </tr>
- 
+      {%for data in data%}  
       <tr>
-        <td></td>
+        <td>{{ data[0] }}</td>
+        <td>{{ data[1] }}</td>
+        <td>{{ data[2] }}</td>
+        <td>{{ data[3] }}</td>
       </tr>
+      {%endfor%}
     </tbody>
   </table>
 {% endblock %}
