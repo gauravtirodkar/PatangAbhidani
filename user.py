@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('base1.html',user="LoggedIn")
+    return render_template('base.html',user="LoggedIn")
 
 @app.route('/images')
 def images_grid():
