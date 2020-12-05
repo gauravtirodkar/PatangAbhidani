@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <!--
   ***************************
-      Constable View
+      SPO Dashboard
   ***************************
-  File Name : constable_view.html
+  File Name : spo_dashboard.html
   File Location : templates/
-  File Description : Displays the dashboard where constable can view added cases.
+  File Description : Displays the dashboard where SPO can assign cases and monitor their progress
 -->
 
 <head>
@@ -22,8 +21,20 @@
   <link rel="stylesheet" href="./static/css/style.css">
 
   <title>Patang Abhidani</title>
+
 </head>
 
+<style>
+.filter {
+  border-right: 3px solid rgb(11, 83, 131);
+  height: auto;
+}
+
+.disable-links {
+    pointer-events: none;
+}
+
+</style>
 <body>
   <!-- Top Bar -->
   <section id="top-bar" class="p-3">
@@ -61,88 +72,83 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="{{url_for('home')}}">
-        <img src="./static/img/ourlogo.png" class="logo" alt="">
+      <a class="navbar-brand" href="">
+        <img src="assets/img/ourlogo.png" class="logo" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav" style="color: white;">
+          <li><a class="nav-link" href="">Home</a></li>
+          <li><a class="nav-link" href="">View Data</a></li>
+          <li><a class="nav-link" href="">Add Data</a></li>
+          <li><a class="nav-link" href="">About</a></li>
+        </ul>
+
         
       </div>
     </div>
   </nav>
 
+  <!--Species Details-->
   <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">Case Details</h1>
-          <p class="lead">Analyze your case</p>
+          <h1 class="display-4">Species Details</h1>
+          <p class="lead">Find all the information of your species</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="index.html">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb-item active"> Case Details</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
+ 
 
   <section id="dashboard" class="py-4">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <h2>Case Details</h2>
-          <p>Case Id : {{ data['caseId'] }}</p>
-          <p>Case Type: {{ data['caseType'] }}</p>
-          <p>Case Title : {{ data['caseTitle'] }}</p>
-          <p>Investigation Officer : {{ data['assignedTo'] }}</p>
-          <p>Constable : {{ data['addedBy'] }}</p>
-          <p>Senior Police Officer : {{ data['assignedBy'] }}</p>
-          <p>Complainant Name : {{ data['complainantName'] }}</p>
-          <p>Complainant Contact No : {{ data['complainantPhoneNo'] }}</p>
-          <p>Victim Name : {{ data['victimName'] }}</p>
+        <div class="col-md-3 filter">
+          Filter
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="documents" class="py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <p>Here are all the documents related to the case</p>
+        <div class="col-md-9">
+           <!-- Breadcrumb -->
+          <section id="bc" class="mt-3">
+            <div class="container">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">      
+                    <li><a class="nav-link filter" href="">Table</a></li>
+                    <li><a class="nav-link filter" href="">Gallery</a></li>
+                    <li><a class="nav-link filter" href="">Map</a></li>
+                    <li><a class="nav-link filter" href="">Analysis</a></li>
+                    <li><a class="nav-link disable-links" href="">Download</a></li>
+                </ol>
+              </nav>
+            </div>
+          </section>
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Document Id.</th>
-                <th scope="col">Document Type</th>
-                <th scope="col">Uploaded By</th>
+                <th scope="col">Scientific Name</th>
+                <th scope="col">Country/Area</th>
+                <th scope="col">Co-ordinates</th>
+                <th scope="col">Date</th>
               </tr>
             </thead>
             <tbody>
-              {% for row in documents %}
-              <form action="{{url_for('viewDoc')}}" method="POST">
-                <tr>
-                  <td name="">{{ row['documentKey'] }}</td>
-                  <td name="DocType">{{ row['docType'] }}</td>
-                  <td name="uploadedBy">{{ row['uploadedBy']}}</td>
-                  <input type="hidden" name="documentKey" value="{{row['documentKey']}}" />
-                  <td><input type="submit" value="View" class="btn btn-sm btn-primary"></input></td>
-                </tr>
-              </form>
-              {% endfor %}
+              
+              <tr>
+                <form action="" method="POST">
+                  <td name="sname"> </td>
+                  <td name="country"></td>
+                  <td name="coords"></td>
+                  <td name="date"></td>
+                </form>
+              </tr>
+         
+              <tr>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -159,6 +165,21 @@
   <script src="./static/js/jquery-3.3.1.min.js "></script>
   <script src="./static/js/bootstrap.bundle.min.js "></script>
   <script src="./static/js/main.js "></script>
+  <style>
+    #analysis {
+      display: none;
+    }
+  </style>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("analysis");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
 </body>
 
 </html>
