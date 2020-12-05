@@ -1,0 +1,184 @@
+<!--
+  File Name: certificate.html
+  File Location: templates/certificate.html
+  File Description: This page is displayed after the investigation officer verifies the information extracted from the document and is satisfied with it, and hence generates the certificate under article 65B.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Patang Abhidani</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="./static/css/all.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="./static/css/bootstrap.css">
+	<!-- Custom -->
+	<link rel="stylesheet" href="./static/css/style.css">
+
+	<style>
+		body {
+			background-color: rgb(231, 236, 236);
+		}
+
+		@CHARSET "UTF-8";
+
+		.page-break {
+			page-break-after: always;
+			page-break-inside: avoid;
+			clear: both;
+		}
+
+		.page-break-before {
+			page-break-before: always;
+			page-break-inside: avoid;
+			clear: both;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="html-2-pdfwrapper"
+		style='position: absolute; left: 5%; top: 50px; bottom: 0; overflow: auto; width: 100vh;'>
+
+		<h1 style="text-align: center;">Certificate under Section 65-B of the Indian Evidence Act, 1872</h1>
+		<p>This is to certify that I am <b> {{ data1['name']}} </b> and reside/work at <b>Patang Abhidani</b>. I am owner/
+			incharge/user of the mobile having subscription and description of the mobile as follows:-</p>
+		<ul>
+			<li>Electronic record : Description of the document to be proved </li>
+			<li>Case Id : {{ data2['caseId'] }}</li>
+			<li>Case Title : {{ data2['caseTitle'] }}</li>
+			<li>Case Type : {{ data2['caseType'] }}</li>
+			<li>Document Name : {{ data['documentKey'] }}</li>
+			<li>Document Type : {{ data['docType'] }}</li>
+			<li>Classification : {{ data['docInfo'] }}</li>
+
+		</ul>
+		<p>I certify the aforesaid electronic generated from the above document data that: </p>
+		<h4 style="text-align: center;">CERTIFICATE</h4>
+		<p>
+			<ul>
+				<li>The information contained in the above document was fed into it in the ordinary course of
+					activity/usage of the document which was into my possession.</li>
+				<li>During the period the document was operating properly and there have been no such operational
+					problems so as to affect the accuracy of the electronic record.</li>
+				<li>During this period, the document was in my possession and safe custody and the document software’s
+					have built in security mechanisms i.e. Password Protected Access Control etc.</li>
+				<li>The electronic record generated from the above document has been derived from the information fed
+					into it and is a true extract of the data in the aforesaid document.</li>
+				<li>The above said document is in working conditions, when the output was taken from the aforesaid
+					document. The printout of the data/data transferred on CD has been taken directly from the document.
+				</li>
+				<li>I am personally involved into the transaction and / or generation of aforesaid electronic record.
+				</li>
+				<li>I am computer literate and having qualification (s) in IT.</li>
+				<li>The above stated matter is true to the best of my knowledge and belief.</li>
+			</ul>
+			<div style="text-align: right;">
+				<h5 style="float: right;">{{ data1['name']}}, Investigation Officer <br> (Name and Designation Of
+					Officer)</h5>
+			</div>
+		</p>
+
+
+	</div>
+
+	<script src='jspdf.min.js'></script>
+
+	<script>
+		var base64Img = null;
+		imgToBase64('octocat.jpg', function (base64) {
+			base64Img = base64;
+		});
+
+		margins = {
+			top: 70,
+			bottom: 40,
+			left: 30,
+			width: 550
+		};
+
+		generate = function () {
+			var pdf = new jsPDF('p', 'pt', 'a4');
+			pdf.setFontSize(18);
+			pdf.fromHTML(document.getElementById('html-2-pdfwrapper'),
+				margins.left, // x coord
+				margins.top, {
+					// y coord
+					width: margins.width // max width of content on PDF
+				},
+				function (dispose) {
+					headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
+				},
+				margins);
+
+			var iframe = document.createElement('iframe');
+			iframe.setAttribute('style',
+				'position:absolute;right:0; top:0; bottom:0; height:100%; width:650px; padding:20px;');
+			document.body.appendChild(iframe);
+
+			iframe.src = pdf.output('datauristring');
+		};
+
+		function headerFooterFormatting(doc, totalPages) {
+			for (var i = totalPages; i >= 1; i--) {
+				doc.setPage(i);
+				//header
+				header(doc);
+
+				footer(doc, i, totalPages);
+				doc.page++;
+			}
+		};
+
+		function header(doc) {
+			doc.setFontSize(30);
+			doc.setTextColor(40);
+			doc.setFontStyle('normal');
+
+			if (base64Img) {
+				doc.addImage(base64Img, 'JPEG', margins.left, 10, 40, 40);
+			}
+
+			doc.text("Certificate Under 65-B", margins.left + 110, 40);
+			doc.setLineCap(2);
+			doc.line(3, 70, margins.width + 43, 70); // horizontal line
+		};
+
+		// You could either use a function similar to this or pre convert an image with for example http://dopiaza.org/tools/datauri
+		// http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+
+		function imgToBase64(url, callback, imgVariable) {
+
+			if (!window.FileReader) {
+				callback(null);
+				return;
+			}
+			var xhr = new XMLHttpRequest();
+			xhr.responseType = 'blob';
+			xhr.onload = function () {
+				var reader = new FileReader();
+				reader.onloadend = function () {
+					imgVariable = reader.result.replace('text/xml', 'image/jpeg');
+					callback(imgVariable);
+					headerFooterFormatting
+				};
+				reader.readAsDataURL(xhr.response);
+			};
+			xhr.open('GET', url);
+			xhr.send();
+		};
+
+		function footer(doc, pageNumber, totalPages) {
+
+			var str = "Page " + pageNumber + " of " + totalPages
+
+			doc.setFontSize(10);
+			doc.text(str, margins.left, doc.internal.pageSize.height - 20);
+
+		};
+	</script>
+</body>
+
+</html>

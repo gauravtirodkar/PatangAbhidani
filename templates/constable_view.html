@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+  ***************************
+      Constable View
+  ***************************
+  File Name : constable_view.html
+  File Location : templates/
+  File Description : Displays the dashboard where constable can view added cases.
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="./static/css/all.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="./static/css/bootstrap.css">
+  <!-- Custom -->
+  <link rel="stylesheet" href="./static/css/style.css">
+
+  <title>Patang Abhidani</title>
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <section id="top-bar" class="p-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <i class="fas fa-phone"></i> (+91) 8087559977
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-envelope-open"></i> contact@patangabhidani.com
+        </div>
+        <div class="col-md-4">
+          <div class="social text-right">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="{{url_for('home')}}">
+        <img src="./static/img/ourlogo.png" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto">
+          {% if user != "LoggedIn" %}
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="">
+              <i class="fas fa-sign-in-alt"></i>
+              Login</a>
+          </li>
+          {% else %}
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="{{url_for('dropsession')}}">
+              <i class="fas fa-sign-in-alt"></i>
+              Log-Out</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">Case Details</h1>
+          <p class="lead">Analyze your case</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="index.html">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Case Details</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Case Details</h2>
+          <p>Case Id : {{ data['caseId'] }}</p>
+          <p>Case Type: {{ data['caseType'] }}</p>
+          <p>Case Title : {{ data['caseTitle'] }}</p>
+          <p>Investigation Officer : {{ data['assignedTo'] }}</p>
+          <p>Constable : {{ data['addedBy'] }}</p>
+          <p>Senior Police Officer : {{ data['assignedBy'] }}</p>
+          <p>Complainant Name : {{ data['complainantName'] }}</p>
+          <p>Complainant Contact No : {{ data['complainantPhoneNo'] }}</p>
+          <p>Victim Name : {{ data['victimName'] }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="documents" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>Here are all the documents related to the case</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Document Id.</th>
+                <th scope="col">Document Type</th>
+                <th scope="col">Uploaded By</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in documents %}
+              <form action="{{url_for('viewDoc')}}" method="POST">
+                <tr>
+                  <td name="">{{ row['documentKey'] }}</td>
+                  <td name="DocType">{{ row['docType'] }}</td>
+                  <td name="uploadedBy">{{ row['uploadedBy']}}</td>
+                  <input type="hidden" name="documentKey" value="{{row['documentKey']}}" />
+                  <td><input type="submit" value="View" class="btn btn-sm btn-primary"></input></td>
+                </tr>
+              </form>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="main-footer" class="py-4 bg-primary text-white text-center">
+    Copyright &copy;
+    <span class="year"></span> Patang Abhidani
+  </footer>
+
+  <script src="./static/js/jquery-3.3.1.min.js "></script>
+  <script src="./static/js/bootstrap.bundle.min.js "></script>
+  <script src="./static/js/main.js "></script>
+</body>
+
+</html>
