@@ -6,5 +6,9 @@ app = Flask(__name__)
 def home():
     return render_template('base1.html',user="LoggedIn")
 
+@app.route('/images')
+def images_grid():
+    return render_template('images_grid.html',user="LoggedIn")
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -33,6 +33,10 @@
 .disable-links {
     pointer-events: none;
 }
+p{
+  padding: 0px;
+  margin:0px;
+}
 
 </style>
 <body>
@@ -96,7 +100,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">Species Details</h1>
+          <h1 class="display-4">Images Details</h1>
           <p class="lead">Find all the information of your species</p>
         </div>
       </div>
@@ -126,31 +130,51 @@
               </nav>
             </div>
           </section>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Scientific Name</th>
-                <th scope="col">Country/Area</th>
-                <th scope="col">Co-ordinates</th>
-                <th scope="col">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr>
-                <form action="" method="POST">
-                  <td name="sname"> </td>
-                  <td name="country"></td>
-                  <td name="coords"></td>
-                  <td name="date"></td>
-                </form>
-              </tr>
-         
-              <tr>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="thumbnail">
+                  <a href="../static/img/homes/home-2.jpg" target="_blank">
+                    <img src="../static/img/homes/home-2.jpg" alt="Lights" style="width:100%">
+                    <div class="caption">
+                      <p>Species Name :</p> 
+                      <p>Clicked By :</p> 
+                      <p>Date :</p> 
+                      <p>Location :</p>
+
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="thumbnail">
+                  <a href="../static/img/homes/home-2.jpg" target="_blank">
+                    <img src="../static/img/homes/home-2.jpg" alt="Nature" style="width:100%">
+                    <div class="caption">
+                      <p>Species Name :</p>
+                      <p>Clicked By :</p> 
+                      <p>Date :</p> 
+                      <p>Location :</p> 
+
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="thumbnail">
+                  <a href="../static/img/homes/home-2.jpg" target="_blank">
+                    <img src="../static/img/homes/home-2.jpg" alt="Fjords" style="width:100%">
+                    <div class="caption">
+                      <p>Species Name :</p>
+                      <p>Clicked By :</p> 
+                      <p>Date :</p>
+                      <p>Location :</p> 
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
