@@ -3,8 +3,12 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def home():
+def species_details():
     return render_template('species_details.html',user="LoggedIn")
+
+@app.route('/images')
+def images_grid():
+    return render_template('images_grid.html',user="LoggedIn")
 
 if __name__ == '__main__':
     app.run(debug=True)
