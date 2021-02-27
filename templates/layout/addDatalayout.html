@@ -73,7 +73,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav" style="color: white;">
           <li><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
-          <li><a class="nav-link" href="">Add Data</a></li>
+          <li><a class="nav-link" href="{{ url_for('addData') }}">Add Data</a></li>
           <li><a class="nav-link" href="">About</a></li>
         </ul>
 
@@ -98,8 +98,8 @@
             <div class="container">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">      
-                    <li><a class="nav-link filter" href="">Table</a></li>
-                    <li><a class="nav-link filter" href="">Gallery</a></li>
+                    <li><a class="nav-link filter" href="{{ url_for('specsdeets') }}">Table</a></li>
+                    <li><a class="nav-link filter" href="{{ url_for('images_grid') }}">Gallery</a></li>
                     <li><a class="nav-link filter" href="">Map</a></li>
                     <li><a class="nav-link filter" href="">Analysis</a></li>
                     <li><a class="nav-link disable-links" href="">Download</a></li>
