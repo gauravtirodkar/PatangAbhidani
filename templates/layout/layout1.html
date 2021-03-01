@@ -154,9 +154,7 @@ ul, #myUL {
                                 <ul class="nested">
                                     {% for location in location %}
                                         {%if location[1] == state[0] %}
-                                            <li><span class="box">{{location[0]}}</span>
-                                                <ul class="nested"></ul>
-                                            </li>
+                                            <li> <input class = "locn" type = "checkbox" id="box" value={{location[0]}} >{{location[0]}} </li>
                                         {%endif%}
                                     {%endfor%}
                                 </ul>
@@ -173,10 +171,14 @@ ul, #myUL {
 
               <script>               
                   $("#filter").click(function(){ 
+                    var locn = [];
+                      $('input.locn:checkbox:checked').each(function () {
+                        locn.push($(this).val());
+                      });
                   $.ajax({
                     url: "/updateTable",
                     type: "get",
-                    data: {jsdata: 'text'},
+                    data: {jsdata : locn},
                     success: function(response) {
                        $("#body").html(response);
                     },

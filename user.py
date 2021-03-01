@@ -43,6 +43,8 @@ def images_grid():
 
 @app.route('/updateTable')
 def updateTable ():
+    text = request.args.getlist('jsdata')
+    print(text)
     cur = mysql.connection.cursor()
     
     cur.execute("SELECT city FROM location where state = 'Maharashtra' ")
@@ -54,6 +56,7 @@ def updateTable ():
     state = cur.fetchall()
     cur.close()
     return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
+ 
 
 @app.route('/addData')
 def addData():
