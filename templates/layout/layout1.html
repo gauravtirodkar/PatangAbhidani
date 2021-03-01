@@ -149,30 +149,20 @@ ul, #myUL {
                 <ul id="myUL">
                     <li><span class="box">Location</span>
                         <ul class="nested">
-                            <li><span class="box">Goa</span>
-                                <ul class="nested"></ul>
-                            </li>
-                            <li><span class="box">Rajasthan</span>
-                                <ul class="nested"></ul>
-                            </li>
-                            <li><span class="box">Maharashtra</span>
+                          {%for state in state %}
+                            <li><span class="box">{{state[0]}}</span>
                                 <ul class="nested">
-                                    <li><span class="box">Nashik</span>
-                                        <ul class="nested"></ul>
-                                    </li>
-                                    <li><span class="box">Pune</span>
-                                        <ul class="nested"></ul>
-                                    </li>
-                                    <li><span class="box">Raigad</span>
-                                        <ul class="nested">
-                                            <li>Sencha</li>
-                                            <li>Gyokuro</li>
-                                            <li>Matcha</li>
-                                            <li>Pi Lo Chun</li>
-                                        </ul>
-                                    </li>
+                                    {% for location in location %}
+                                        {%if location[1] == state[0] %}
+                                            <li><span class="box">{{location[0]}}</span>
+                                                <ul class="nested"></ul>
+                                            </li>
+                                        {%endif%}
+                                    {%endfor%}
                                 </ul>
                             </li>  
+                          {%endfor%}
+
                         </ul>
                     </li>
                 </ul>
