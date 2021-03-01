@@ -53,7 +53,7 @@ def updateTable ():
     cur.execute("SELECT DISTINCT state FROM location")
     state = cur.fetchall()
     cur.close()
-    return render_template('update_table.html', data=data, location=location, state=state, user="LoggedIn")
+    return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/addData')
 def addData():
