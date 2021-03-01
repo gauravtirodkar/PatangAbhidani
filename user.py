@@ -12,7 +12,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def home():
-    return render_template('index.html',user="LoggedIn")
+    return render_template('index.html', user="LoggedIn")
 
 @app.route('/specsdeets')
 def specsdeets():
@@ -20,16 +20,28 @@ def specsdeets():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
+    cur.execute("SELECT * FROM location")
+    location = cur.fetchall()
+    cur.execute("SELECT DISTINCT state FROM location")
+    state = cur.fetchall()
     cur.close()
-    return render_template('species_details.html', data=data,user="LoggedIn")
+    return render_template('species_details.html', data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/images')
 def images_grid():
-    return render_template('images_grid.html',user="LoggedIn")
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from butterflydata")
+    data = cur.fetchall()
+    cur.execute("SELECT * FROM location")
+    location = cur.fetchall()
+    cur.execute("SELECT DISTINCT state FROM location")
+    state = cur.fetchall()
+    cur.close()
+    return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/addData')
 def addData():
-    return render_template('addData.html',user="LoggedIn")
+    return render_template('addData.html', user="LoggedIn")
 
 if __name__ == '__main__':
     app.run(debug=True)
