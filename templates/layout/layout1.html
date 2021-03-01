@@ -167,6 +167,26 @@ ul, #myUL {
                     </li>
                 </ul>
               </div>
+              <div id="place_for_suggestions"></div>
+              <button id="filter">Submit</button>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+              <script>               
+                  $("#filter").click(function(){ 
+                  $.ajax({
+                    url: "/updateTable",
+                    type: "get",
+                    data: {jsdata: 'text'},
+                    success: function(response) {
+                       $("#table-id").html(response);
+                    },
+                    error: function(xhr) {
+                      //Do Something to handle error
+                    }
+                  });
+              });       
+                
+                </script>
               <script>
                 var toggler = document.getElementsByClassName("box");
                 var i;

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
+from bs4 import BeautifulSoup
+
 app = Flask(__name__)
  
  
@@ -34,10 +36,24 @@ def images_grid():
     data = cur.fetchall()
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
-    cur.execute("SELECT DISTINCT state FROM location")
+    cur.execute("SELECT DISTINCT state FROM location ")
     state = cur.fetchall()
     cur.close()
     return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
+
+@app.route('/updateTable')
+def updateTable ():
+    cur = mysql.connection.cursor()
+    
+    cur.execute("SELECT city FROM location where state = 'Maharashtra' ")
+    location = [item[0] for item in cur.fetchall()]
+    location = tuple(location)
+    cur.execute("SELECT * from butterflydata where location IN {}".format(location))
+    data = cur.fetchall()
+    cur.execute("SELECT DISTINCT state FROM location")
+    state = cur.fetchall()
+    cur.close()
+    return render_template('update_table.html', data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/addData')
 def addData():
