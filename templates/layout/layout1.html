@@ -154,7 +154,7 @@ ul, #myUL {
                                 <ul class="nested">
                                     {% for location in location %}
                                         {%if location[1] == state[0] %}
-                                            <li> <input class = "locn" type = "checkbox" id="box" value={{location[0]}} >{{location[0]}} </li>
+                                            <li> <input name = "locn" class = "locn" type = "checkbox" id="box" value={{location[0]}} >{{location[0]}} </li>
                                         {%endif%}
                                     {%endfor%}
                                 </ul>
@@ -166,26 +166,19 @@ ul, #myUL {
                 </ul>
               </div>
               <div id="place_for_suggestions"></div>
-              <button id="filter">Submit</button>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+              <button class="btn-success" id="filter">Submit</button>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
               <script>               
                   $("#filter").click(function(){ 
-                    var locn = [];
-                      $('input.locn:checkbox:checked').each(function () {
-                        locn.push($(this).val());
-                      });
-                  $.ajax({
-                    url: "/updateTable",
-                    type: "get",
-                    data: {jsdata : locn},
-                    success: function(response) {
-                       $("#body").html(response);
-                    },
-                    error: function(xhr) {
-                      //Do Something to handle error
-                    }
-                  });
+                    var list = [];
+                    $("input:checkbox[name=locn]:checked").each(function(){
+                        list.push($(this).val());
+                    });
+
+                  $.post("/updateTable",{"list":list}).done(function(resp){
+                    $("#body").html(resp);
+                  })
               });       
                 
                 </script>

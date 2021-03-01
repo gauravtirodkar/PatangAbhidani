@@ -41,17 +41,19 @@ def images_grid():
     cur.close()
     return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
 
-@app.route('/updateTable')
+@app.route('/updateTable',methods = ["POST"])
 def updateTable ():
-    text = request.args.getlist('jsdata')
-    print(text)
+    name = tuple(request.form.getlist('list[]'))
+    print(name)
     cur = mysql.connection.cursor()
     
-    cur.execute("SELECT city FROM location where state = 'Maharashtra' ")
+    cur.execute("SELECT city FROM location where city IN {}".format(name))
     location = [item[0] for item in cur.fetchall()]
     location = tuple(location)
+
     cur.execute("SELECT * from butterflydata where location IN {}".format(location))
     data = cur.fetchall()
+
     cur.execute("SELECT DISTINCT state FROM location")
     state = cur.fetchall()
     cur.close()
