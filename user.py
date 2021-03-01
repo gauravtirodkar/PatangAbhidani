@@ -16,9 +16,9 @@ def home():
 
 @app.route('/specsdeets')
 def specsdeets():
-    return render_template('species_details.html',user="LoggedIn")
+    #return render_template('species_details.html',user="LoggedIn")
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * from details")
+    cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
     cur.close()
     return render_template('species_details.html', data=data,user="LoggedIn")
