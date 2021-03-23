@@ -1,0 +1,16 @@
+
+{{state}}
+
+{%for state in state %}
+<li><span class="box">{{state[0]}}</span>
+    <ul class="nested">
+        {% for location in location %}
+            {%if location[1] == state[0] %}
+                <li><span class="box">{{location[0]}}</span>
+                    <ul class="nested"></ul>
+                </li>
+            {%endif%}
+        {%endfor%}
+    </ul>
+</li>  
+{%endfor%}

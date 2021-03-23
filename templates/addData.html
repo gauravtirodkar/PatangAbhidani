@@ -1,0 +1,70 @@
+{% extends 'layout/addDatalayout.html' %}
+
+{%block title %}
+<div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">Upload Images</h1>
+        <p class="lead">Upload Images with details</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+<table class="table">
+    <thead>
+      <tr>
+        <th>Document</th>
+        <th>Species Name</th>
+        <th>Clicked On Date</th>
+        <th>Location</th>
+        <th>Upload </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <form action="" method="POST" enctype="multipart/form-data">
+          <td style="width:10px;">
+            <div class="file has-name is-info">
+              <label class="file-label ">
+                <input class="file-input" type="file" name="casedoc" />
+              </label>
+            </div>
+          </td>
+          <td>
+            <input type="text" list="species" name="species" />
+            <datalist id="species">
+              <option>Species</option>
+              <option>Species</option>
+              <option>Species</option>
+              <option>Species</option>
+              <option>Species</option>
+              <option>Species</option>
+              <option>Species</option>
+              <option>Species</option>
+            </datalist>
+          </td>
+          <td>
+            <input type="date" name="Date&Time" id="dnt" class="form-control" max="2020-08-03" required>
+          </td>
+          <td>
+            <input type="text" list="Location" name="Location" />
+            <datalist id="Location">
+              <option>Location</option>
+              <option>Location</option>
+              <option>Location</option>
+              <option>Location</option>
+              <option>Location</option>
+              <option>Location</option>
+            </datalist>
+          </td>
+          <td>
+            <input type="submit" value="Upload" class="btn btn-primary" />
+          </td>
+        </form>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
