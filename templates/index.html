@@ -52,9 +52,9 @@
     <header class="s-header">
 
         <div class="header-logo" style="margin-bottom: 10px;">
-            <a class="site-logo" href="">
-                <!-- <img src="images/logo.svg" alt="Homepage"> -->
-                <h3 style="color: white;margin: auto;">Patang-Abhidani</h3>
+            <a class="site-logo" href="" style="margin-right:20px">
+                
+                <h3 style="color: #00a650; margin: auto; ">Patang-Abhidani</h3>
             </a>
         </div>
 
@@ -64,18 +64,11 @@
                 <li><a class="smoothscroll" href="#about" title="about">About</a></li>
                 <li><a class="smoothscroll" href="#info" title="info">Info</a></li>
                 <li><a class="" href="{{ url_for('images_grid') }}">GetData</a></li>
-                <li><a class="" href="">Register</a></li>
-                <li><a class="" href="">Log-In</a></li>
+                
             </ul>
 
             <ul class="header-social">
-                <li><a href="https://www.facebook.com/mp.mygov/"><i class="fab fa-facebook-f"
-                            aria-hidden="true"></i></a></li>
-                <li><a
-                        href="https://twitter.com/MP_MyGov?fbclid=IwAR3FkAA_B_oopP57rTs3DheOsHMVGgG4is6xdhF69vC_QplPfY0S4uWjzDw"><i
-                            class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="https://www.youtube.com/c/mpmygov"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                </li>
+                <li><a class="" href="">Register/Login</a></li>
             </ul>
         </nav>
 
@@ -88,7 +81,7 @@
     ================================================== -->
     <section id="home" class="s-home target-section">
 
-        <div class="home-image-part"></div>
+        
 
         <div class="home-content">
 
@@ -103,13 +96,6 @@
                     One click solution for all <br>butterfly enthusiasts.
                 </h3>
 
-                <!-- <div class="home-content__button">
-                    <a class="btn-video" href="https://player.vimeo.com/video/14592941?color=00a650&title=0&byline=0&portrait=0" data-lity>
-                        <span class="video-icon"></span>
-                    </a>
-                     <a href="#download" class="smoothscroll btn btn--primary btn--large">
-                        Check demo.
-                    </a> -->
             </div>
 
         </div> <!-- end home-content__main -->
@@ -146,55 +132,9 @@
                 </p>
                 <br>
                 <h3 class="display-1">Distribution of skipper butterfly</h3>
-                <iframe src="http://127.0.0.1:5000/map" height="800px" width="800px" frameborder="0"></iframe>
+                <iframe src="http://127.0.0.1:5000/map" height="800px" width="800px" frameborder="0" scrolling="no" style="pointer-events:none;"></iframe>
             </div>
         </div> <!-- end section-header -->
-
-        <!-- <div class="row about-desc" data-aos="fade-up">
-            <div class="col-full slick-slider about-desc__slider">
-
-                <div class="about-desc__slide">
-                    <h3 class="item-title">Women Helpline Number.</h3>
-                    <p>
-                        1090
-                    </p>
-                </div> 
-                <div class="about-desc__slide">
-                    <h3 class="item-title">Fire Emergency.</h3>
-                    <p>
-                        101
-                    </p>
-                </div> 
-                <div class="about-desc__slide">
-                    <h3 class="item-title">Ambulance.</h3>
-                    <p>
-                        102,108
-                    </p>
-                </div> 
-                <div class="about-desc__slide">
-                    <h3 class="item-title">SSR.</h3>
-                    <p>
-                        0755-2443655
-                    </p>
-                </div> 
-                <div class="about-desc__slide">
-                    <h3 class="item-title">PHQ Exchange.</h3>
-                    <p>
-                        0755-2501000
-                    </p>
-                </div> 
-
-            </div> 
-        </div> -->
-
-        <!-- <div class="row about-bottom-image" data-aos="fade-up">
-            <img src="images/app-screen-1400.png" 
-                 srcset="images/app-screen-600.png 600w, 
-                         images/app-screen-1400.png 1400w, 
-                         images/app-screen-2800.png 2800w" 
-                 sizes="(max-width: 2800px) 100vw, 2800px" 
-                 alt="App Screenshots"> 
-         </div> -->
 
     </section> <!-- end s-about -->
 
@@ -205,7 +145,7 @@
 
         <div class="row">
             <div class="col-full text-center" data-aos="fade-up">
-                <h2 class="display-2">How Our System Works?</h2>
+                <h2 class="display-2">How Our Community Works?</h2>
             </div>
         </div>
 
@@ -214,7 +154,7 @@
                 <div class="item-process__text">
                     <h3>Sign Up</h3>
                     <p>
-                        Enter your basic credentials.
+                        Enter your basic credentials or create a new account
                     </p>
                 </div>
             </div>
@@ -222,16 +162,15 @@
                 <div class="item-process__text">
                     <h3>Verify</h3>
                     <p>
-                        Once your account is created, it will be sent for verification of details.
+                        Once a user, you can upload images for verification. The butterfly species and subspecies will be verified
                     </p>
                 </div>
             </div>
             <div class="col-block item-process" data-aos="fade-up">
                 <div class="item-process__text">
-                    <h3>Get going</h3>
+                    <h3>Share with the world</h3>
                     <p>
-                        As soon as your account is verified, you can immediately Log-In and embark on your journey to 
-                        exploring the world of butterflies
+                        As soon as your image is uploaded, it will be available to the rest of the world to see and use, hence helping the community along with ur credits
                     </p>
                 </div>
             </div>
@@ -251,24 +190,31 @@
 
     <!-- footer
     ================================================== -->
-    <footer class="s-footer footer">
+    <!-- <footer class="s-footer footer" >
 
-        <div class="row footer__top">
-            <div class="col-six md-full">
-                <h1 class="display-2">
+        <div class="row footer__top" >
+            <div class="col-four md-full">
+                <h2 class="display-2" style="width: 500px; color: aliceblue;">
                     Patang Abhidani
-                </h1>
-                <p class="lead">
-                    One click solution for all butterfly enthusiasts.
-                </p>
+                </h2>
+                <h5 style="width: 500px; color: #00a650; margin-bottom: 3.2rem;">
+                    A comprehensive guide on skipper butterflies
+                </h5>
             </div>
+            <div>
+                <h4>contact us: 9876543210 </h4>
+            </div>
+
         </div>
 
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
         </div>
 
-    </footer> <!-- end s-footer -->
+    </footer> -->
+    <!-- Footer -->
+
+  <!-- Footer -->
 
 
     <!-- Java Script
@@ -276,5 +222,38 @@
     <script src="./static/js/jquery-3.2.1.min.js"></script>
     <script src="./static/js/plugins.js"></script>
     <script src="./static/js/citizen_main.js"></script>
+    <footer class="page-footer font-small blue pt-4" style="align-items: center; align-content: center;">
 
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-center" style="align-items: center; align-content: center;">
+      
+          <div class="row" style="align-items: center; align-content: center;">
+      
+            <div class="col-md-6 mt-md-0 mt-3">
+              <h1 class="text-uppercase" style="color:aliceblue">Patanga Abhidani</h1>
+              <p style="color: #00a650;">A compelete guide on skipper butterflies</p>
+      
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3"  > 
+                <h5 class="linke" style="color:aliceblue">Get help</h5>
+                <h5 class="linke" style="color:aliceblue">Email: XYZ@abc</h5>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3" > 
+                
+                <h5 class="linke" style="color:aliceblue">Contact us: 9876543210</h5>
+                <h5 class="linke" style="color:aliceblue">Follow us: icon</h5>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-3" > 
+                
+                <h5 class="linke" style="color:aliceblue">Made by: VESIT</h5>
+                <h5 class="linke" style="color:aliceblue">In association with: Greenworks trust</h5>
+            </div>
+            <!-- Grid column -->
+      
+            <hr class="clearfix w-100 d-md-none pb-3">
+          </div>
+        </div>
+        <!-- Copyright -->
+      
+      </footer>
 </body>
