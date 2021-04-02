@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2021 at 12:36 PM
+-- Generation Time: Apr 02, 2021 at 04:23 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -336,12 +336,80 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`city`, `state`) VALUES
+('', 'Punjab'),
+('Amboli', 'Maharashtra'),
+('Amirdhi', 'Tamilnadu'),
+('Aska', 'Odisha'),
+('Bandipur', 'Karnataka'),
+('Bangalore', 'Karnataka'),
+('Bankura', 'West Bengal'),
+('Baripada', 'Odisha'),
+('Barpeta', 'Assam'),
+('Bhaderwah', 'Jammu&Kashmir'),
+('Bhubaneswar', 'Odisha'),
+('Bokakhat', 'Assam'),
+('Calicut', 'Kerala'),
+('Chandigarh', 'Maharashtra'),
+('Changaram', 'Kerala'),
+('Changlang', 'Arunachal Pradesh'),
+('Chennai', 'Tamilnadu'),
+('Chiplun', 'Maharashtra'),
+('Coimbatore', 'Tamilnadu'),
+('Dakshina Kannada', 'Karnataka'),
+('Dapoli', 'Maharashtra'),
+('Devrukh', 'Maharashtra'),
+('Durgapur', 'West Bengal'),
 ('Faridabad', 'Haryana'),
+('Gonikopalu', 'Karnataka'),
 ('Gurgaon', 'Haryana'),
+('Guwahati', 'Assam'),
+('Harinavi', 'West Bengal'),
+('Idukki', 'Kerala'),
+('Jammu', 'Jammu&Kashmir'),
+('Jorhat', 'Assam'),
+('Kadavoor', 'Kerala'),
+('Kannur', 'Kerala'),
+('Karimganj', 'Assam'),
+('Kattappana', 'Kerala'),
+('Kolhapur', 'Maharashtra'),
+('Kollam', 'Kerala'),
+('Kozhikode', 'Kerala'),
+('Lonavala', 'Maharashtra'),
+('Lucknow', 'UttarPradesh'),
+('Malappuram', 'Kerala'),
+('Mangalore', 'Karnataka'),
+('Medinipur', 'West Bengal'),
+('Mettupalayam', 'Tamilnadu'),
 ('Mumbai', 'Maharashtra'),
+('Mysore', 'Karnataka'),
+('Nagaon', 'Assam'),
+('Nawabgunj', 'UttarPradesh'),
 ('New Delhi', 'Delhi'),
+('Nilambur', 'Kerala'),
+('Palakkad', 'Kerala'),
+('Palghar', 'Maharashtra'),
+('Panaji', 'Goa'),
 ('Pune', 'Maharashtra'),
-('Ratnagiri', 'Maharashtra');
+('Rajapalayam', 'Tamilnadu'),
+('Rajshahi', 'Bangladesh'),
+('Ranthambore', 'Rajasthan'),
+('Ratnagiri', 'Maharashtra'),
+('Reshi', 'Sikkim'),
+('Salcete', 'Goa'),
+('Satara', 'Maharashtra'),
+('Sindhudurg', 'Maharashtra'),
+('Southern West Bengal', 'West Bengal'),
+('Sriperumbudur', 'Tamilnadu'),
+('Thakurli', 'Maharashtra'),
+('Thenmala', 'Kerala'),
+('Thrissur', 'Kerala'),
+('Tiruppur', 'Tamilnadu'),
+('Trivandrum', 'Kerala'),
+('Uttarakannada', 'Karnataka'),
+('Vadodara', 'Gujarat'),
+('Vagamon', 'Kerala'),
+('Valanchery', 'Kerala'),
+('Viralimalai', 'Tamilnadu');
 
 -- --------------------------------------------------------
 
