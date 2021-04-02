@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +10,9 @@
   <link rel="stylesheet" href="./static/css/bootstrap.css">
   <!-- Custom -->
   <link rel="stylesheet" href="./static/css/style.css">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
   <title>Patang Abhidani</title>
-
 </head>
 
 <style>
@@ -131,8 +126,6 @@
           <li><a class="nav-link" style="color: white;" href="{{ url_for('addData') }}">Add Data</a></li>
           <li><a class="nav-link" style="color: white;" href="">About</a></li>
         </ul>
-
-
       </div>
     </div>
   </nav>
@@ -142,16 +135,27 @@
     {% block title %}{% endblock %}
   </section>
 
-
-
   <section id="dashboard" class="py-4">
     <div class="container">
       <div class="row">
         <div class="col-md-2 filter">
-          Filter
+          <h3> <i> FILTER </i> </h3>
           <div class="dropdown">
 
             <ul id="myUL">
+              <!--SPECIES FILTER-->
+              <li> <span class="box"> Species </span>
+                <ul class="nested">
+
+
+                  {% for species in species %}
+                  <li> <input name="species" class="species" type="checkbox" id="box" value={{species[0]}}>{{species[0]}} </li>
+                  {%endfor%}
+            
+                  <button class="btn-danger" id="fspecies">Submit</button>
+                </ul>
+              </li>
+              <!--LOCATION FILTER-->
               <li><span class="box">Location</span>
                 <ul class="nested">
                   {%for state in state %}
@@ -166,41 +170,37 @@
                     </ul>
                   </li>
                   {%endfor%}
-
+                  <button class="btn-success" id="filter">Submit</button>
                 </ul>
               </li>
             </ul>
           </div>
           <div id="place_for_suggestions"></div>
-          <button class="btn-success" id="filter">Submit</button>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
           <script>
             $("#filter").click(function () {
               var locn = [];
-                    $("input:checkbox[name=locn]:checked").each(function(){
-                        locn.push($(this).val());
-                    });
-                    
+              $("input:checkbox[name=locn]:checked").each(function () {
+                locn.push($(this).val());
+              });
+
               if (locn != '') {
                 table = document.getElementById("table-id");
                 tr = table.getElementsByTagName("tr");
 
                 // Loop through all table rows, and hide those who don't match the search query
                 for (i = 1; i < tr.length; i++) {
-
                   var flag = 0;
+                  td = tr[i].getElementsByTagName("td")[1];
+                  // console.log(td)
+                  if (td) {
+                    n = locn.length
+                    var td_text = td.innerHTML;
+                    for (k = 0; k < n; k++) {
+                      filter = locn[k].toLowerCase()
+                      console.log(typeof (filter))
 
-                
-                    td = tr[i].getElementsByTagName("td")[1];
-                    // console.log(td)
-                    if (td) {
-                      n = locn.length
-                      var td_text = td.innerHTML;
-                      for (k = 0;k < n; k++){ 
-                        filter = locn[k].toLowerCase()
-                        console.log(typeof(filter))
-                        
                       if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
                         //var td_text = td.innerHTML;  
                         //td.innerHTML = 'shaban';
@@ -209,15 +209,56 @@
                         //DO NOTHING
                       }
                     }
-                    }
-                  
+                  }
+
                   if (flag == 1) {
                     tr[i].style.display = "";
                   } else {
                     tr[i].style.display = "none";
                   }
                 }
-              } 
+              }
+            });
+
+            $("#fspecies").click(function () {
+              var species = [];
+              $("input:checkbox[name=species]:checked").each(function () {
+                species.push($(this).val());
+              });
+
+              if (species != '') {
+                table = document.getElementById("table-id");
+                tr = table.getElementsByTagName("tr");
+
+                // Loop through all table rows, and hide those who don't match the search query
+                for (i = 1; i < tr.length; i++) {
+                  var flag = 0;
+                  td = tr[i].getElementsByTagName("td")[1];
+                  // console.log(td)
+                  if (td) {
+                    n = species.length
+                    var td_text = td.innerHTML;
+                    for (k = 0; k < n; k++) {
+                      filter = species[k].toLowerCase()
+                      console.log(typeof (filter))
+
+                      if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                        //var td_text = td.innerHTML;  
+                        //td.innerHTML = 'shaban';
+                        flag = 1;
+                      } else {
+                        //DO NOTHING
+                      }
+                    }
+                  }
+
+                  if (flag == 1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
             });
           </script>
           <script>

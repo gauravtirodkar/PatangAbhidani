@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block table%}
-<script>
+<script>  
   getPagination('#table-id');
   $('#maxRows').trigger('change');
 
@@ -82,10 +82,6 @@
     // END OF PAGINATION 
 
   }
-
-
-
-
   // SI SETTING
   $(function () {
     // Just to append id number for each row  
@@ -167,12 +163,14 @@
   th{
     border: 1px solid black;
     overflow:hidden;
-    width: 170px;
+    width: 160px;
 }
 td{
     border: 1px solid black;
     overflow:inherit;
     width: fit-content;
+    padding: 0px;
+    margin: 0px;
 }
 
   table th,

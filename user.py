@@ -38,8 +38,10 @@ def images_grid():
     location = cur.fetchall()
     cur.execute("SELECT DISTINCT state FROM location ")
     state = cur.fetchall()
+    cur.execute("SELECT DISTINCT species FROM species ")
+    species = cur.fetchall()
     cur.close()
-    return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
+    return render_template('images_grid.html', species=species, data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/updateTable',methods = ["POST"])
 def updateTable ():
