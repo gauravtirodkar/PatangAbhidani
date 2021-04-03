@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
 from bs4 import BeautifulSoup
-
+import json
 app = Flask(__name__)
  
  
@@ -27,6 +27,7 @@ def specsdeets():
     cur.execute("SELECT DISTINCT state FROM location")
     state = cur.fetchall()
     cur.close()
+ 
     return render_template('species_details.html', data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/images')
@@ -34,6 +35,7 @@ def images_grid():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
+    
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
     cur.execute("SELECT DISTINCT state FROM location ")
@@ -46,6 +48,32 @@ def images_grid():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
+    # print(data)
+    # print(data[0][1])
+    # aqi = [x[0][1] for x in data]
+    # print(aqi)
+    lst=[]
+    for i in data:
+        i= list(i)
+        lst.append(i)
+    print(lst)
+    # pm10 = [x for x in data[7,8]]
+    # pm100 = [x for x in data[1]]
+    # pm101 = [x for x in data[4]]
+    # pm102 = [x[6] for x in data]
+    # pm103 = [x[5] for x in data]
+
+
+    # fin = [aqi,pm10,pm100,pm101]
+    # lst  =[]
+    # print(fin)
+
+    # for i in range(len(fin)):
+    #     lst.append([fin[j][i] for j in  range(len(fin))])
+    dict1={}
+    dict1["data"]=lst 
+    out_file = open("templates/data.txt", "w") 
+    json.dump(dict1, out_file, indent = 6) 
     return render_template('images_grid.html', species=species, species_name=species_name, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/updateTable',methods = ["POST"])
