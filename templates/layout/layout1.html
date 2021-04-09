@@ -197,7 +197,7 @@
                   </li>
                   {%endfor%}
                   
-                  <button class="btn-danger" id="fspecies">Submit</button>
+                  <button class="btn-primary" id="fspecies">Submit</button>
                 </ul>
               </li>
               <!--LOCATION FILTER-->
@@ -215,7 +215,7 @@
                     </ul>
                   </li>
                   {%endfor%}
-                  <button class="btn-success" id="filter">Submit</button>
+                  <button class="btn-primary" id="filter">Submit</button>
                 </ul>
               </li>
             </ul>
@@ -318,7 +318,11 @@
               });
             }
           </script>
+          <div class="container" style="padding: 8px;">
+            <button class="btn-danger" id="filter" onclick="location.reload()">Clear</button>
+          </div>
         </div>
+
         <div class="col-md-9">
           <ul class="nav nav-pills" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
