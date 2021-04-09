@@ -53,15 +53,20 @@ def images_grid():
 @app.route('/updateTable',methods = ["POST"])
 def updateTable ():
     places = request.form.getlist('locn')
-    if len(places) == 1:
-        p = tuple(places[0],places[0])
-    else:
-        p = tuple(places)
-    print(places)
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * from butterflydata where city in {}".format(places))
-    data = cur.fetchall()
+
+    if len(places) == 1:
+        places = places[0]
+        cur.execute("SELECT * from butterflydata where city=%s",(places,))
+        data = cur.fetchall()
+    else:
+        places = tuple(places)
+        cur.execute("SELECT * from butterflydata where city in {}".format(places))
+        data = cur.fetchall()
+    
+    '''cur.execute("SELECT * from butterflydata where city in {}".format(places))
+    data = cur.fetchall()'''
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
     cur.execute("SELECT DISTINCT state FROM location ")
