@@ -262,8 +262,7 @@
 <div id="TableData" class="container">
   <div class="header_wrap">
     <div class="num_rows">
-      <div class="form-group">
-        <!--		Show Numbers Of Rows 		-->
+      <!-- <div class="form-group">
         <select class="form-control" name="state" id="maxRows">
           <option value="10">10</option>
           <option value="15">15</option>
@@ -273,7 +272,7 @@
           <option value="100">100</option>
           <option value="5000">Show ALL Rows</option>
         </select>
-      </div>
+      </div> -->
     </div>
     <div class="tb_search">
       <input
@@ -291,30 +290,33 @@
     id="table-id"
     style="table-layout: fixed; max-width: 300px"
   >
-    <thead>
-      <tr>
-        <th>Location</th>
-        <th>Latitude/Longitude</th>
-        <th>Date</th>
-        <th>Species</th>
-        <th>Scientific Name</th>
-        <th>CopyRight</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for data in data %}
-      <tr>
-        <td>{{data[2]}}</td>
-        <td>{{data[7],data[8]}}</td>
-        <td>{{data[1]}}</td>
-        <td>{{data[4]}}</td>
-        <td>{{data[6]}}</td>
-        <td>{{data[5]}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Latitude/Longitude</th>
+      <th>Date</th>
+      <th>Sub Species</th>
+      <th>Species</th>
+      <th>Scientific Name</th>
+      <th>CopyRight</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    {% for data in data %}
+    <tr>
+    <td>{{data[2]}}</td>
+    <td>{{data[12],data[13]}}</td>
+    <td>{{data[1]}}</td>
+    <td>{{data[8]}}</td>
+    <td>{{data[5]}}</td>
+    <td>{{data[7]}}</td>
+    <td>{{data[6]}}</td>
+   </tr>
+    {% endfor %}
+    
+  <tbody>
 
-    <tbody></tbody>
   </table>
 
   <!--		Start Pagination -->
@@ -334,6 +336,8 @@
 
 <div class="container">
   <main class="grid">
+    
+    
     {%for i in data%}
     <article>
       <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />

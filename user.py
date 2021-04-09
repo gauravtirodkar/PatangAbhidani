@@ -53,18 +53,23 @@ def specsdeets():
 
 @app.route('/images')
 def images_grid():
-    print("Hello")
     cur = mysql.connection.cursor()
     cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
-    print("data")
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
     cur.execute("SELECT DISTINCT state FROM location ")
     state = cur.fetchall()
+    cur.execute("SELECT * FROM species")
+    species = cur.fetchall()
+    cur.execute("SELECT DISTINCT sub_sub_family, sub_family FROM species")
+    sub_sub_family = cur.fetchall()
+    cur.execute("SELECT DISTINCT species_name, sub_sub_family, sub_family FROM species")
+    species_name = cur.fetchall()
+    cur.execute("SELECT DISTINCT sub_family FROM species")
+    sub_family = cur.fetchall()
     cur.close()
-    return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
-
+    return render_template('images_grid.html', species=species, species_name=species_name, sub_sub_family=sub_sub_family, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")    
 @app.route('/updateTable',methods = ["POST"])
 def updateTable ():
     name = tuple(request.form.getlist('list[]'))
