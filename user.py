@@ -52,23 +52,21 @@ def images_grid():
 
 @app.route('/updateTable',methods = ["POST"])
 def updateTable ():
-    places = request.get_json()
-    places = tuple(places.get("locn"))
-
+    places = request.form.getlist('locn')
+    if len(places) == 1:
+        p = tuple(places[0],places[0])
+    else:
+        p = tuple(places)
     print(places)
 
     cur = mysql.connection.cursor()
-
-    cur.execute("SELECT * FROM location ")
-    location = cur.fetchall()
-
-    cur.execute("SELECT * from butterflydata where city IN {}".format(places))
+    cur.execute("SELECT * from butterflydata where city in {}".format(places))
     data = cur.fetchall()
-
-    print(data)
-
-    cur.execute("SELECT DISTINCT state FROM location")
+    cur.execute("SELECT * FROM location")
+    location = cur.fetchall()
+    cur.execute("SELECT DISTINCT state FROM location ")
     state = cur.fetchall()
+    
     cur.execute("SELECT * FROM species")
     species = cur.fetchall()
     cur.execute("SELECT DISTINCT sub_sub_family, sub_family FROM species")
@@ -78,7 +76,8 @@ def updateTable ():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
-    return render_template('images_grid.html', species=species, species_name=species_name, sub_sub_family=sub_sub_family, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
+    return render_template('images_grid.html', places=places,species=species, species_name=species_name, sub_sub_family=sub_sub_family, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
+
 
 
  
