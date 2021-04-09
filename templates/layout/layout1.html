@@ -156,7 +156,7 @@
                             <ul class="nested">
 
                               {% for species_name in species_name %}
-                              {% if species_name[2] == sub_family[0] %} 
+                              {% if species_name[2] == sub_family[0] and species_name[1] == sub_sub_family[0] %} 
                                   <li><span class="box">{{species_name[0]}} </span>
                                     <ul class="nested">
                                       {% for species in species %}
