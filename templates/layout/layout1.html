@@ -97,6 +97,7 @@
       width: 100%;
       background-color: #000;
       position: fixed;
+      z-index: 999;
     }
 
     .nav1 > .nav-header {
@@ -132,6 +133,15 @@
 
     .nav1 > #nav-check {
       display: none;
+    }
+
+    .refreshpage{
+      color:white;
+      text-decoration: none;
+    }
+    .refreshpage:hover{
+      color:white;
+      text-decoration: none;
     }
 
     @media (max-width: 750px) {
@@ -246,93 +256,134 @@
         <div class="row">
           <div class="col-md-3 filter">
             <h3> <i> FILTER </i> </h3>
-            <div class="dropdown">
-  
-              <ul id="myUL">
-                <!--SPECIES FILTER-->
-                <li> <span class="box"> Species </span>
-                  <ul class="nested">
-                    {% for sub_family in sub_family %}
-                    <li><span class="box">{{sub_family[0]}} </span>
-                      <ul class="nested">
-                        
-                        {% for sub_sub_family in sub_sub_family %}
-                          {% if sub_sub_family[1] == sub_family[0] and sub_sub_family[0] != '' %}
-                            <li><span class="box">{{sub_sub_family[0]}}</span>
-                              <ul class="nested">
-  
-                                {% for species_name in species_name %}
-                                {% if species_name[2] == sub_family[0] and species_name[1] == sub_sub_family[0]%} 
-                                    <li><span class="box">{{species_name[0]}} </span>
-                                      <ul class="nested">
-                                        {% for species in species %}
-                                          {% if species[1] == species_name[0] and species[3] == species_name[2] %}
-                                            <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
-                                              value={{species[0]}}>{{species[0]}} </li>
-                                          {% endif %}
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                {%endif %}
-                              {% endfor %}
-  
-                              
-                              </ul>
-                            </li>
-                          {% elif sub_sub_family[1] == sub_family[0] and sub_sub_family[0] == '' %}
-                            
-                          {% for species_name in species_name %}
-                            {% if species_name[2] == sub_family[0] %} 
-                                <li><span class="box">{{species_name[0]}} </span>
-                                  <ul class="nested">
-                                    {% for species in species %}
-                                      {% if species[1] == species_name[0] and species[3] == species_name[2] %}
-                                        <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
-                                          value={{species[0]}}>{{species[0]}} </li>
-                                      {% endif %}
-                                    {% endfor %}
-                                  </ul>
-                                </li>
-                            {%endif %}
-                          {% endfor %}
-  
-                          {% endif %}
-                        {% endfor %}
-  
-                      </ul>
-                    </li>
-                    {%endfor%}
-                    
-                    <button class="btn-danger" id="fspecies">Submit</button>
-                  </ul>
-                </li>
-
+            <form action="{{url_for('updateTable')}}" method="POST">
+              <div class="dropdown">
                 
-                <!--LOCATION FILTER-->
-                <li><span class="box">Location</span>
-                  <ul class="nested">
-                    {%for state in state %}
-                    <li><span class="box">{{state[0]}}</span>
-                      <ul class="nested">
-                        {% for location in location %}
-                        {%if location[1] == state[0] %}
-                        <li> <input name="locn" class="locn" type="checkbox" id="box"
-                            value={{location[0]}}>{{location[0]}} </li>
-                        {%endif%}
-                        {%endfor%}
-                      </ul>
-                    </li>
-                    {%endfor%}
-                    <button class="btn-success" id="filter">Submit</button>
-                  </ul>
-                </li>
-              </ul>
-              
-            </div>
+                <ul id="myUL">
+                  <!--SPECIES FILTER-->
+                  
+                  <li> <span class="box"> Species </span>
+                    <ul class="nested">
+                      
+                      {% for sub_family in sub_family %}
+                      <li><span class="box">{{sub_family[0]}} </span>
+                        <ul class="nested">
+                          
+                          {% for sub_sub_family in sub_sub_family %}
+                            {% if sub_sub_family[1] == sub_family[0] and sub_sub_family[0] != '' %}
+                              <li><span class="box">{{sub_sub_family[0]}}</span>
+                                <ul class="nested">
+    
+                                  {% for species_name in species_name %}
+                                  {% if species_name[2] == sub_family[0] and species_name[1] == sub_sub_family[0] %} 
+                                      <li><span class="box">{{species_name[0]}} </span>
+                                        <ul class="nested">
+                                          {% for species in species %}
+                                            {% if species[1] == species_name[0] and species[3] == species_name[2] %}
+                                              {%if species[0] is in sub_spec %}
+                                              <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
+                                                value={{species[0]}} checked>{{species[0]}} </li>
+                                              {% else %}
+                                                <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
+                                                  value={{species[0]}}>{{species[0]}} </li>
+                                              {% endif %}
+                                            {% endif %}
+                                          {% endfor %}
+                                        </ul>
+                                      </li>
+                                  {%endif %}
+                                {% endfor %}
+    
+                                
+                                </ul>
+                              </li>
+                            {% elif sub_sub_family[1] == sub_family[0] and sub_sub_family[0] == '' %}
+                              
+                            {% for species_name in species_name %}
+                              {% if species_name[2] == sub_family[0] %} 
+                                  <li><span class="box">{{species_name[0]}} </span>
+                                    <ul class="nested">
+                                      {% for species in species %}
+                                        {% if species[1] == species_name[0] and species[3] == species_name[2]  %}
+                                          {%if species[0] is in sub_spec %}
+                                              <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
+                                                value={{species[0]}} checked>{{species[0]}} </li>
+                                            {% else %}
+                                              <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
+                                                value={{species[0]}}>{{species[0]}} </li>
+                                            {% endif %}
+                                        
+                                        {% endif %}
+                                      {% endfor %}
+                                    </ul>
+                                  </li>
+                              {%endif %}
+                            {% endfor %}
+    
+                            {% endif %}
+                          {% endfor %}
+    
+                        </ul>
+                      </li>
+                      {%endfor%}
+                      
+                      <!--<button class="btn-danger" id="fspecies">Submit</button>-->
+                    </ul>
+                  </li>
+                  <!--LOCATION FILTER-->
+                  
+                  <li><span class="box">Location</span>
+                    <ul class="nested">
+                      {%for state in state %}
+                      <li><span class="box">{{state[0]}}</span>
+                        <ul class="nested">
+                          {% for location in location %}
+                          {%if location[1] == state[0]  %}
+                          {% if location[0] is in places %}
+                          
+                          <li> <input name="locn" class="locn" type="checkbox" id="box"
+                            value={{location[0]}} checked>{{location[0]}} </li>
+                          {%else%}
+                          <li> <input name="locn" class="locn" type="checkbox" id="box"
+                              value={{location[0]}}>{{location[0]}} </li>
+                            {% endif %}
+                          {%endif%}
+                          {%endfor%}
+                        </ul>
+                      </li>
+                      {%endfor%}
+                      
+                    </ul>
+                  </li>
+                </ul>
+                
+              </div>
+              <button class="btn-success" type="submit">Submit</button>
+                    </form>
             <div id="place_for_suggestions"></div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   
             <script>
+
+              $('#update_locn').click(function(){
+                  var locn = [];
+                  var sub_spec = [];
+                  $("input:checkbox[name=locn]:checked").each(function () {
+                    locn.push($(this).val());
+                  });
+                  $("input:checkbox[name=sub_spec]:checked").each(function () {
+                    sub_spec.push($(this).val());
+                  });
+                  $.ajax({
+                    type:'POST',
+                    contentType: "application/json;charset=utf-8",
+                    traditional: "true",
+                    url:'/updateTable',
+                    data:JSON.stringify({locn},{sub_spec}),
+                    dataType : "json"
+                  })
+                });
+
               $("#filter").click(function () {
                 var locn = [];
                 $("input:checkbox[name=locn]:checked").each(function () {
@@ -428,7 +479,8 @@
               }
             </script>
             <div class="container" style="padding: 8px;">
-              <button class="btn btn-danger" onclick="location.reload()">Clear</button>
+              <button class="btn btn-danger" >
+                 <a href="{{url_for('images_grid')}}" class="refreshpage">Clear</a> </button>
             </div>
           </div>
           <div class="col-md-9">
