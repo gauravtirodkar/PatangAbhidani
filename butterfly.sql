@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2021 at 09:13 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Apr 09, 2021 at 09:36 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -428,7 +428,7 @@ INSERT INTO `location` (`city`, `state`) VALUES
 
 CREATE TABLE `species` (
   `sub_species` varchar(50) NOT NULL,
-  `species` varchar(50) NOT NULL,
+  `species_name` varchar(50) NOT NULL,
   `sub_sub_family` varchar(50) NOT NULL,
   `sub_family` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -437,7 +437,7 @@ CREATE TABLE `species` (
 -- Dumping data for table `species`
 --
 
-INSERT INTO `species` (`sub_species`, `species`, `sub_sub_family`, `sub_family`) VALUES
+INSERT INTO `species` (`sub_species`, `species_name`, `sub_sub_family`, `sub_family`) VALUES
 ('exclamationis', 'Badamia', '', 'Coeliadinae'),
 ('sena', 'Bibasis', '', 'Coeliadinae'),
 ('mahintha', 'Bibasis', '', 'Coeliadinae'),

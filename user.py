@@ -40,18 +40,18 @@ def images_grid():
     state = cur.fetchall()
     cur.execute("SELECT * FROM species")
     species = cur.fetchall()
-    cur.execute("SELECT DISTINCT species_name,sub_family FROM species")
+    cur.execute("SELECT DISTINCT sub_sub_family, sub_family FROM species")
+    sub_sub_family = cur.fetchall()
+    cur.execute("SELECT DISTINCT species_name, sub_sub_family, sub_family FROM species")
     species_name = cur.fetchall()
-    print(species_name[0])
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
-    return render_template('images_grid.html', species=species, species_name=species_name, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
+    return render_template('images_grid.html', species=species, species_name=species_name, sub_sub_family=sub_sub_family, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
 
 @app.route('/updateTable',methods = ["POST"])
 def updateTable ():
     name = tuple(request.form.getlist('list[]'))
-    print(name)
     cur = mysql.connection.cursor()
     
     cur.execute("SELECT city FROM location where city IN {}".format(name))

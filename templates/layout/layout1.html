@@ -149,12 +149,38 @@
                   {% for sub_family in sub_family %}
                   <li><span class="box">{{sub_family[0]}} </span>
                     <ul class="nested">
-                      {% for species_name in species_name %}
-                          {% if species_name[1] == sub_family[0] %} 
+                      
+                      {% for sub_sub_family in sub_sub_family %}
+                        {% if sub_sub_family[1] == sub_family[0] and sub_sub_family[0] != '' %}
+                          <li><span class="box">{{sub_sub_family[0]}}</span>
+                            <ul class="nested">
+
+                              {% for species_name in species_name %}
+                              {% if species_name[2] == sub_family[0] %} 
+                                  <li><span class="box">{{species_name[0]}} </span>
+                                    <ul class="nested">
+                                      {% for species in species %}
+                                        {% if species[1] == species_name[0] and species[3] == species_name[2] %}
+                                          <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
+                                            value={{species[0]}}>{{species[0]}} </li>
+                                        {% endif %}
+                                      {% endfor %}
+                                    </ul>
+                                  </li>
+                              {%endif %}
+                            {% endfor %}
+
+                            
+                            </ul>
+                          </li>
+                        {% elif sub_sub_family[1] == sub_family[0] and sub_sub_family[0] == '' %}
+                          
+                        {% for species_name in species_name %}
+                          {% if species_name[2] == sub_family[0] %} 
                               <li><span class="box">{{species_name[0]}} </span>
                                 <ul class="nested">
                                   {% for species in species %}
-                                    {% if species[1] == species_name[0] and species[3] == species_name[1] %}
+                                    {% if species[1] == species_name[0] and species[3] == species_name[2] %}
                                       <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
                                         value={{species[0]}}>{{species[0]}} </li>
                                     {% endif %}
@@ -163,6 +189,9 @@
                               </li>
                           {%endif %}
                         {% endfor %}
+
+                        {% endif %}
+                      {% endfor %}
 
                     </ul>
                   </li>
@@ -237,25 +266,25 @@
             });
 
             $("#fspecies").click(function () {
-              var species = [];
-              $("input:checkbox[name=species]:checked").each(function () {
-                species.push($(this).val());
+              var sub_spec = [];
+              $("input:checkbox[name=sub_spec]:checked").each(function () {
+                sub_spec.push($(this).val());
               });
 
-              if (species != '') {
+              if (sub_spec != '') {
                 table = document.getElementById("table-id");
                 tr = table.getElementsByTagName("tr");
 
                 // Loop through all table rows, and hide those who don't match the search query
                 for (i = 1; i < tr.length; i++) {
                   var flag = 0;
-                  td = tr[i].getElementsByTagName("td")[1];
+                  td = tr[i].getElementsByTagName("td")[4];
                   // console.log(td)
                   if (td) {
-                    n = species.length
+                    n = sub_spec.length
                     var td_text = td.innerHTML;
                     for (k = 0; k < n; k++) {
-                      filter = species[k].toLowerCase()
+                      filter = sub_spec[k].toLowerCase()
                       console.log(typeof (filter))
 
                       if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
@@ -277,6 +306,7 @@
               }
             });
           </script>
+
           <script>
             var toggler = document.getElementsByClassName("box");
             var i;
