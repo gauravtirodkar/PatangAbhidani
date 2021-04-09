@@ -216,7 +216,7 @@ def img():
                             150,loc,datee,sn,cb)
             iframe = branca.element.IFrame(html=popup,width=200,height=200)
             popup = folium.Popup(iframe,max_width=200)
-            marker = folium.Marker([lat,lon],popup=popup)
+            marker = folium.Marker([lat,lon], popup=popup)
 
             marker.add_to(m)
 

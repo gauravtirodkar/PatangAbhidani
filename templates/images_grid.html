@@ -9,8 +9,8 @@
 </div>
 {% endblock %} 
    
-{% block table%}
-<button onclick="exportTableToCSV('butterflies.csv')">Download data</button>
+{% block table%}<!-- 
+<button onclick="exportTableToCSV('butterflies.csv')">Download data</button> -->
 <script>
   getPagination("#table-id");
   $("#maxRows").trigger("change");
@@ -92,10 +92,7 @@
   }
 
   // SI SETTING
-  $(function () {
-    // Just to append id number for each row
-    default_index();
-  });
+  
 
   //ROWS SHOWING FUNCTION
   function showig_rows_count(maxRows, pageNum, totalRows) {
@@ -114,16 +111,7 @@
   }
 
   // CREATING INDEX
-  function default_index() {
-    $("table tr:eq(0)").prepend("<th> ID </th>");
-
-    var id = 0;
-
-    $("table tr:gt(0)").each(function () {
-      id++;
-      $(this).prepend("<td>" + id + "</td>");
-    });
-  }
+  
 
   // All Table search script
   function FilterkeyWord_all_table() {
@@ -330,9 +318,7 @@
   <thead>
     <tr>
       <th>Location</th>
-      <th>Latitude/Longitude</th>
       <th>Date</th>
-      <th>Sub Species</th>
       <th>Species</th>
       <th>Scientific Name</th>
       <th>CopyRight</th>
@@ -343,9 +329,7 @@
     {% for data in data %}
     <tr>
     <td>{{data[2]}}</td>
-    <td>{{data[12],data[13]}}</td>
     <td>{{data[1]}}</td>
-    <td>{{data[8]}}</td>
     <td>{{data[5]}}</td>
     <td>{{data[7]}}</td>
     <td>{{data[6]}}</td>
@@ -389,62 +373,4 @@
   </main>
 </div>
 
-<div class="container">
-  <main class="grid">
-    <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
-      <div class="text">
-        <h3>name1</h3>
-        <p>Photographer:-</p>
-        <p>Date</p>
-        <p>Location</p>        
-      </div>
-    </article>
-    <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
-      <div class="text">
-        <h3>name2</h3>
-        <p>Photographer:-</p>
-        <p>Date</p>
-        <p>Location</p> 
-      </div>
-    </article>
-    <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
-      <div class="text">
-        <h3>name3</h3>
-        <p>Photographer:-</p>
-        <p>Date</p>
-        <p>Location</p> 
-      </div>
-    </article>
-    <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
-      <div class="text">
-        <h3>name4</h3>
-        <p>Photographer:-</p>
-        <p>Date</p>
-        <p>Location</p> 
-      </div>
-    </article>
-    <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
-      <div class="text">
-        <h3>name5</h3>
-        <p>Photographer:-</p>
-        <p>Date</p>
-        <p>Location</p> 
-      </div>
-    </article>
-    <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
-      <div class="text">
-        <h3>name6</h3>
-        <p>Photographer:-</p>
-        <p>Date</p>
-        <p>Location</p> 
-      </div>
-    </article>
-  </main>
-</div>
 {% endblock %}
