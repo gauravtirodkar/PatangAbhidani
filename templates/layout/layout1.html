@@ -215,7 +215,7 @@
                     </ul>
                   </li>
                   {%endfor%}
-                  <button class="btn-success" id="filter">Submit</button>
+                  <button class="btn-success" id="update_locn">Submit</button>
                 </ul>
               </li>
             </ul>
@@ -263,6 +263,22 @@
                   }
                 }
               }
+              
+            });
+
+            $('#update_locn').click(function(){
+              var locn = [];
+              $("input:checkbox[name=locn]:checked").each(function () {
+                locn.push($(this).val());
+              });
+              $.ajax({
+                type:'POST',
+                contentType: "application/json;charset=utf-8",
+                traditional: "true",
+                url:'/updateTable',
+                data:JSON.stringify({locn}),
+                dataType : "json"
+              })
             });
 
             $("#fspecies").click(function () {
