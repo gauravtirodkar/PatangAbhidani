@@ -69,7 +69,6 @@ def updateTable ():
 
     cur.execute("SELECT DISTINCT state FROM location")
     state = cur.fetchall()
-
     cur.execute("SELECT * FROM species")
     species = cur.fetchall()
     cur.execute("SELECT DISTINCT sub_sub_family, sub_family FROM species")
