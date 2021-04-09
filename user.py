@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_mysqldb import MySQL
 from bs4 import BeautifulSoup
 from werkzeug.utils import secure_filename
@@ -10,6 +10,33 @@ import pandas as pd
 import branca
 import gzip
 from io import BufferedReader
+import sqlite3
+import time
+import datetime
+import random
+
+def insert_users(email,password,name):
+    conn = sqlite3.connect('patanga')
+    c = conn.cursor()
+    c.execute("INSERT INTO users (email,password,name) VALUES (?, ?, ?)",
+          (email,password,name))
+    conn.commit()
+    c.close
+    conn.close()
+
+
+def check_valid_password(email,password):
+    conn = sqlite3.connect('patanga')
+    c = conn.cursor()
+    c.execute('''SELECT * FROM users where email = ?''',(email,))
+    data = c.fetchall()
+    conn.commit()
+    c.close
+    conn.close()
+    if len(data) == 1:
+        return data[0][1] == password
+    else:
+        return False
 UPLOAD_FOLDER = 'C:/applications/XAMPP/htdocs/butterfly'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 """ from flask import Flask, url_for, render_template,request,session
@@ -19,13 +46,13 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app) """
 app = Flask(__name__)
- 
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'butterfly'
- 
+
 mysql = MySQL(app)
 
 
@@ -70,7 +97,7 @@ def updateTable ():
     name = tuple(request.form.getlist('list[]'))
     print(name)
     cur = mysql.connection.cursor()
-    
+
     cur.execute("SELECT city FROM location where city IN {}".format(name))
     location = [item[0] for item in cur.fetchall()]
     location = tuple(location)
@@ -82,11 +109,13 @@ def updateTable ():
     state = cur.fetchall()
     cur.close()
     return render_template('images_grid.html', data=data, location=location, state=state, user="LoggedIn")
- 
+
 
 @app.route('/addData')
 def addData():
     return render_template('addData.html', user="LoggedIn")
+
+
 
 
 """ class User(db.Model):
@@ -117,39 +146,65 @@ def login():
 			return "Incorrect Login"
 	return render_template('layout/auth.html')
 
-""" @app.route('/register', methods=['POST'])
-def register():
-	if request.method == 'POST':
-		new_user = User(name=request.form['name'], username=request.form['username'], password=request.form['password'])
-		db.session.add(new_user)
-		db.session.commit()
-	return render_template('auth.html') """
+@app.route("/new_login",methods = ["GET","POST"])
+def new_login():
+    if request.method == "POST":
+        try:
+            #REGISTER User
+            email = request.form["email"]
+            name = request.form["name"]
+            password = request.form["password"]
+            try:
+                insert_users(email,password,name)
+                return jsonify({"status":"Success"})
+            except:
+                return jsonify({"error":"User already exists"})
+        except:
+            email = request.form["email"]
+            password = request.form["password"]
+            if(check_valid_password(email,password)):
+                return jsonify({"status":"Success"})
+            else:
+                return jsonify({"error":"Invalid Username or Password"})
+    return render_template("new_login.html")
 
-@app.route('/upload')  
-def upload():  
-    return render_template("img.html")  
-    
+
+
+@app.route('/register', methods=['POST',"GET"])
+def register():
+    if request.method == "POST":
+        email = request.form["username"]
+        name = request.form["name"]
+        password = request.form["password"]
+        insert_users(email,password,name)
+        return render_template("register.html")
+    return render_template("register.html")
+
+@app.route('/upload')
+def upload():
+    return render_template("img.html")
+
 @app.route('/img', methods=['GET', 'POST'])
 def img():
-    if request.method == 'POST':  
-        f = request.files['file']  
+    if request.method == 'POST':
+        f = request.files['file']
         result = request.form
         str1=str(f.filename)
         lst=[str1,result['text2'],result['text3'],result['text4'],result['text5'],result['text6'],result['text7'],result['text8']]
         print(lst)
         with open('static/combined.csv', 'a') as f_object:
-        
+
             # Pass this file object to csv.writer()
             # and get a writer object
             writer_object = writer(f_object)
-        
+
             # Pass the list as an argument into
             # the writerow()
             writer_object.writerow(lst)
-        
+
             #Close the file object
             f_object.close()
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))  
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
         df = pd.read_csv("static/combined.csv")
 
 
@@ -160,22 +215,22 @@ def img():
 
 
         def get_frame(url,width,height,loc,datee,sn,cb):
-            html = """ 
+            html = """
                     <!doctype html>
                 <html>
-            
+
                 <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost/butterfly/{}""".format(width,height,url) + """ frameborder="0" ></img>
                 <p>scientific name :<b>{}</b>""".format(sn)+"""<br>date : <b>{}</b>""".format(datee)+"""<br>clicked by : <b>{}</b>""".format(cb)+"""<br>location : <b>{}</b>""".format(loc)+"""</p>
-            
-            
+
+
                 <style>
-            
+
                 .frame {
 
                     border: 0;
-                    
+
                     overflow:hidden;
-                
+
                 }
                 </style>
                 </html>"""
@@ -194,7 +249,7 @@ def img():
 
         m.save("templates/Heatmap.html")
 
-        return render_template("Heatmap.html", name = f.filename)  
+        return render_template("Heatmap.html", name = f.filename)
 
 
 if __name__ == '__main__':
