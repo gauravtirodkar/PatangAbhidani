@@ -1,0 +1,12 @@
+{% extends 'layout/auth.html' %} {% block content %}
+
+<form action="/register" method="POST">
+  <div class="form-container sign-up-container">
+    <h1>Create Account</h1>
+    <input type="text" placeholder="Name" name="name" />
+    <input type="email" placeholder="Email" name="username" />
+    <input type="password" placeholder="Password" name="password" />
+    <button>Sign Up</button>
+  </div>
+</form>
+{% endblock %}

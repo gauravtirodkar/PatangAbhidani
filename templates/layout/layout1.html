@@ -1,308 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./static/css/all.css" />
+    <!-- Bootstrap -->
+    <!-- 
+    <link rel="stylesheet" href="./static/css/bootstrap.css" /> -->
+    <!-- Custom -->
+    <link rel="stylesheet" href="./static/css/style.css" />
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="./static/css/all.css">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="./static/css/bootstrap.css">
-  <!-- Custom -->
-  <link rel="stylesheet" href="./static/css/style.css">
+    <title>Patang Abhidani</title>
+  </head>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <style>
+    a {
+      color: black;
+      text-decoration: none;
+    }
 
-  <title>Patang Abhidani</title>
+    a:hover {
+      color: black;
+      text-decoration: none;
+    }
 
-</head>
+    .filter {
+      border-right: 3px solid rgb(11, 83, 131);
+      height: auto;
+    }
 
-<style>
-  a {
-    color: black;
-    text-decoration: none;
-  }
+    .disable-links {
+      pointer-events: none;
+    }
 
-  a:hover {
-    color: black;
-    text-decoration: none;
-  }
+    ul,
+    #myUL {
+      list-style-type: none;
+    }
 
-  .filter {
-    border-right: 3px solid rgb(11, 83, 131);
-    height: auto;
-  }
+    #myUL {
+      margin: 0;
+      padding: 0;
+    }
 
-  .disable-links {
-    pointer-events: none;
-  }
+    .box {
+      cursor: pointer;
+      -webkit-user-select: none;
+      /* Safari 3.1+ */
+      -moz-user-select: none;
+      /* Firefox 2+ */
+      -ms-user-select: none;
+      /* IE 10+ */
+      user-select: none;
+    }
 
-  ul,
-  #myUL {
-    list-style-type: none;
-  }
+    .box::before {
+      content: "\2610";
+      color: black;
+      display: inline-block;
+      margin-right: 6px;
+    }
 
-  #myUL {
-    margin: 0;
-    padding: 0;
-  }
+    .check-box::before {
+      content: "\2611";
+      color: dodgerblue;
+    }
 
-  .box {
-    cursor: pointer;
-    -webkit-user-select: none;
-    /* Safari 3.1+ */
-    -moz-user-select: none;
-    /* Firefox 2+ */
-    -ms-user-select: none;
-    /* IE 10+ */
-    user-select: none;
-  }
+    .nested {
+      display: none;
+    }
 
-  .box::before {
-    content: "\2610";
-    color: black;
-    display: inline-block;
-    margin-right: 6px;
-  }
+    .active {
+      display: block;
+    }
+    * {
+      box-sizing: border-box;
+    }
 
-  .check-box::before {
-    content: "\2611";
-    color: dodgerblue;
-  }
+    body {
+      margin: 0px;
+      font-family: "segoe ui";
+    }
 
-  .nested {
-    display: none;
-  }
+    .nav1 {
+      padding-top: 10px;
+      height: 80px;
+      width: 100%;
+      background-color: #000;
+      position: fixed;
+    }
 
-  .active {
-    display: block;
-  }
-</style>
+    .nav1 > .nav-header {
+      display: inline;
+    }
 
-<body id="body">
-  <!-- Top Bar -->
-  <section id="top-bar" class="p-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <i class="fas fa-phone"></i> (+91) 8087559977
-        </div>
-        <div class="col-md-4">
-          <i class="fas fa-envelope-open"></i> contact@patangabhidani.com
-        </div>
-        <div class="col-md-4">
-          <div class="social text-right">
-            <a href="#">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-pinterest"></i>
-            </a>
-          </div>
+    .nav1 > .nav-header > .nav-title {
+      display: inline-block;
+      font-size: 22px;
+      color: #fff;
+      padding: 10px 10px 10px 10px;
+    }
+
+    .nav1 > .nav-btn {
+      display: none;
+    }
+
+    .nav1 > .nav-links {
+      display: inline;
+      font-size: 18px;
+    }
+
+    .nav1 > .nav-links > a {
+      display: inline-block;
+      padding: 13px 10px 13px 10px;
+      text-decoration: none;
+      color: #efefef;
+    }
+
+    .nav1 > .nav-links > a:hover {
+      color: #00a650;
+    }
+
+    .nav1 > #nav-check {
+      display: none;
+    }
+
+    @media (max-width: 750px) {
+      .nav1 {
+        position: fixed;
+        top: 0px;
+        width: 100%;
+      }
+      .nav1 > .nav-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
+      .nav1 > .nav-btn > label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+      }
+      .nav1 > .nav-btn > label:hover,
+      .nav1 #nav-check:checked ~ .nav-btn > label {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+      .nav1 > .nav-btn > label > span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+      }
+      .nav1 > .nav-links {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: #333;
+        height: 80px;
+        transition: all 0.3s ease-in;
+        overflow-y: hidden;
+        top: 50px;
+        left: 0px;
+      }
+      .nav1 > .nav-links > a {
+        display: block;
+        width: 100%;
+      }
+      .nav1 > #nav-check:not(:checked) ~ .nav-links {
+        height: 0px;
+      }
+      .nav1 > #nav-check:checked ~ .nav-links {
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+      }
+      .regbtn {
+        background-color: #00a650;
+        margin-right: 10px;
+      }
+    }
+  </style>
+
+  <body id="body">
+    <div class="nav1">
+      <input type="checkbox" id="nav-check" />
+      <div class="nav-header">
+        <div class="nav-title">
+          <h3 style="color: #00a650; margin: auto; margin-left: 30px">
+            Patang-Abhidani
+          </h3>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg" style="background-color: #474608fd; color: white;">
-    <div class="container">
-      <a class="navbar-brand" href="">
-        <img src="assets/img/ourlogo.png" class="logo" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav">
-          <li><a class="nav-link" style="color: white;" href="{{ url_for('home') }}">Home</a></li>
-          <li><a class="nav-link" style="color: white;" href="{{ url_for('addData') }}">Add Data</a></li>
-          <li><a class="nav-link" style="color: white;" href="">About</a></li>
-        </ul>
+      <div class="nav-links">
+        <a href="http://127.0.0.1:5000/">Intro</a>
+        <a href="//github.io/" target="_blank">About</a>
+        <a href="https://codepen.io/" target="_blank">Data</a>
 
-
+        <a
+          class="regbtn"
+          href=""
+          style="
+            float: right;
+            background-color: #00a650;
+            margin-right: 60px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            margin-top: 5px;
+          "
+          >Register/Login</a
+        >
       </div>
     </div>
-  </nav>
 
-  <!--Species Details-->
-  <section id="showcase-inner" class="py-5 text-white">
-    {% block title %}{% endblock %}
-  </section>
+    <!--Species Details-->
+    <section
+      style="
+        padding-top: 120px;
+        padding-bottom: 20px;
+        background-image: url(../../static/img/pattern.jpg);
+      "
+    >
+      {% block title %}{% endblock %}
+    </section>
 
+    <section id="dashboard" class="py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2 filter">
+            Filter
+            <div class="dropdown">
+              <ul id="myUL">
+                <li>
+                  <span class="box">Location</span>
+                  <ul class="nested">
+                    {%for state in state %}
+                    <li>
+                      <span class="box">{{state[0]}}</span>
+                      <ul class="nested">
+                        {% for location in location %} {%if location[1] ==
+                        state[0] %}
+                        <li>
+                          <input
+                            name="locn"
+                            class="locn"
+                            type="checkbox"
+                            id="box"
+                            value="{{location[0]}}"
+                          />{{location[0]}}
+                        </li>
+                        {%endif%} {%endfor%}
+                      </ul>
+                    </li>
+                    {%endfor%}
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div id="place_for_suggestions"></div>
+            <button class="btn-success" id="filter">Submit</button>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+            <script>
+              $("#filter").click(function () {
+                var locn = [];
+                $("input:checkbox[name=locn]:checked").each(function () {
+                  locn.push($(this).val());
+                });
 
-  <section id="dashboard" class="py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2 filter">
-          Filter
-          <div class="dropdown">
+                if (locn != "") {
+                  table = document.getElementById("table-id");
+                  tr = table.getElementsByTagName("tr");
 
-            <ul id="myUL">
-              <li><span class="box">Location</span>
-                <ul class="nested">
-                  {%for state in state %}
-                  <li><span class="box">{{state[0]}}</span>
-                    <ul class="nested">
-                      {% for location in location %}
-                      {%if location[1] == state[0] %}
-                      <li> <input name="locn" class="locn" type="checkbox" id="box"
-                          value={{location[0]}}>{{location[0]}} </li>
-                      {%endif%}
-                      {%endfor%}
-                    </ul>
-                  </li>
-                  {%endfor%}
+                  // Loop through all table rows, and hide those who don't match the search query
+                  for (i = 1; i < tr.length; i++) {
+                    var flag = 0;
 
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div id="place_for_suggestions"></div>
-          <button class="btn-success" id="filter">Submit</button>
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-          <script>
-            $("#filter").click(function () {
-              var locn = [];
-                    $("input:checkbox[name=locn]:checked").each(function(){
-                        locn.push($(this).val());
-                    });
-                    
-              if (locn != '') {
-                table = document.getElementById("table-id");
-                tr = table.getElementsByTagName("tr");
-
-                // Loop through all table rows, and hide those who don't match the search query
-                for (i = 1; i < tr.length; i++) {
-
-                  var flag = 0;
-
-                
                     td = tr[i].getElementsByTagName("td")[1];
                     // console.log(td)
                     if (td) {
-                      n = locn.length
+                      n = locn.length;
                       var td_text = td.innerHTML;
-                      for (k = 0;k < n; k++){ 
-                        filter = locn[k].toLowerCase()
-                        console.log(typeof(filter))
-                        
-                      if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                        //var td_text = td.innerHTML;  
-                        //td.innerHTML = 'shaban';
-                        flag = 1;
-                      } else {
-                        //DO NOTHING
+                      for (k = 0; k < n; k++) {
+                        filter = locn[k].toLowerCase();
+                        console.log(typeof filter);
+
+                        if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                          //var td_text = td.innerHTML;
+                          //td.innerHTML = 'shaban';
+                          flag = 1;
+                        } else {
+                          //DO NOTHING
+                        }
                       }
                     }
+
+                    if (flag == 1) {
+                      tr[i].style.display = "";
+                    } else {
+                      tr[i].style.display = "none";
                     }
-                  
-                  if (flag == 1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
                   }
                 }
-              } 
-            });
-          </script>
-          <script>
-            var toggler = document.getElementsByClassName("box");
-            var i;
-
-            for (i = 0; i < toggler.length; i++) {
-              toggler[i].addEventListener("click", function () {
-                this.parentElement.querySelector(".nested").classList.toggle("active");
-                this.classList.toggle("check-box");
               });
-            }
-          </script>
-        </div>
-        <div class="col-md-10">
-          <ul class="nav nav-pills" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="Table-tab" data-bs-toggle="tab" data-bs-target="#Table" type="button"
-                role="tab" aria-controls="Table" aria-selected="true">Table</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="Gallery-tab" data-bs-toggle="tab" data-bs-target="#Gallery" type="button"
-                role="tab" aria-controls="Gallery" aria-selected="false">Gallery</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="Map-tab" data-bs-toggle="tab" data-bs-target="#Map" type="button" role="tab"
-                aria-controls="Map" aria-selected="false">Map</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="Analysis-tab" data-bs-toggle="tab" data-bs-target="#Analysis" type="button"
-                role="tab" aria-controls="Analysis" aria-selected="false">Analysis</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="Download-tab" data-bs-toggle="tab" data-bs-target="#Download" type="button"
-                role="tab" aria-controls="Download" aria-selected="false">Download</button>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div style="padding: 10px;" class="tab-pane fade show active" id="Table" role="tabpanel"
-              aria-labelledby="Table-tab">{% block table %}{% endblock %}</div>
-            <div style="padding: 10px;" class="tab-pane fade" id="Gallery" role="tabpanel"
-              aria-labelledby="Gallery-tab">{% block gallery %}{% endblock %}</div>
-            <div style="padding: 10px;" class="tab-pane fade" id="Map" role="tabpanel" aria-labelledby="Map-tab"> <h5 class="display-1">Distribution of skipper butterfly</h5>
-              <iframe src="http://127.0.0.1:5000/map" height="800px" width="800px" frameborder="0"></iframe>
-            </div>
-            <div style="padding: 10px;" class="tab-pane fade" id="Analysis" role="tabpanel"
-              aria-labelledby="Analysis-tab">...</div>
-            <div style="padding: 10px;" class="tab-pane fade" id="Download" role="tabpanel"
-              aria-labelledby="Download-tab">..ss.</div>
+            </script>
+            <script>
+              var toggler = document.getElementsByClassName("box");
+              var i;
+
+              for (i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function () {
+                  this.parentElement
+                    .querySelector(".nested")
+                    .classList.toggle("active");
+                  this.classList.toggle("check-box");
+                });
+              }
+            </script>
           </div>
+          <div class="col-md-10">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="Table-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Table"
+                  type="button"
+                  role="tab"
+                  aria-controls="Table"
+                  aria-selected="true"
+                >
+                  Table
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Gallery-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Gallery"
+                  type="button"
+                  role="tab"
+                  aria-controls="Gallery"
+                  aria-selected="false"
+                >
+                  Gallery
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Map-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Map"
+                  type="button"
+                  role="tab"
+                  aria-controls="Map"
+                  aria-selected="false"
+                >
+                  Map
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Analysis-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Analysis"
+                  type="button"
+                  role="tab"
+                  aria-controls="Analysis"
+                  aria-selected="false"
+                >
+                  Analysis
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                style="padding: 10px"
+                class="tab-pane fade show active"
+                id="Table"
+                role="tabpanel"
+                aria-labelledby="Table-tab"
+              >
+                {% block table %}{% endblock %}
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Gallery"
+                role="tabpanel"
+                aria-labelledby="Gallery-tab"
+              >
+                {% block gallery %}{% endblock %}
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Map"
+                role="tabpanel"
+                aria-labelledby="Map-tab"
+              >
+                <h5 class="display-1">Distribution of skipper butterfly</h5>
+                <iframe
+                  src="http://127.0.0.1:5000/map"
+                  height="800px"
+                  width="800px"
+                  frameborder="0"
+                ></iframe>
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Analysis"
+                role="tabpanel"
+                aria-labelledby="Analysis-tab"
+              >
+                ...
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Download"
+                role="tabpanel"
+                aria-labelledby="Download-tab"
+              >
+                ..ss.
+              </div>
+            </div>
+          </div>
+          <!-- {% block content %}{% endblock %} -->
         </div>
-        <!-- {% block content %}{% endblock %} -->
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer id="main-footer" class="py-4 text-white text-center" style="background-color: #474608fd;">
-    Copyright &copy;
-    <span class="year"></span> Patang Abhidani
-  </footer>
+    <!-- Footer -->
+    <!-- Java Script
+    ================================================== -->
+    <script src="./static/js/jquery-3.2.1.min.js"></script>
+    <script src="./static/js/plugins.js"></script>
+    <script src="./static/js/citizen_main.js"></script>
+    <footer
+      class="page-footer font-small blue pt-4"
+      style="
+        align-items: center;
+        align-content: center;
+        background-color: black;
+      "
+    >
+      <!-- Footer Links -->
+      <div
+        class="container-fluid text-center text-md-center"
+        style="align-items: center; align-content: center"
+      >
+        <div class="row" style="align-items: center; align-content: center">
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h1 class="text-uppercase" style="color: aliceblue">
+              Patanga Abhidani
+            </h1>
+            <p style="color: #00a650">
+              A compelete guide on skipper butterflies
+            </p>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h5 class="linke" style="color: aliceblue">Get help</h5>
+            <h5 class="linke" style="color: aliceblue">Email: XYZ@abc</h5>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h5 class="linke" style="color: aliceblue">
+              Contact us: 9876543210
+            </h5>
+            <h5 class="linke" style="color: aliceblue">Follow us: icon</h5>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h5 class="linke" style="color: aliceblue">Made by: VESIT</h5>
+            <h5 class="linke" style="color: aliceblue">
+              In association with: Greenworks trust
+            </h5>
+          </div>
+          <!-- Grid column -->
 
-  <script src="./static/js/jquery-3.3.1.min.js "></script>
-  <!-- <script src="./static/js/bootstrap.bundle.min.js "></script> -->
-  <script src="./static/js/main.js "></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-  </script>
+          <hr class="clearfix w-100 d-md-none pb-3" />
+        </div>
+      </div>
+      <!-- Copyright -->
+    </footer>
 
-  <style>
-    #analysis {
-      display: none;
-    }
-  </style>
-  <script>
-    function myFunction() {
-      var x = document.getElementById("analysis");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
+    <script src="./static/js/jquery-3.3.1.min.js "></script>
+    <!-- <script src="./static/js/bootstrap.bundle.min.js "></script> -->
+    <script src="./static/js/main.js "></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      #analysis {
+        display: none;
       }
-    }
-  </script>
-</body>
-
+    </style>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("analysis");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+    </script>
+  </body>
 </html>

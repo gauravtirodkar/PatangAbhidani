@@ -1,9 +1,3 @@
-<!-- 
-    
-    File name: index.html
-    File Description: This is landing page of the citizen portal of SAKSHY system. 
-    Routes used:  volunteer_reg, loginresult
--->
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -37,7 +31,18 @@
     ================================================== -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-
+        <style>
+            @media (min-width: 576px) {
+                .mapp {
+                width: 540px; } }
+            @media (min-width: 768px) {
+                .mapp {
+                width: 720px; } }
+            @media (min-width: 992px) {
+    .mapp {
+      width: 840px; } }
+ 
+        </style>
 </head>
 
 <body id="top">
@@ -63,12 +68,12 @@
                 <li class="current"><a class="smoothscroll" href="#home" title="intro">Intro</a></li>
                 <li><a class="smoothscroll" href="#about" title="about">About</a></li>
                 <li><a class="smoothscroll" href="#info" title="info">Info</a></li>
-                <li><a class="" href="{{ url_for('images_grid') }}">GetData</a></li>
+                <li><a class="" href="{{ url_for('images_grid') }}">Data</a></li>
                 
             </ul>
 
             <ul class="header-social">
-                <li><a class="" href="">Register/Login</a></li>
+                <li><a class="" href="{{url_for('auth')}}">Register/Login</a></li>
             </ul>
         </nav>
 
@@ -113,7 +118,7 @@
     <!-- about
     ================================================== -->
     <section id="about" class="s-about target-section">
-
+        
         <div class="row section-header narrower align-center" data-aos="fade-up">
             <div class="col-full">
                 <h1 class="display-1">
@@ -132,7 +137,7 @@
                 </p>
                 <br>
                 <h3 class="display-1">Distribution of skipper butterfly</h3>
-                <iframe src="http://127.0.0.1:5000/map" height="800px" width="800px" frameborder="0" scrolling="no" style="pointer-events:none;"></iframe>
+                <iframe src="http://127.0.0.1:5000/map" height="800px" class="mapp" frameborder="0" scrolling="no" style="pointer-events:none;"></iframe>
             </div>
         </div> <!-- end section-header -->
 
