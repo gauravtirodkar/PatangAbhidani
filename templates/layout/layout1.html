@@ -220,13 +220,13 @@
       </div>
 
       <div class="nav-links">
-        <a href="http://127.0.0.1:5000/">Intro</a>
-        <a href="//github.io/" target="_blank">About</a>
-        <a href="https://codepen.io/" target="_blank">Data</a>
-
+        <a href="http://127.0.0.1:5000/">Home</a>
+        <a href="http://127.0.0.1:5000/">About</a>
+        <a class="" href="{{ url_for('images_grid') }}">Data</a>
+        <a class="" href="{{ url_for('upload') }}">Upload</a>
         <a
           class="regbtn"
-          href=""
+          href="{{url_for('new_login')}}"
           style="
             float: right;
             background-color: #00a650;
@@ -362,7 +362,7 @@
                     </form>
             <div id="place_for_suggestions"></div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  
+
             <script>
 
               $('#update_locn').click(function(){
@@ -389,25 +389,25 @@
                 $("input:checkbox[name=locn]:checked").each(function () {
                   locn.push($(this).val());
                 });
-  
-                if (locn != '') {
+
+                if (locn != "") {
                   table = document.getElementById("table-id");
                   tr = table.getElementsByTagName("tr");
-  
+
                   // Loop through all table rows, and hide those who don't match the search query
                   for (i = 1; i < tr.length; i++) {
                     var flag = 0;
                     td = tr[i].getElementsByTagName("td")[1];
                     // console.log(td)
                     if (td) {
-                      n = locn.length
+                      n = locn.length;
                       var td_text = td.innerHTML;
                       for (k = 0; k < n; k++) {
-                        filter = locn[k].toLowerCase()
-                        console.log(typeof (filter))
-  
+                        filter = locn[k].toLowerCase();
+                        console.log(typeof filter);
+
                         if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                          //var td_text = td.innerHTML;  
+                          //var td_text = td.innerHTML;
                           //td.innerHTML = 'shaban';
                           flag = 1;
                         } else {
@@ -415,7 +415,7 @@
                         }
                       }
                     }
-  
+
                     if (flag == 1) {
                       tr[i].style.display = "";
                     } else {
@@ -424,31 +424,31 @@
                   }
                 }
               });
-  
+
               $("#fspecies").click(function () {
                 var sub_spec = [];
                 $("input:checkbox[name=sub_spec]:checked").each(function () {
                   sub_spec.push($(this).val());
                 });
-  
-                if (sub_spec != '') {
+
+                if (sub_spec != "") {
                   table = document.getElementById("table-id");
                   tr = table.getElementsByTagName("tr");
-  
+
                   // Loop through all table rows, and hide those who don't match the search query
                   for (i = 1; i < tr.length; i++) {
                     var flag = 0;
                     td = tr[i].getElementsByTagName("td")[4];
                     // console.log(td)
                     if (td) {
-                      n = sub_spec.length
+                      n = sub_spec.length;
                       var td_text = td.innerHTML;
                       for (k = 0; k < n; k++) {
-                        filter = sub_spec[k].toLowerCase()
-                        console.log(typeof (filter))
-  
+                        filter = sub_spec[k].toLowerCase();
+                        console.log(typeof filter);
+
                         if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                          //var td_text = td.innerHTML;  
+                          //var td_text = td.innerHTML;
                           //td.innerHTML = 'shaban';
                           flag = 1;
                         } else {
@@ -456,24 +456,26 @@
                         }
                       }
                     }
-  
+
                     if (flag == 1) {
                       tr[i].style.display = "";
-                    } else { 
+                    } else {
                       tr[i].style.display = "none";
                     }
                   }
                 }
               });
             </script>
-  
+
             <script>
               var toggler = document.getElementsByClassName("box");
               var i;
-  
+
               for (i = 0; i < toggler.length; i++) {
                 toggler[i].addEventListener("click", function () {
-                  this.parentElement.querySelector(".nested").classList.toggle("active");
+                  this.parentElement
+                    .querySelector(".nested")
+                    .classList.toggle("active");
                   this.classList.toggle("check-box");
                 });
               }

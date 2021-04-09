@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_mysqldb import MySQL
 from bs4 import BeautifulSoup
 from werkzeug.utils import secure_filename
@@ -9,6 +9,9 @@ import folium
 import pandas as pd
 import branca
 import gzip
+import time
+import datetime
+import random
 from io import BufferedReader
 UPLOAD_FOLDER = 'C:/applications/XAMPP/htdocs/butterfly'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -28,6 +31,32 @@ app.config['MYSQL_DB'] = 'butterfly'
  
 mysql = MySQL(app)
 
+def insert_users(email,password,name):
+    c = mysql.connection.cursor()
+    c.execute("INSERT INTO user (email,password,name) VALUES (%s, %s, %s)",(email,password,name))
+    mysql.connection.commit()
+    c.close()
+
+def check_valid_password(email,password):
+    print("3 if")
+    c = mysql.connection.cursor()
+    print("4 if")
+    email= str(email)
+    c.execute("SELECT * FROM user where email = (%s)",(email,))
+    print("5 if")
+    data = c.fetchall()
+    print("6 if")
+    mysql.connection.commit()
+    print("7 if")
+    c.close()
+    print("8 if")
+    if len(data) == 1:
+        print("9 if")
+        print(password)
+        print(data[0][2])
+        return data[0][2] == password
+    else:
+        return False
 
 @app.route('/')
 def home():
@@ -128,43 +157,6 @@ def updateTable ():
 def addData():
     return render_template('addData.html', user="LoggedIn")
 
-
-""" class User(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(80))
-	username = db.Column(db.String(80), unique=True)
-	password = db.Column(db.String(80))
-
-	def __init__(self, name, username, password):
-		self.name = name
-		self.username = username
-		self.password = password """
-
-@app.route('/auth')
-def auth():
-	return render_template('layout/auth.html')
-
-@app.route('/login', methods=['GET','POST'])
-def login():
-	if request.method == 'GET':
-		return render_template('login.html')
-	else:
-		name = request.form['username']
-		passw = request.form['password']
-		try:
-			data = User.query.filter_by(username=name, password=passw).first()
-		except:
-			return "Incorrect Login"
-	return render_template('layout/auth.html')
-
-""" @app.route('/register', methods=['POST'])
-def register():
-	if request.method == 'POST':
-		new_user = User(name=request.form['name'], username=request.form['username'], password=request.form['password'])
-		db.session.add(new_user)
-		db.session.commit()
-	return render_template('auth.html') """
-
 @app.route('/upload')  
 def upload():  
     return render_template("img.html")  
@@ -232,6 +224,31 @@ def img():
         m.save("templates/Heatmap.html")
 
         return render_template("Heatmap.html", name = f.filename)  
+
+@app.route("/new_login",methods = ["GET","POST"])
+def new_login():
+    if request.method == "POST":
+        try:
+            #REGISTER User
+            email = request.form["email"]
+            name = request.form["name"]
+            password = request.form["password"]
+            try:
+                insert_users(email,password,name)
+                return jsonify({"status":"Success"})
+            except:
+                return jsonify({"error":"User already exists"})
+        except:
+            email = request.form["email"]
+            password = request.form["password"]
+            if(check_valid_password(email,password)):
+                print("1 if")
+                return jsonify({"status":"Success"})
+                print("2 if")
+            else:
+                return jsonify({"error":"Invalid Username or Password"})
+    return render_template("new_login.html")
+
 
 
 if __name__ == '__main__':
