@@ -53,20 +53,37 @@ def images_grid():
 @app.route('/updateTable',methods = ["POST"])
 def updateTable ():
     places = request.form.getlist('locn')
+    sub_spec = request.form.getlist('sub_spec')
+
+    if len(places) == 1:
+        places = tuple(tuple(places)+tuple(places))
+    else:
+        places = tuple(places)
+    print(places)
+
+    if len(sub_spec) == 1:
+        sub_spec = tuple(tuple(sub_spec)+tuple(sub_spec))
+    else:
+        sub_spec = tuple(sub_spec)
+    print(sub_spec)
 
     cur = mysql.connection.cursor()
 
-    if len(places) == 1:
-        places = places[0]
-        cur.execute("SELECT * from butterflydata where city=%s",(places,))
-        data = cur.fetchall()
-    else:
-        places = tuple(places)
+    if len(places) > 1 and len(sub_spec) == 0:
         cur.execute("SELECT * from butterflydata where city in {}".format(places))
         data = cur.fetchall()
-    
+    elif len(sub_spec)>1 and len(places) == 0:
+        cur.execute("SELECT * from butterflydata where sub_species in {}".format(sub_spec))
+        data = cur.fetchall()
+    elif len(places) > 1 and len(sub_spec) > 1:
+        cur.execute("SELECT * from butterflydata where city in {} and sub_species in {}".format(places, sub_spec))
+        data = cur.fetchall()
+    else:
+        cur.execute("SELECT * from butterflydata")
+        data = cur.fetchall()
     '''cur.execute("SELECT * from butterflydata where city in {}".format(places))
     data = cur.fetchall()'''
+
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
     cur.execute("SELECT DISTINCT state FROM location ")
@@ -81,7 +98,7 @@ def updateTable ():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
-    return render_template('images_grid.html', places=places,species=species, species_name=species_name, sub_sub_family=sub_sub_family, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
+    return render_template('images_grid.html', places=places, sub_spec = sub_spec, species=species, species_name=species_name, sub_sub_family=sub_sub_family, sub_family=sub_family, data=data, location=location, state=state, user="LoggedIn")
 
 
 
