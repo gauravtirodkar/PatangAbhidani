@@ -210,13 +210,13 @@
       </div>
 
       <div class="nav-links">
-        <a href="http://127.0.0.1:5000/">Intro</a>
-        <a href="//github.io/" target="_blank">About</a>
-        <a href="https://codepen.io/" target="_blank">Data</a>
-
+        <a href="http://127.0.0.1:5000/">Home</a>
+        <a href="http://127.0.0.1:5000/">About</a>
+        <a class="" href="{{ url_for('images_grid') }}">Data</a>
+        <a class="" href="{{ url_for('upload') }}">Upload</a>
         <a
           class="regbtn"
-          href=""
+          href="{{url_for('new_login')}}"
           style="
             float: right;
             background-color: #00a650;
@@ -245,81 +245,97 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3 filter">
-            <h3> <i> FILTER </i> </h3>
+            <h3><i> FILTER </i></h3>
             <div class="dropdown">
-  
               <ul id="myUL">
                 <!--SPECIES FILTER-->
-                <li> <span class="box"> Species </span>
+                <li>
+                  <span class="box"> Species </span>
                   <ul class="nested">
                     {% for sub_family in sub_family %}
-                    <li><span class="box">{{sub_family[0]}} </span>
+                    <li>
+                      <span class="box">{{sub_family[0]}} </span>
                       <ul class="nested">
-                        
-                        {% for sub_sub_family in sub_sub_family %}
-                          {% if sub_sub_family[1] == sub_family[0] and sub_sub_family[0] != '' %}
-                            <li><span class="box">{{sub_sub_family[0]}}</span>
+                        {% for sub_sub_family in sub_sub_family %} {% if
+                        sub_sub_family[1] == sub_family[0] and sub_sub_family[0]
+                        != '' %}
+                        <li>
+                          <span class="box">{{sub_sub_family[0]}}</span>
+                          <ul class="nested">
+                            {% for species_name in species_name %} {% if
+                            species_name[2] == sub_family[0] and species_name[1]
+                            == sub_sub_family[0]%}
+                            <li>
+                              <span class="box">{{species_name[0]}} </span>
                               <ul class="nested">
-  
-                                {% for species_name in species_name %}
-                                {% if species_name[2] == sub_family[0] and species_name[1] == sub_sub_family[0]%} 
-                                    <li><span class="box">{{species_name[0]}} </span>
-                                      <ul class="nested">
-                                        {% for species in species %}
-                                          {% if species[1] == species_name[0] and species[3] == species_name[2] %}
-                                            <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
-                                              value={{species[0]}}>{{species[0]}} </li>
-                                          {% endif %}
-                                        {% endfor %}
-                                      </ul>
-                                    </li>
-                                {%endif %}
-                              {% endfor %}
-  
-                              
+                                {% for species in species %} {% if species[1] ==
+                                species_name[0] and species[3] ==
+                                species_name[2] %}
+                                <li>
+                                  <input
+                                    name="sub_spec"
+                                    class="sub_spec"
+                                    type="checkbox"
+                                    id="box"
+                                    value="{{species[0]}}"
+                                  />{{species[0]}}
+                                </li>
+                                {% endif %} {% endfor %}
                               </ul>
                             </li>
-                          {% elif sub_sub_family[1] == sub_family[0] and sub_sub_family[0] == '' %}
-                            
-                          {% for species_name in species_name %}
-                            {% if species_name[2] == sub_family[0] %} 
-                                <li><span class="box">{{species_name[0]}} </span>
-                                  <ul class="nested">
-                                    {% for species in species %}
-                                      {% if species[1] == species_name[0] and species[3] == species_name[2] %}
-                                        <li> <input name="sub_spec" class="sub_spec" type="checkbox" id="box"
-                                          value={{species[0]}}>{{species[0]}} </li>
-                                      {% endif %}
-                                    {% endfor %}
-                                  </ul>
-                                </li>
-                            {%endif %}
-                          {% endfor %}
-  
-                          {% endif %}
-                        {% endfor %}
-  
+                            {%endif %} {% endfor %}
+                          </ul>
+                        </li>
+                        {% elif sub_sub_family[1] == sub_family[0] and
+                        sub_sub_family[0] == '' %} {% for species_name in
+                        species_name %} {% if species_name[2] == sub_family[0]
+                        %}
+                        <li>
+                          <span class="box">{{species_name[0]}} </span>
+                          <ul class="nested">
+                            {% for species in species %} {% if species[1] ==
+                            species_name[0] and species[3] == species_name[2] %}
+                            <li>
+                              <input
+                                name="sub_spec"
+                                class="sub_spec"
+                                type="checkbox"
+                                id="box"
+                                value="{{species[0]}}"
+                              />{{species[0]}}
+                            </li>
+                            {% endif %} {% endfor %}
+                          </ul>
+                        </li>
+                        {%endif %} {% endfor %} {% endif %} {% endfor %}
                       </ul>
                     </li>
                     {%endfor%}
-                    
+
                     <button class="btn-danger" id="fspecies">Submit</button>
                   </ul>
                 </li>
 
-                
                 <!--LOCATION FILTER-->
-                <li><span class="box">Location</span>
+                <li>
+                  <span class="box">Location</span>
                   <ul class="nested">
                     {%for state in state %}
-                    <li><span class="box">{{state[0]}}</span>
+                    <li>
+                      <span class="box">{{state[0]}}</span>
                       <ul class="nested">
-                        {% for location in location %}
-                        {%if location[1] == state[0] %}
-                        <li> <input name="locn" class="locn" type="checkbox" id="box"
-                            value={{location[0]}}>{{location[0]}} </li>
-                        {%endif%}
-                        {%endfor%}
+                        {% for location in location %} {%if location[1] ==
+                        state[0] %}
+                        <li>
+                          <input
+                            name="locn"
+                            class="locn"
+                            type="checkbox"
+                            id="box"
+                            value="{{location[0]}}"
+                          />{{location[0]}}
+                        </li>
+                        {%endif%} {%endfor%}
                       </ul>
                     </li>
                     {%endfor%}
@@ -327,36 +343,35 @@
                   </ul>
                 </li>
               </ul>
-              
             </div>
             <div id="place_for_suggestions"></div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  
+
             <script>
               $("#filter").click(function () {
                 var locn = [];
                 $("input:checkbox[name=locn]:checked").each(function () {
                   locn.push($(this).val());
                 });
-  
-                if (locn != '') {
+
+                if (locn != "") {
                   table = document.getElementById("table-id");
                   tr = table.getElementsByTagName("tr");
-  
+
                   // Loop through all table rows, and hide those who don't match the search query
                   for (i = 1; i < tr.length; i++) {
                     var flag = 0;
                     td = tr[i].getElementsByTagName("td")[1];
                     // console.log(td)
                     if (td) {
-                      n = locn.length
+                      n = locn.length;
                       var td_text = td.innerHTML;
                       for (k = 0; k < n; k++) {
-                        filter = locn[k].toLowerCase()
-                        console.log(typeof (filter))
-  
+                        filter = locn[k].toLowerCase();
+                        console.log(typeof filter);
+
                         if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                          //var td_text = td.innerHTML;  
+                          //var td_text = td.innerHTML;
                           //td.innerHTML = 'shaban';
                           flag = 1;
                         } else {
@@ -364,7 +379,7 @@
                         }
                       }
                     }
-  
+
                     if (flag == 1) {
                       tr[i].style.display = "";
                     } else {
@@ -373,31 +388,31 @@
                   }
                 }
               });
-  
+
               $("#fspecies").click(function () {
                 var sub_spec = [];
                 $("input:checkbox[name=sub_spec]:checked").each(function () {
                   sub_spec.push($(this).val());
                 });
-  
-                if (sub_spec != '') {
+
+                if (sub_spec != "") {
                   table = document.getElementById("table-id");
                   tr = table.getElementsByTagName("tr");
-  
+
                   // Loop through all table rows, and hide those who don't match the search query
                   for (i = 1; i < tr.length; i++) {
                     var flag = 0;
                     td = tr[i].getElementsByTagName("td")[4];
                     // console.log(td)
                     if (td) {
-                      n = sub_spec.length
+                      n = sub_spec.length;
                       var td_text = td.innerHTML;
                       for (k = 0; k < n; k++) {
-                        filter = sub_spec[k].toLowerCase()
-                        console.log(typeof (filter))
-  
+                        filter = sub_spec[k].toLowerCase();
+                        console.log(typeof filter);
+
                         if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                          //var td_text = td.innerHTML;  
+                          //var td_text = td.innerHTML;
                           //td.innerHTML = 'shaban';
                           flag = 1;
                         } else {
@@ -405,30 +420,34 @@
                         }
                       }
                     }
-  
+
                     if (flag == 1) {
                       tr[i].style.display = "";
-                    } else { 
+                    } else {
                       tr[i].style.display = "none";
                     }
                   }
                 }
               });
             </script>
-  
+
             <script>
               var toggler = document.getElementsByClassName("box");
               var i;
-  
+
               for (i = 0; i < toggler.length; i++) {
                 toggler[i].addEventListener("click", function () {
-                  this.parentElement.querySelector(".nested").classList.toggle("active");
+                  this.parentElement
+                    .querySelector(".nested")
+                    .classList.toggle("active");
                   this.classList.toggle("check-box");
                 });
               }
             </script>
-            <div class="container" style="padding: 8px;">
-              <button class="btn btn-danger" onclick="location.reload()">Clear</button>
+            <div class="container" style="padding: 8px">
+              <button class="btn btn-danger" onclick="location.reload()">
+                Clear
+              </button>
             </div>
           </div>
           <div class="col-md-9">
