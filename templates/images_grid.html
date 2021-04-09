@@ -329,7 +329,24 @@
 </div>
 <!-- 		End of Container -->
 
-{% endblock %} {% block gallery %}
+{% endblock %} 
+{% block gallery %}
+
+<div class="container">
+  <main class="grid">
+    {%for i in data%}
+    <article>
+      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
+      <div class="text">
+        <h3>{{i[7]}}</h3>
+        <p>Photographer:-{{i[6]}}</p>
+        <p>Date: {{i[1]}}</p>
+        <p>Location: {{i[2]}}</p>        
+      </div>
+    </article>
+    {%endfor%}
+  </main>
+</div>
 
 <div class="container">
   <main class="grid">
