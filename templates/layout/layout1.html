@@ -537,7 +537,7 @@
                 </button>
               </li>
               <li class="nav-item" role="presentation">
-                <button
+                <a href="#" data-toggle="tooltip" title="Click to view images and description"><button
                   class="nav-link"
                   id="Gallery-tab"
                   data-bs-toggle="tab"
@@ -548,7 +548,7 @@
                   aria-selected="false"
                 >
                   Gallery
-                </button>
+                </button></a>
               </li>
               <li class="nav-item" role="presentation">
                 <button
@@ -561,9 +561,14 @@
                   aria-controls="Map"
                   aria-selected="false"
                 >
-                  Map
+                <a href="#" data-toggle="tooltip" title="Click to view distribution of Skippers pan India">Map</a>
                 </button>
               </li>
+              <script>
+                $(document).ready(function(){
+                  $('[data-toggle="tooltip"]').tooltip();
+                });
+                </script>
               <!-- <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
@@ -579,7 +584,7 @@
                 </button>
               </li> -->
               <li class="nav-item" role="presentation">
-                <button
+                <a href="#" data-toggle="tooltip" title="Click to view download data"> <button
                   class="nav-link"
                   id="Analysis-tab"
                   type="button"
@@ -589,7 +594,7 @@
                   onclick="exportTableToCSV('butterflies.csv')"
                 >
                   Download
-                </button>
+                </button></a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
