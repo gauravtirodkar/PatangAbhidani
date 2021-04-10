@@ -69,16 +69,19 @@ def check_valid_password(email, password):
 
 @app.route("/")
 def home():
-    return render_template("index.html", user="LoggedIn")
+    global session
+    return render_template("index.html", sess=session)
 
 
 @app.route("/map")
 def map():
     return render_template("Heatmap.html")
 
+
 @app.route("/map_filter")
 def map_filter():
     return render_template("Heatmap_filter.html")
+
 
 @app.route("/specsdeets")
 def specsdeets():
@@ -118,7 +121,8 @@ def images_grid():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
-    url= "http://127.0.0.1:5000/map"
+    url = "http://127.0.0.1:5000/map"
+    global session
     return render_template(
         "images_grid.html",
         species=species,
@@ -129,7 +133,8 @@ def images_grid():
         location=location,
         state=state,
         user="LoggedIn",
-        url=url
+        url=url,
+        sess=session,
     )
 
 
@@ -149,8 +154,8 @@ def updateTable():
     else:
         sub_spec = tuple(sub_spec)
     print(sub_spec)
-    plcs= list(places)
-    spcs= list(sub_spec)
+    plcs = list(places)
+    spcs = list(sub_spec)
     # print(spcs)
     # df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/butterflydata.csv")
     # if (len(spcs)==0 and len(plcs)!=0):
@@ -162,13 +167,13 @@ def updateTable():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
-    df=pd.DataFrame(data)
-    
-    df1 =df.loc[df[3].isin(plcs)]
-    df2 =df.loc[df[8].isin(spcs)]
+    df = pd.DataFrame(data)
+
+    df1 = df.loc[df[3].isin(plcs)]
+    df2 = df.loc[df[8].isin(spcs)]
     # print(df1)
     # print(df2)
-    df=df1.merge(df2,how="inner",indicator=False)
+    df = df1.merge(df2, how="inner", indicator=False)
     # df =df.loc[df['sub_species'].isin(plcs)]
     print(df)
     m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
@@ -206,7 +211,9 @@ def updateTable():
         )
         return html
 
-    for img1, lat, lon, loc, datee, sn, cb in zip(df[0],df[12],df[13],df[2],df[1],df[7],df[6]):
+    for img1, lat, lon, loc, datee, sn, cb in zip(
+        df[0], df[12], df[13], df[2], df[1], df[7], df[6]
+    ):
 
         popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
         iframe = branca.element.IFrame(html=popup, width=200, height=200)
@@ -216,7 +223,7 @@ def updateTable():
         marker.add_to(m)
 
     m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap_filter.html")
-    url= "http://127.0.0.1:5000/map_filter"
+    url = "http://127.0.0.1:5000/map_filter"
 
     cur = mysql.connection.cursor()
 
@@ -255,6 +262,7 @@ def updateTable():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
+    global session
     return render_template(
         "images_grid.html",
         places=places,
@@ -267,7 +275,8 @@ def updateTable():
         location=location,
         state=state,
         user="LoggedIn",
-        url=url
+        url=url,
+        sess=session,
     )
 
 
@@ -278,8 +287,11 @@ def addData():
 
 @app.route("/upload")
 def upload():
-    print(session)
-    return render_template("img.html")
+    global session
+    if session == True:
+        return render_template("img.html", sess=session)
+    else:
+        return new_login()
 
 
 @app.route("/img", methods=["GET", "POST"])
@@ -299,7 +311,9 @@ def img():
             result["text8"],
         ]
         print(lst)
-        with open("E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a") as f_object:
+        with open(
+            "E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a"
+        ) as f_object:
 
             # Pass this file object to csv.writer()
             # and get a writer object
@@ -373,6 +387,7 @@ def img():
 
 @app.route("/new_login", methods=["GET", "POST"])
 def new_login():
+    global session
     if request.method == "POST":
         try:
             # REGISTER User
@@ -393,7 +408,7 @@ def new_login():
                 return jsonify({"status": "Success"})
             else:
                 return jsonify({"error": "Invalid Username or Password"})
-    return render_template("new_login.html")
+    return render_template("new_login.html", sess=session)
 
 
 if __name__ == "__main__":

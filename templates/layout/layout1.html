@@ -204,44 +204,7 @@
   </style>
 
   <body id="body" style="overflow-x: hidden">
-    <div class="nav1">
-      <input type="checkbox" id="nav-check" />
-      <div class="nav-header">
-        <div class="nav-title">
-          <h3 style="color: #00a650; margin: auto; margin-left: 30px">
-            Patang-Abhidani
-          </h3>
-        </div>
-      </div>
-      <div class="nav-btn">
-        <label for="nav-check">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
-      </div>
-
-      <div class="nav-links">
-        <a href="http://127.0.0.1:5000/">Home</a>
-        <a href="http://127.0.0.1:5000/">About</a>
-        <a class="" href="{{ url_for('images_grid') }}">Data</a>
-        <a class="" href="{{ url_for('upload') }}">Upload</a>
-        <a
-          class="regbtn"
-          href="{{url_for('new_login')}}"
-          style="
-            float: right;
-            background-color: #00a650;
-            margin-right: 60px;
-            padding-top: 7px;
-            padding-bottom: 7px;
-            margin-top: 5px;
-          "
-          >Register/Login</a
-        >
-      </div>
-    </div>
-
+    {% block nav %} {% endblock %}
     <!--Species Details-->
     <section
       style="
@@ -401,7 +364,7 @@
                   padding-bottom: 5px;
                   border-radius: 3px;
                 "
-                type="submit" 
+                type="submit"
               >
                 Submit
               </button>
@@ -528,7 +491,6 @@
                   this.classList.toggle("check-box");
                 });
               }
-              
             </script>
             <div class="container" style="padding: 8px; padding-left: 0px">
               <button class="btn btn-danger">

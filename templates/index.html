@@ -61,10 +61,16 @@
                 <li><a class="" href="{{ url_for('upload') }}">Upload</a></li>
                 
             </ul>
-
+            {% if sess==false %}
             <ul class="header-social">
                 <li><a class="" href="{{url_for('new_login')}}">Register/Login</a></li>
             </ul>
+            {% endif %}
+            {% if sess==true %}
+            <ul class="header-social">
+                <li><a class="" style="background-color: transparent; color: #eee;">Logged in</a></li>
+            </ul>
+            {% endif %}
         </nav>
 
         <a class="header-menu-toggle" href="#"><span>Menu</span></a>

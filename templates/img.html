@@ -164,7 +164,7 @@
         <a href="http://127.0.0.1:5000/">About</a>
         <a href="{{ url_for('images_grid') }}">Data</a>
         <a class="" href="{{ url_for('upload') }}">Upload</a>
-
+        {% if sess==false %}
         <a
           class="regbtn"
           href="{{url_for('new_login')}}"
@@ -178,6 +178,21 @@
           "
           >Register/Login</a
         >
+        {% endif %} {% if sess==true %}
+        <a
+          class="regbtn"
+          style="
+            float: right;
+            background-color: transparent;
+            margin-right: 60px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            margin-top: 5px;
+            color: #eee;
+          "
+          >Logged in</a
+        >
+        {% endif %}
       </div>
     </div>
     <div id="content">
