@@ -14,7 +14,7 @@ import datetime
 import random
 from io import BufferedReader
 
-UPLOAD_FOLDER = "C:/applications/XAMPP/htdocs/butterfly"
+UPLOAD_FOLDER = "C:/xampp/htdocs/butterfly"
 ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
 """ from flask import Flask, url_for, render_template,request,session
 from flask_sqlalchemy import SQLAlchemy
@@ -76,6 +76,9 @@ def home():
 def map():
     return render_template("Heatmap.html")
 
+@app.route("/map_filter")
+def map_filter():
+    return render_template("Heatmap_filter.html")
 
 @app.route("/specsdeets")
 def specsdeets():
@@ -115,6 +118,7 @@ def images_grid():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
+    url= "http://127.0.0.1:5000/map"
     return render_template(
         "images_grid.html",
         species=species,
@@ -125,6 +129,7 @@ def images_grid():
         location=location,
         state=state,
         user="LoggedIn",
+        url=url
     )
 
 
@@ -144,6 +149,74 @@ def updateTable():
     else:
         sub_spec = tuple(sub_spec)
     print(sub_spec)
+    plcs= list(places)
+    spcs= list(sub_spec)
+    # print(spcs)
+    # df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/butterflydata.csv")
+    # if (len(spcs)==0 and len(plcs)!=0):
+    #     df =df.loc[df['city'].isin(plcs)]
+    # elif (len(plcs)==0 and len(spcs)!=0):
+    #     print("yo")
+    #     df =df.loc[df['sub_species'].isin(spcs)]
+    # else:
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from butterflydata")
+    data = cur.fetchall()
+    df=pd.DataFrame(data)
+    
+    df1 =df.loc[df[3].isin(plcs)]
+    df2 =df.loc[df[8].isin(spcs)]
+    # print(df1)
+    # print(df2)
+    df=df1.merge(df2,how="inner",indicator=False)
+    # df =df.loc[df['sub_species'].isin(plcs)]
+    print(df)
+    m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
+
+    def get_frame(url, width, height, loc, datee, sn, cb):
+        html = (
+            """ 
+                <!doctype html>
+            <html>
+        
+            <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost:3000/butterfly/{}""".format(
+                width, height, url
+            )
+            + """ frameborder="0" ></img>
+            <p>scientific name :<b>{}</b>""".format(
+                sn
+            )
+            + """<br>date : <b>{}</b>""".format(datee)
+            + """<br>clicked by : <b>{}</b>""".format(cb)
+            + """<br>location : <b>{}</b>""".format(loc)
+            + """</p>
+        
+        
+            <style>
+        
+            .frame {
+
+                border: 0;
+                
+                overflow:hidden;
+            
+            }
+            </style>
+            </html>"""
+        )
+        return html
+
+    for img1, lat, lon, loc, datee, sn, cb in zip(df[0],df[12],df[13],df[2],df[1],df[7],df[6]):
+
+        popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
+        iframe = branca.element.IFrame(html=popup, width=200, height=200)
+        popup = folium.Popup(iframe, max_width=200)
+        marker = folium.Marker([lat, lon], popup=popup)
+
+        marker.add_to(m)
+
+    m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap_filter.html")
+    url= "http://127.0.0.1:5000/map_filter"
 
     cur = mysql.connection.cursor()
 
@@ -194,6 +267,7 @@ def updateTable():
         location=location,
         state=state,
         user="LoggedIn",
+        url=url
     )
 
 
@@ -225,7 +299,7 @@ def img():
             result["text8"],
         ]
         print(lst)
-        with open("static/combined.csv", "a") as f_object:
+        with open("E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a") as f_object:
 
             # Pass this file object to csv.writer()
             # and get a writer object
@@ -238,7 +312,7 @@ def img():
             # Close the file object
             f_object.close()
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], f.filename))
-        df = pd.read_csv("static/combined.csv")
+        df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/combined.csv")
 
         m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
 
@@ -248,7 +322,7 @@ def img():
                     <!doctype html>
                 <html>
             
-                <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost/butterfly/{}""".format(
+                <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost:3000/butterfly/{}""".format(
                     width, height, url
                 )
                 + """ frameborder="0" ></img>
@@ -292,7 +366,7 @@ def img():
 
             marker.add_to(m)
 
-        m.save("templates/Heatmap.html")
+        m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap.html")
 
         return render_template("Heatmap.html", name=f.filename)
 

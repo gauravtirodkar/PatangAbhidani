@@ -324,7 +324,7 @@
 tr = table.getElementsByTagName("tr");
 console.log("HI");
 console.log(tr.length);
-document.getElementById("bdg").innerHTML=tr.length;})</script>
+document.getElementById("bdg").innerHTML=tr.length-1;})</script>
 <div class="container-fluid table-responsive-xl">
   <table
     class="table  table-hover table-borderless"
@@ -389,4 +389,16 @@ document.getElementById("bdg").innerHTML=tr.length;})</script>
   </main>
 </div>
 
+{% endblock %}
+{% block map %}
+<div class="embed-responsive embed-responsive-21by9">
+                  <iframe
+                  id="map"
+                    src="{{url}}"
+                    height="500px"
+                    class="embed-responsive-item"
+                    frameborder="0"
+                    style="width: 100%; padding-bottom: 20px"
+                  ></iframe>
+                </div>
 {% endblock %}
