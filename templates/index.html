@@ -31,18 +31,7 @@
     ================================================== -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <style>
-            @media (min-width: 576px) {
-                .mapp {
-                width: 540px; } }
-            @media (min-width: 768px) {
-                .mapp {
-                width: 720px; } }
-            @media (min-width: 992px) {
-    .mapp {
-      width: 840px; } }
- 
-        </style>
+        
 </head>
 
 <body id="top">
@@ -135,7 +124,12 @@
                 </p>
                 <br>
                 <h3 class="display-1">Distribution of skipper butterfly</h3>
-                <iframe src="http://127.0.0.1:5000/map" height="800px" class="mapp" frameborder="0" scrolling="no" style="pointer-events:none;"></iframe>
+                <div class="embed-responsive embed-responsive-21by9"> <iframe 
+                    src="http://127.0.0.1:5000/map"
+                    height="800px"
+                    class="embed-responsive-item"
+                    frameborder="0" style="width: 100%;padding-bottom: 20px;"
+                  ></iframe></div>
             </div>
         </div> <!-- end section-header -->
 

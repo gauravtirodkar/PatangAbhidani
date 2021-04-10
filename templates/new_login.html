@@ -299,10 +299,12 @@
         padding: 13px 10px 13px 10px;
         text-decoration: none;
         color: #efefef;
+        font-family: "IBM Plex Sans", sans-serif ;
+        font-weight: 600;
       }
 
       .nav1 > .nav-links > a:hover {
-        color: #00a650;
+        color: #eee;
       }
 
       .nav1 > #nav-check {
@@ -391,10 +393,10 @@
         <a href="http://127.0.0.1:5000/">About</a>
         <a class="" href="{{ url_for('images_grid') }}">Data</a>
         <a class="" href="{{ url_for('upload') }}">Upload</a>
-        <a class="" href="{{ url_for('upload') }}">Upload</a>
+       
 
         <a
-          class="regbtn"
+          class="regbtn btn btn-primary" role="button"
           href="{{url_for('new_login')}}"
           style="
             float: right;

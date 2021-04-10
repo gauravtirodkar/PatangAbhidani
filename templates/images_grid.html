@@ -12,6 +12,7 @@
 {% block table%}<!-- 
 <button onclick="exportTableToCSV('butterflies.csv')">Download data</button> -->
 <script>
+    
   getPagination("#table-id");
   $("#maxRows").trigger("change");
 
@@ -157,7 +158,8 @@
       }
     } else {
       //RESET TABLE
-      $("#maxRows").trigger("change");
+      // $("#maxRows").trigger("change");
+      tr.style.display="";
     }
   }
 </script>
@@ -299,7 +301,13 @@
         </select>
       </div> -->
     </div>
-    <div class="tb_search">
+    <div class="input-group input-group-sm mb-3 ">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+      </div>
+      <input type="text" class="form-control" id="search_input_all" onkeyup="FilterkeyWord_all_table()" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+    </div>
+    <!-- <div class="tb_search">
       <input
         type="text"
         id="search_input_all"
@@ -307,15 +315,23 @@
         placeholder="Search.."
         class="form-control"
       />
-    </div>
+    </div> -->
   </div>
-
+  <div class="container">
+  <span>Total count : <span id="bdg"></span></span></div>
+  <script>  $(document).ready(function(){
+    table = document.getElementById("table-id");
+tr = table.getElementsByTagName("tr");
+console.log("HI");
+console.log(tr.length);
+document.getElementById("bdg").innerHTML=tr.length;})</script>
+<div class="container-fluid table-responsive-xl">
   <table
-    class="table table-striped table-class"
+    class="table  table-hover table-borderless"
     id="table-id"
-    style="table-layout: fixed; max-width: 300px"
+    style="table-layout: fixed; max-width: 300px" 
   >
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th>Location</th>
       <th>Date</th>
@@ -327,7 +343,7 @@
   <tbody>
     
     {% for data in data %}
-    <tr>
+    <tr  style="background: linear-gradient(to right, #56ab2f, #a8e063); color: #eee; font-weight: bold;">
     <td>{{data[2]}}</td>
     <td>{{data[1]}}</td>
     <td>{{data[5]}}</td>
@@ -339,7 +355,7 @@
   <tbody>
 
   </table>
-
+</div>
   <!--		Start Pagination -->
   <div class="pagination-container">
     <nav>
@@ -361,7 +377,7 @@
     
     {%for i in data%}
     <article>
-      <img src="../static/img/butterfly.jpg" class="card-img-top" alt="..." />
+      <img src="../static/img/butterfly/{{i[0]}}" class="card-img-top" alt="..." height="250px" />
       <div class="text">
         <h3>{{i[7]}}</h3>
         <p>Photographer:-{{i[6]}}</p>
