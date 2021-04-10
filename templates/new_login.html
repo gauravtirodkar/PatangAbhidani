@@ -299,7 +299,7 @@
         padding: 13px 10px 13px 10px;
         text-decoration: none;
         color: #efefef;
-        font-family: "IBM Plex Sans", sans-serif ;
+        font-family: "IBM Plex Sans", sans-serif;
         font-weight: 600;
       }
 
@@ -393,10 +393,10 @@
         <a href="http://127.0.0.1:5000/">About</a>
         <a class="" href="{{ url_for('images_grid') }}">Data</a>
         <a class="" href="{{ url_for('upload') }}">Upload</a>
-       
 
         <a
-          class="regbtn btn btn-primary" role="button"
+          class="regbtn btn btn-primary"
+          role="button"
           href="{{url_for('new_login')}}"
           style="
             float: right;
@@ -489,6 +489,8 @@
           } else {
             alert("The user has been registered successfully!");
             $("#register")[0].reset();
+            sessionStorage.setItem("user", true);
+            window.location = "/";
           }
         });
         event.preventDefault();
@@ -513,6 +515,7 @@
           } else {
             alert("User successfully Authenticated");
             $("#login")[0].reset();
+            window.location = "/";
           }
         });
         event.preventDefault();

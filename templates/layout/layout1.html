@@ -98,8 +98,8 @@
       background-color: #000;
       position: fixed;
       z-index: 999;
-      font-family: "IBM Plex Sans", sans-serif ;
-        font-weight: 600;
+      font-family: "IBM Plex Sans", sans-serif;
+      font-weight: 600;
     }
 
     .nav1 > .nav-header {
@@ -203,7 +203,7 @@
     }
   </style>
 
-  <body id="body" style="overflow-x: hidden;">
+  <body id="body" style="overflow-x: hidden">
     <div class="nav1">
       <input type="checkbox" id="nav-check" />
       <div class="nav-header">
@@ -393,7 +393,18 @@
                   </li>
                 </ul>
               </div>
-              <button class="btn-success" type="submit">Submit</button>
+              <button
+                class="btn-success"
+                style="
+                  background-color: #00a650;
+                  padding-top: 5px;
+                  padding-bottom: 5px;
+                  border-radius: 3px;
+                "
+                type="submit"
+              >
+                Submit
+              </button>
             </form>
             <div id="place_for_suggestions"></div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -525,7 +536,6 @@
           <div class="col-md-9">
             <ul class="nav nav-pills" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                
                 <button
                   class="nav-link active"
                   id="Table-tab"
@@ -536,14 +546,19 @@
                   aria-controls="Table"
                   aria-selected="true"
                 >
-             
-                <a href="#" class="teacher" data-toggle="tooltip" title="Data in tabular format" id="btnnn" >Table</a> 
+                  <a
+                    href="#"
+                    class="teacher"
+                    data-toggle="tooltip"
+                    title="Data in tabular format"
+                    id="btnnn"
+                    >Table</a
+                  >
                 </button>
-               
               </li>
-             
+
               <li class="nav-item" role="presentation">
-               <button
+                <button
                   class="nav-link"
                   id="Gallery-tab"
                   data-bs-toggle="tab"
@@ -553,7 +568,13 @@
                   aria-controls="Gallery"
                   aria-selected="false"
                 >
-                <a href="#" data-toggle="tooltip" title="Click to view images and description"> Gallery</a>
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view images and description"
+                  >
+                    Gallery</a
+                  >
                 </button>
               </li>
               <li class="nav-item" role="presentation">
@@ -567,10 +588,15 @@
                   aria-controls="Map"
                   aria-selected="false"
                 >
-                <a href="#" data-toggle="tooltip" title="Click to view distribution of Skippers pan India">Map</a>
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view distribution of Skippers pan India"
+                    >Map</a
+                  >
                 </button>
               </li>
-         
+
               <!-- <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
@@ -586,7 +612,7 @@
                 </button>
               </li> -->
               <li class="nav-item" role="presentation">
-               <button
+                <button
                   class="nav-link"
                   id="Analysis-tab"
                   type="button"
@@ -595,22 +621,28 @@
                   aria-selected="false"
                   onclick="exportTableToCSV('butterflies.csv')"
                 >
-                <a href="#" data-toggle="tooltip" title="Click to view download data">  Download</a>
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view download data"
+                  >
+                    Download</a
+                  >
                 </button>
               </li>
             </ul>
             <script>
-              $(document).ready(function(){
+              $(document).ready(function () {
                 table = document.getElementById("table-id");
-      tr = table.getElementsByTagName("tr");
-      console.log("HI");
-      console.log(tr.length);
-      document.getElementById("bdg").innerHTML=tr.length;
-      // document.getElementById("btnnn").setAttribute("title", "EHllllooo"); 
+                tr = table.getElementsByTagName("tr");
+                console.log("HI");
+                console.log(tr.length);
+                document.getElementById("bdg").innerHTML = tr.length;
+                // document.getElementById("btnnn").setAttribute("title", "EHllllooo");
                 $('[data-toggle="tooltip"]').tooltip();
               });
-              </script>
-              
+            </script>
+
             <div class="tab-content" id="myTabContent">
               <div
                 style="padding: 10px"
@@ -630,21 +662,37 @@
               >
                 {% block gallery %}{% endblock %}
               </div>
-              <div 
-                style="align-content: center; background: linear-gradient(to right, #56ab2f, #a8e063); border-radius: 8px;margin-top: 10px;"
+              <div
+                style="
+                  align-content: center;
+                  background: linear-gradient(to right, #56ab2f, #a8e063);
+                  border-radius: 8px;
+                  margin-top: 10px;
+                "
                 class="tab-pane fade container"
                 id="Map"
                 role="tabpanel"
                 aria-labelledby="Map-tab"
-                
               >
-                <h5  style="font-weight: bold;text-align: center;font-size: 30px;padding-top: 10px;">DISTRIBUTION OF SKIPPER BUTTERFLIES PAN INDIA</h5>
-               <div class="embed-responsive embed-responsive-21by9"> <iframe 
-                  src="http://127.0.0.1:5000/map"
-                  height="500px"
-                  class="embed-responsive-item"
-                  frameborder="0" style="width: 100%;padding-bottom: 20px;"
-                ></iframe></div>
+                <h5
+                  style="
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 30px;
+                    padding-top: 10px;
+                  "
+                >
+                  DISTRIBUTION OF SKIPPER BUTTERFLIES PAN INDIA
+                </h5>
+                <div class="embed-responsive embed-responsive-21by9">
+                  <iframe
+                    src="http://127.0.0.1:5000/map"
+                    height="500px"
+                    class="embed-responsive-item"
+                    frameborder="0"
+                    style="width: 100%; padding-bottom: 20px"
+                  ></iframe>
+                </div>
               </div>
               <div
                 style="padding: 10px"
