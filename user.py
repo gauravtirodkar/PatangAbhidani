@@ -299,7 +299,11 @@ def img():
     if request.method == "POST":
         f = request.files["file"]
         result = request.form
+        print(f.filename)
         str1 = str(f.filename)
+        
+        str1 = str1.replace(" ", "_")
+        print(str1)
         lst = [
             str1,
             result["text2"],
@@ -310,24 +314,38 @@ def img():
             result["text7"],
             result["text8"],
         ]
+        c = mysql.connection.cursor()
+        c.execute("INSERT INTO butterflydata (img,date,location,sub_species,clicked_by,scientific_name,latitude,longitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s)",(str1,result["text2"],result["text3"],result["text4"],result["text5"],result["text6"],result["text7"],result["text8"]))
+        mysql.connection.commit()
+        c.close()
         print(lst)
-        with open(
-            "E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a"
-        ) as f_object:
+        # with open(
+        #     "E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a"
+        # ) as f_object:
 
-            # Pass this file object to csv.writer()
-            # and get a writer object
-            writer_object = writer(f_object)
+        #     # Pass this file object to csv.writer()
+        #     # and get a writer object
+        #     writer_object = writer(f_object)
 
-            # Pass the list as an argument into
-            # the writerow()
-            writer_object.writerow(lst)
+        #     # Pass the list as an argument into
+        #     # the writerow()
+        #     writer_object.writerow(lst)
 
-            # Close the file object
-            f_object.close()
+        #     # Close the file object
+        #     f_object.close()
+        f.filename=f.filename.replace(" ","_")
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], f.filename))
-        df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/combined.csv")
+        # df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/combined.csv")
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * from butterflydata")
+        data = cur.fetchall()
+        df = pd.DataFrame(data)
 
+        # df1 = df.loc[df[3].isin(plcs)]
+        # df2 = df.loc[df[8].isin(spcs)]
+        # # print(df1)
+        # # print(df2)
+        # df = df1.merge(df2, how="inner", indicator=False)
         m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
 
         def get_frame(url, width, height, loc, datee, sn, cb):
@@ -363,20 +381,16 @@ def img():
             )
             return html
 
-        for img1, lat, lon, loc, datee, sn, cb in zip(
-            df["img"],
-            df["latitude"],
-            df["longitude"],
-            df["location"],
-            df["date"],
-            df["scientific name"],
-            df["click by"],
-        ):
-
+        for img1, lat, lon, loc, datee, sn, cb in zip(df[0], df[12], df[13], df[2], df[1], df[7], df[6]):
+            # img1 = img1.replace("_", " ")
             popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
             iframe = branca.element.IFrame(html=popup, width=200, height=200)
             popup = folium.Popup(iframe, max_width=200)
-            marker = folium.Marker([lat, lon], popup=popup)
+            print(type(lat), lon)
+            if (lat!="" and lon!=""):
+                lat=float(lat)
+                lon=float(lon)
+                marker = folium.Marker([lat,lon], popup=popup)
 
             marker.add_to(m)
 
