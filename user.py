@@ -61,7 +61,14 @@ def check_valid_password(email, password):
 def home():
     global session
     return render_template("index.html", sess=session)
+@app.route("/car")
+def car():
+    c = mysql.connection.cursor()
+    c.execute("SELECT * FROM butterflydata ORDER BY RAND() LIMIT 3;")
+    data = c.fetchall()
+    c.close()
 
+    return render_template("carousel.html",data=data)
 
 @app.route("/map")
 def map():
@@ -149,11 +156,21 @@ def updateTable():
     cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
     df = pd.DataFrame(data)
-
-    df1 = df.loc[df[3].isin(plcs)]
-    df2 = df.loc[df[8].isin(spcs)]
+    for i in range(len(spcs)):
+        spcs[i]=spcs[i].lower()
+    print(spcs)
+    if (len(plcs)!=0):
+        df1 = df.loc[df[3].isin(plcs)]
+    else:
+        df1=df
+    print(df1)
+    if (len(spcs)!=0):
+        df2 = df.loc[df[8].isin(spcs)]
+    else:
+        df2=df
+    print(df2)
     df = df1.merge(df2, how="inner", indicator=False)
-
+    print(df)
     m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
 
     def get_frame(url, width, height, loc, datee, sn, cb):
@@ -196,7 +213,10 @@ def updateTable():
         popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
         iframe = branca.element.IFrame(html=popup, width=200, height=200)
         popup = folium.Popup(iframe, max_width=200)
-        marker = folium.Marker([lat, lon], popup=popup)
+        if (lat!="" and lon!=""):
+            lat=float(lat)
+            lon=float(lon)
+            marker = folium.Marker([lat, lon], popup=popup)
 
         marker.add_to(m)
 

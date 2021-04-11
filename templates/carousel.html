@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div id="carousel-example" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example" data-slide-to="1"></li>
+          <li data-target="#carousel-example" data-slide-to="2"></li>
+        </ol>
+      
+        <div class="carousel-inner">
+          <div class="item active">
+            <a href="#"><img src="../static/img/butterfly/{{data[0][0]}}" style="height:600px; width:100%;  opacity: 0.9;" /></a>
+            <div class="carousel-caption">
+              <h3>{{data[0][8]}}</h3>
+              <p>{{data[0][7]}}</p>
+            </div>
+          </div>
+          <div class="item">
+            <a href="#"><img src="../static/img/butterfly/{{data[1][0]}}" style="height:600px; width:100%; opacity: 0.9; " /></a>
+            <div class="carousel-caption">
+              <h3>{{data[1][8]}}</h3>
+              <p>{{data[1][7]}}</p>
+            </div>
+          </div>
+          <div class="item">
+            <a href="#"><img src="../static/img/butterfly/{{data[2][0]}}"style="height:600px; width:100%;  opacity: 0.9;"  /></a>
+            <div class="carousel-caption">
+              <h3>{{data[2][8]}}</h3>
+              <p>{{data[2][7]}}</p>
+            </div>
+          </div>
+        </div>
+      
+        <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
