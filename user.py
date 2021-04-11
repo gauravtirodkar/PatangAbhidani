@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_mysqldb import MySQL
 from bs4 import BeautifulSoup
-from werkzeug.utils import secure_filename
+import matplotlib.pyplot as plt
+import numpy as np
 import os
 import json
 from csv import writer
@@ -12,7 +13,11 @@ import gzip
 import time
 import datetime
 import random
-from io import BufferedReader
+from keras.preprocessing import image
+from numpy import loadtxt
+from keras.models import load_model
+import tensorflow as tf
+
 
 UPLOAD_FOLDER = "C:/xampp/htdocs/butterfly"
 ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
@@ -147,13 +152,13 @@ def updateTable():
         places = tuple(tuple(places) + tuple(places))
     else:
         places = tuple(places)
-    print(places)
+    
 
     if len(sub_spec) == 1:
         sub_spec = tuple(tuple(sub_spec) + tuple(sub_spec))
     else:
         sub_spec = tuple(sub_spec)
-    print(sub_spec)
+   
     plcs = list(places)
     spcs = list(sub_spec)
     # print(spcs)
@@ -289,7 +294,8 @@ def addData():
 def upload():
     global session
     if session == True:
-        return render_template("img.html", sess=session)
+        xyz=False
+        return render_template("img.html", sess=session,xyz=xyz)
     else:
         return new_login()
 
@@ -298,106 +304,131 @@ def upload():
 def img():
     if request.method == "POST":
         f = request.files["file"]
-        result = request.form
-        print(f.filename)
-        str1 = str(f.filename)
-        
-        str1 = str1.replace(" ", "_")
-        print(str1)
-        lst = [
-            str1,
-            result["text2"],
-            result["text3"],
-            result["text4"],
-            result["text5"],
-            result["text6"],
-            result["text7"],
-            result["text8"],
-        ]
-        c = mysql.connection.cursor()
-        c.execute("INSERT INTO butterflydata (img,date,location,sub_species,clicked_by,scientific_name,latitude,longitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s)",(str1,result["text2"],result["text3"],result["text4"],result["text5"],result["text6"],result["text7"],result["text8"]))
-        mysql.connection.commit()
-        c.close()
-        print(lst)
-        # with open(
-        #     "E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a"
-        # ) as f_object:
-
-        #     # Pass this file object to csv.writer()
-        #     # and get a writer object
-        #     writer_object = writer(f_object)
-
-        #     # Pass the list as an argument into
-        #     # the writerow()
-        #     writer_object.writerow(lst)
-
-        #     # Close the file object
-        #     f_object.close()
+        print(f)
         f.filename=f.filename.replace(" ","_")
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], f.filename))
-        # df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/combined.csv")
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * from butterflydata")
-        data = cur.fetchall()
-        df = pd.DataFrame(data)
+        path = f'C:/xampp/htdocs/butterfly/{f.filename}'
+        img = image.load_img(path, target_size=(64, 64))
+        x = image.img_to_array(img)
+        # plt.imshow(x/255.)
+        x = np.expand_dims(x, axis=0)
+        # images = np.vstack([x])
+        model = load_model('E:/Project_TE/testing/PatangAbhidani/model.h5')
+        classes = model.predict(x)
+        print(classes[0])
+        if classes[0]<0.5:
+            result = request.form
+            print(f.filename)
+            str1 = str(f.filename)
+            
+            str1 = str1.replace(" ", "_")
+            print(str1)
+            lst = [
+                str1,
+                result["text2"],
+                result["text3"],
+                result["text4"],
+                result["text5"],
+                result["text6"],
+                result["text7"],
+                result["text8"],
+            ]
+            c = mysql.connection.cursor()
+            c.execute("INSERT INTO butterflydata (img,date,location,sub_species,clicked_by,scientific_name,latitude,longitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s)",(str1,result["text2"],result["text3"],result["text4"],result["text5"],result["text6"],result["text7"],result["text8"]))
+            mysql.connection.commit()
+            c.close()
+            print(lst)
+            # with open(
+            #     "E:/Project_TE/testing/PatangAbhidani/static/combined.csv", "a"
+            # ) as f_object:
 
-        # df1 = df.loc[df[3].isin(plcs)]
-        # df2 = df.loc[df[8].isin(spcs)]
-        # # print(df1)
-        # # print(df2)
-        # df = df1.merge(df2, how="inner", indicator=False)
-        m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
+            #     # Pass this file object to csv.writer()
+            #     # and get a writer object
+            #     writer_object = writer(f_object)
 
-        def get_frame(url, width, height, loc, datee, sn, cb):
-            html = (
-                """ 
-                    <!doctype html>
-                <html>
-            
-                <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost:3000/butterfly/{}""".format(
-                    width, height, url
-                )
-                + """ frameborder="0" ></img>
-                <p>scientific name :<b>{}</b>""".format(
-                    sn
-                )
-                + """<br>date : <b>{}</b>""".format(datee)
-                + """<br>clicked by : <b>{}</b>""".format(cb)
-                + """<br>location : <b>{}</b>""".format(loc)
-                + """</p>
-            
-            
-                <style>
-            
-                .frame {
+            #     # Pass the list as an argument into
+            #     # the writerow()
+            #     writer_object.writerow(lst)
 
-                    border: 0;
-                    
-                    overflow:hidden;
+            #     # Close the file object
+            #     f_object.close()
+            
+            # f.save(os.path.join(app.config["UPLOAD_FOLDER"], f.filename))
+            # df = pd.read_csv("E:/Project_TE/testing/PatangAbhidani/static/combined.csv")
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * from butterflydata")
+            data = cur.fetchall()
+            df = pd.DataFrame(data)
+
+            # df1 = df.loc[df[3].isin(plcs)]
+            # df2 = df.loc[df[8].isin(spcs)]
+            # # print(df1)
+            # # print(df2)
+            # df = df1.merge(df2, how="inner", indicator=False)
+            m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
+
+            def get_frame(url, width, height, loc, datee, sn, cb):
+                html = (
+                    """ 
+                        <!doctype html>
+                    <html>
                 
-                }
-                </style>
-                </html>"""
-            )
-            return html
+                    <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost:3000/butterfly/{}""".format(
+                        width, height, url
+                    )
+                    + """ frameborder="0" ></img>
+                    <p>scientific name :<b>{}</b>""".format(
+                        sn
+                    )
+                    + """<br>date : <b>{}</b>""".format(datee)
+                    + """<br>clicked by : <b>{}</b>""".format(cb)
+                    + """<br>location : <b>{}</b>""".format(loc)
+                    + """</p>
+                
+                
+                    <style>
+                
+                    .frame {
 
-        for img1, lat, lon, loc, datee, sn, cb in zip(df[0], df[12], df[13], df[2], df[1], df[7], df[6]):
-            # img1 = img1.replace("_", " ")
-            popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
-            iframe = branca.element.IFrame(html=popup, width=200, height=200)
-            popup = folium.Popup(iframe, max_width=200)
-            print(type(lat), lon)
-            if (lat!="" and lon!=""):
-                lat=float(lat)
-                lon=float(lon)
-                marker = folium.Marker([lat,lon], popup=popup)
+                        border: 0;
+                        
+                        overflow:hidden;
+                    
+                    }
+                    </style>
+                    </html>"""
+                )
+                return html
 
-            marker.add_to(m)
+            for img1, lat, lon, loc, datee, sn, cb in zip(df[0], df[12], df[13], df[2], df[1], df[7], df[6]):
+                # img1 = img1.replace("_", " ")
+                popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
+                iframe = branca.element.IFrame(html=popup, width=200, height=200)
+                popup = folium.Popup(iframe, max_width=200)
+                print(type(lat), lon)
+                if (lat!="" and lon!=""):
+                    lat=float(lat)
+                    lon=float(lon)
+                    marker = folium.Marker([lat,lon], popup=popup)
 
-        m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap.html")
+                marker.add_to(m)
 
-        return render_template("Heatmap.html", name=f.filename)
+            m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap.html")
 
+            return render_template("Heatmap.html", name=f.filename)
+        else:
+            print("is non skipper")
+            xyz=True
+            global session
+            return render_template("img.html",sess=session,xyz=xyz)
+        # t= model()
+        # print(t)
+
+@app.route("/logout") 
+def logout():
+    global session
+    session = False
+    return home()
 
 @app.route("/new_login", methods=["GET", "POST"])
 def new_login():

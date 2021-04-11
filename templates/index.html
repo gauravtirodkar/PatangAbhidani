@@ -68,7 +68,7 @@
             {% endif %}
             {% if sess==true %}
             <ul class="header-social">
-                <li><a class="" style="background-color: transparent; color: #eee;">Logged in</a></li>
+                <li><a class="" href="{{url_for('logout')}}" style="background-color: transparent; color: #eee;">Log out</a></li>
             </ul>
             {% endif %}
         </nav>
