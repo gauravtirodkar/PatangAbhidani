@@ -18,11 +18,13 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    
 
     <title>Patang Abhidani</title>
   </head>
 
   <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
     a {
       color: black;
       text-decoration: none;
@@ -32,6 +34,97 @@
       color: black;
       text-decoration: none;
     }
+    .button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 24px;
+    border: 0px solid #1b9954;
+    border-radius: 20px;
+    background: #2dfc8a;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2dfc8a), to(#1b9954));
+    background: -moz-linear-gradient(to right, #56ab2f, #a8e063);
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+    text-shadow: #146e3c 1px 1px 2px;
+    font: normal normal bold 15px tahoma;
+    color: #fafafa;
+    text-decoration: none;
+}
+    .button:hover,
+    .button:focus {
+        border: 0px solid ##27db78;
+        background: #36ffa6;
+        background: -webkit-gradient(linear, left top, left bottom, from(#36ffa6), to(#20b865));
+        background: -moz-linear-gradient(top, #36ffa6, #20b865);
+        background: linear-gradient(to bottom, #36ffa6, #20b865);
+        color: #fafafa;
+        text-decoration: none;
+    }
+.button:active {
+    background: #1b9954;
+    background: -webkit-gradient(linear, left top, left bottom, from(#1b9954), to(#1b9954));
+    background: -moz-linear-gradient(top, #1b9954, #1b9954);
+    background: linear-gradient(to bottom, #1b9954, #1b9954);
+}
+.button:after{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 -4px -6px 4px;
+    position: relative;
+    top: 0px;
+    left: 4px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABr0lEQVRIib3VPWsVURAG4CfLFkGCBAsRxSZFkGtjoYKd/8DuomBrGUV7f4GNIgGxsAs2195KRIQUiq1gIZYiJpEgIhJWi531jvtxFb3xhWHPOTvzzpn3fC2gsI9oyKuB/9U82u0Kinm3ZyX4ZxTpWwz0CxzAxdQfY6nHr2NlEFaJ+Cre4yk+xL8v+IZTyf9zijmM8ziC22m8ylU02MT3sNdYxwglboSVMbYePo3/ZludMncS3sWsRziByzgXMyqwGmQHw/8VjvZwdSRq8BifIoEguoKz0T+eyOERTmLFr3L/VqJsG9gK2xjw6Ug0tIuoF/FZT3UZe+rN8LVF/JM3n+TGGtyL/mRGggdYxP00lnmqvkP1Mb4reK5e5CGM8ES96Dm2SYSuTGN/vwZjrYOWK2hKm+A6dmfMvI3diJloSbQgbacWTuOS6Vl5gTvRvoYz0d7DQ7wcyt63kxax488l2omYzl3UJxH15bY8NKMeLEdMm6cqe5wrtabbOJTG3+JmtI+1YrYjpvPg5ATtai5gLWb2BrdMb9AltSSr6jvrruk91cF/f9HmiiGJ5op9legHHfKIEbb4DZsAAAAASUVORK5CYII=") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+.button2 {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 24px;
+    border: 0px solid #1b9954;
+    border-radius: 20px;
+    background: #fc2d2d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fc2d2d), to(#a81925));
+    background: -moz-linear-gradient(top, #fc2d2d, #a81925);
+    background: linear-gradient(to bottom, #fc2d2d, #a81925);
+    text-shadow: #146e3c 1px 1px 2px;
+    font: normal normal bold 15px tahoma;
+    color: #fafafa;
+    text-decoration: none;
+}
+.button2:hover,
+.button2:focus {
+    border: 0px solid ##27db78;
+    background: #ff3636;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff3636), to(#ca1e2c));
+    background: -moz-linear-gradient(top, #ff3636, #ca1e2c);
+    background: linear-gradient(to bottom, #ff3636, #ca1e2c);
+    color: #fafafa;
+    text-decoration: none;
+}
+.button2:active {
+    background: #971b1b;
+    background: -webkit-gradient(linear, left top, left bottom, from(#971b1b), to(#a81925));
+    background: -moz-linear-gradient(top, #971b1b, #a81925);
+    background: linear-gradient(to bottom, #971b1b, #a81925);
+}
+.button2:after{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 -4px -6px 4px;
+    position: relative;
+    top: 2px;
+    left: 4px;
+    background: url("data:image/png;base64,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") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+
 
     .filter {
       border-right: 3px solid rgb(11, 83, 131);
@@ -220,7 +313,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3 filter">
-            <h3><i> FILTER </i></h3>
+            <h3 style="font-family: 'Roboto Slab';"> FILTER </h3>
             <form action="{{url_for('updateTable')}}" method="POST">
               <div class="dropdown">
                 <ul id="myUL">
@@ -356,20 +449,17 @@
                   </li>
                 </ul>
               </div>
-              <button
-                class="btn-success"
-                style="
-                  background-color: #00a650;
-                  padding-top: 5px;
-                  padding-bottom: 5px;
-                  border-radius: 3px;
-                "
+              <!-- <button
+                class="btn btn-success"
+               
                 type="submit"
               >
                 Submit
-              </button>
+              </button> -->
+             <button class="button"  type="submit"> Go</button>
+             <a class="button2 refreshpage" href="{{url_for('images_grid')}}">Clear</a>
             </form>
-            <div id="place_for_suggestions"></div>
+            <!-- <div id="place_for_suggestions"></div> -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
             <script>
@@ -493,11 +583,12 @@
               }
             </script>
             <div class="container" style="padding: 8px; padding-left: 0px">
-              <button class="btn btn-danger">
+              <!-- <button class="btn btn-danger">
                 <a href="{{url_for('images_grid')}}" class="refreshpage"
                   >Clear</a
                 >
-              </button>
+              </button> -->
+           
             </div>
           </div>
           <div class="col-md-9">
