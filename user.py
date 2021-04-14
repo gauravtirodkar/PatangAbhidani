@@ -54,7 +54,7 @@ def check_valid_password(email, password):
     if len(data) == 1:
         return data[0][2] == password
     else:
-        return False
+        return False\
 
 
 @app.route("/")
@@ -220,7 +220,7 @@ def updateTable():
 
         marker.add_to(m)
 
-    m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap_filter.html")
+    m.save("./templates/Heatmap_filter.html")
     url = "http://127.0.0.1:5000/map_filter"
 
     cur = mysql.connection.cursor()
@@ -372,7 +372,7 @@ def img():
 
                 marker.add_to(m)
 
-            m.save("E:/Project_TE/testing/PatangAbhidani/templates/Heatmap.html")
+            m.save("./templates/Heatmap.html")
 
             return render_template("Heatmap.html", name=f.filename)
         else:
