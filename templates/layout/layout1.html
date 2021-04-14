@@ -249,48 +249,6 @@
 
           <script>
 
-            $("#filter").click(function () {
-              var locn = [];
-              $("input:checkbox[name=locn]:checked").each(function () {
-                locn.push($(this).val());
-              });
-
-              if (locn != '') {
-                table = document.getElementById("table-id");
-                tr = table.getElementsByTagName("tr");
-
-                // Loop through all table rows, and hide those who don't match the search query
-                for (i = 1; i < tr.length; i++) {
-                  var flag = 0;
-                  td = tr[i].getElementsByTagName("td")[1];
-                  // console.log(td)
-                  if (td) {
-                    n = locn.length
-                    var td_text = td.innerHTML;
-                    for (k = 0; k < n; k++) {
-                      filter = locn[k].toLowerCase()
-                      console.log(typeof (filter))
-
-                      if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                        //var td_text = td.innerHTML;  
-                        //td.innerHTML = 'shaban';
-                        flag = 1;
-                      } else {
-                        //DO NOTHING
-                      }
-                    }
-                  }
-
-                  if (flag == 1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
-                  }
-                }
-              }
-              
-            });
-
             $('#update_locn').click(function(){
               var locn = [];
               var sub_spec = [];
@@ -310,46 +268,6 @@
               })
             });
 
-            $("#fspecies").click(function () {
-              var sub_spec = [];
-              $("input:checkbox[name=sub_spec]:checked").each(function () {
-                sub_spec.push($(this).val());
-              });
-
-              if (sub_spec != '') {
-                table = document.getElementById("table-id");
-                tr = table.getElementsByTagName("tr");
-
-                // Loop through all table rows, and hide those who don't match the search query
-                for (i = 1; i < tr.length; i++) {
-                  var flag = 0;
-                  td = tr[i].getElementsByTagName("td")[4];
-                  // console.log(td)
-                  if (td) {
-                    n = sub_spec.length
-                    var td_text = td.innerHTML;
-                    for (k = 0; k < n; k++) {
-                      filter = sub_spec[k].toLowerCase()
-                      console.log(typeof (filter))
-
-                      if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                        //var td_text = td.innerHTML;  
-                        //td.innerHTML = 'shaban';
-                        flag = 1;
-                      } else {
-                        //DO NOTHING
-                      }
-                    }
-                  }
-
-                  if (flag == 1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
-                  }
-                }
-              }
-            });
           </script>
 
           <script>
