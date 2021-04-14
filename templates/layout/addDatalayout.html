@@ -1,142 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <title>Patang Abhidani</title>
+  </head>
 
+  <link rel="stylesheet" href="../../static/css/navbar.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="./static/css/all.css">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="./static/css/bootstrap.css">
-  <!-- Custom -->
-  <link rel="stylesheet" href="./static/css/style.css">
+  <body id="body" style="overflow-x: hidden">
+    {% block nav %} {% endblock %}
+    <!--Species Details-->
+    <section
+      style="
+        padding-top: 120px;
+        padding-bottom: 20px;
+        background-image: url(../../static/img/pattern.jpg);
+      "
+    >
+      {% block title %}{% endblock %}
+    </section>
 
-  <title>Patang Abhidani</title>
+    <section id="dashboard" class="py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 filter">
+            <h3 style="font-family: 'Roboto Slab';"> FILTER </h3>
+            <form action="{{url_for('updateTable')}}" method="POST">
+              <div class="dropdown">
+                <ul id="myUL">
+                  <!--SPECIES FILTER-->
 
-</head>
+                  <li>
+                    <span class="box"> Species </span>
+                    <ul class="nested">
+                      {% for sub_family in sub_family %}
+                      <li>
+                        <span class="box">{{sub_family[0]}} </span>
+                        <ul class="nested">
+                          {% for sub_sub_family in sub_sub_family %} {% if
+                          sub_sub_family[1] == sub_family[0] and
+                          sub_sub_family[0] != '' %}
+                          <li>
+                            <span class="box">{{sub_sub_family[0]}}</span>
+                            <ul class="nested">
+                              {% for species_name in species_name %} {% if
+                              species_name[2] == sub_family[0] and
+                              species_name[1] == sub_sub_family[0] %}
+                              <li>
+                                <span class="box">{{species_name[0]}} </span>
+                                <ul class="nested">
+                                  {% for species in species %} {% if species[1]
+                                  == species_name[0] and species[3] ==
+                                  species_name[2] %} {%if species[0] is in
+                                  sub_spec %}
+                                  <li>
+                                    <input
+                                      name="sub_spec"
+                                      class="sub_spec"
+                                      type="checkbox"
+                                      id="box"
+                                      value="{{species[0]}}"
+                                      checked
+                                    />{{species[0]}}
+                                  </li>
+                                  {% else %}
+                                  <li>
+                                    <input
+                                      name="sub_spec"
+                                      class="sub_spec"
+                                      type="checkbox"
+                                      id="box"
+                                      value="{{species[0]}}"
+                                    />{{species[0]}}
+                                  </li>
+                                  {% endif %} {% endif %} {% endfor %}
+                                </ul>
+                              </li>
+                              {%endif %} {% endfor %}
+                            </ul>
+                          </li>
+                          {% elif sub_sub_family[1] == sub_family[0] and
+                          sub_sub_family[0] == '' %} {% for species_name in
+                          species_name %} {% if species_name[2] == sub_family[0]
+                          %}
+                          <li>
+                            <span class="box">{{species_name[0]}} </span>
+                            <ul class="nested">
+                              {% for species in species %} {% if species[1] ==
+                              species_name[0] and species[3] == species_name[2]
+                              %} {%if species[0] is in sub_spec %}
+                              <li>
+                                <input
+                                  name="sub_spec"
+                                  class="sub_spec"
+                                  type="checkbox"
+                                  id="box"
+                                  value="{{species[0]}}"
+                                  checked
+                                />{{species[0]}}
+                              </li>
+                              {% else %}
+                              <li>
+                                <input
+                                  name="sub_spec"
+                                  class="sub_spec"
+                                  type="checkbox"
+                                  id="box"
+                                  value="{{species[0]}}"
+                                />{{species[0]}}
+                              </li>
+                              {% endif %} {% endif %} {% endfor %}
+                            </ul>
+                          </li>
+                          {%endif %} {% endfor %} {% endif %} {% endfor %}
+                        </ul>
+                      </li>
+                      {%endfor%}
+                    </ul>
+                  </li>
+                  <!--LOCATION FILTER-->
 
-<style>
-.filter {
-  border-right: 3px solid rgb(11, 83, 131);
-  height: auto;
-}
-.disable-links {
-    pointer-events: none;
-}
+                  <li>
+                    <span class="box">Location</span>
+                    <ul class="nested">
+                      {%for state in state %}
+                      <li>
+                        <span class="box">{{state[0]}}</span>
+                        <ul class="nested">
+                          {% for location in location %} {%if location[1] ==
+                          state[0] %} {% if location[0] is in places %}
 
-</style>
-<body>
-  <!-- Top Bar -->
-  <section id="top-bar" class="p-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <i class="fas fa-phone"></i> (+91) 8087559977
-        </div>
-        <div class="col-md-4">
-          <i class="fas fa-envelope-open"></i> contact@patangabhidani.com
-        </div>
-        <div class="col-md-4">
-          <div class="social text-right">
-            <a href="#">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#">
-              <i class="fab fa-pinterest"></i>
-            </a>
+                          <li>
+                            <input
+                              name="locn"
+                              class="locn"
+                              type="checkbox"
+                              id="box"
+                              value="{{location[0]}}"
+                              checked
+                            />{{location[0]}}
+                          </li>
+                          {%else%}
+                          <li>
+                            <input
+                              name="locn"
+                              class="locn"
+                              type="checkbox"
+                              id="box"
+                              value="{{location[0]}}"
+                            />{{location[0]}}
+                          </li>
+                          {% endif %} {%endif%} {%endfor%}
+                        </ul>
+                      </li>
+                      {%endfor%}
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+             <button class="button"  type="submit"> Go</button>
+             <a class="button2 refreshpage" href="{{url_for('images_grid')}}">Clear</a>
+            </form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script>
+              $("#update_locn").click(function () {
+                var locn = [];
+                var sub_spec = [];
+                $("input:checkbox[name=locn]:checked").each(function () {
+                  locn.push($(this).val());
+                });
+                $("input:checkbox[name=sub_spec]:checked").each(function () {
+                  sub_spec.push($(this).val());
+                });
+                $.ajax({
+                  type: "POST",
+                  contentType: "application/json;charset=utf-8",
+                  traditional: "true",
+                  url: "/updateTable",
+                  data: JSON.stringify({ locn }, { sub_spec }),
+                  dataType: "json",
+                });
+              });
+
+              var toggler = document.getElementsByClassName("box");
+              var i;
+
+              for (i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function () {
+                  this.parentElement
+                    .querySelector(".nested")
+                    .classList.toggle("active");
+                  this.classList.toggle("check-box");
+                });
+              }
+            </script>
+            
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <div class="col-md-9">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="Table-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Table"
+                  type="button"
+                  role="tab"
+                  aria-controls="Table"
+                  aria-selected="true"
+                >
+                  <a
+                    href="#"
+                    class="teacher"
+                    data-toggle="tooltip"
+                    title="Data in tabular format"
+                    id="btnnn"
+                    >Table</a
+                  >
+                </button>
+              </li>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="">
-        <img src="assets/img/ourlogo.png" class="logo" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <ul class="navbar-nav" style="color: white;">
-          <li><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
-          <li><a class="nav-link" href="{{ url_for('addData') }}">Add Data</a></li>
-          <li><a class="nav-link" href="">About</a></li>
-        </ul>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Gallery-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Gallery"
+                  type="button"
+                  role="tab"
+                  aria-controls="Gallery"
+                  aria-selected="false"
+                >
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view images and description"
+                  >
+                    Gallery</a
+                  >
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Map-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Map"
+                  type="button"
+                  role="tab"
+                  aria-controls="Map"
+                  aria-selected="false"
+                >
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view distribution of Skippers pan India"
+                    >Map</a
+                  >
+                </button>
+              </li>
 
-        
-      </div>
-    </div>
-  </nav>
+              <!-- <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Analysis-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Analysis"
+                  type="button"
+                  role="tab"
+                  aria-controls="Analysis"
+                  aria-selected="false"
+                >
+                  Analysis
+                </button>
+              </li> -->
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="Analysis-tab"
+                  type="button"
+                  role="tab"
+                  aria-controls="Analysis"
+                  aria-selected="false"
+                  onclick="exportTableToCSV('butterflies.csv')"
+                >
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view download data"
+                  >
+                    Download</a
+                  >
+                </button>
+              </li>
+            </ul>
+            <script>
+              $(document).ready(function () {
+                table = document.getElementById("table-id");
+                tr = table.getElementsByTagName("tr");
+                console.log("HI");
+                console.log(tr.length);
+                document.getElementById("bdg").innerHTML = tr.length;
+                $('[data-toggle="tooltip"]').tooltip();
+              });
+            </script>
 
-  <!--Species Details-->
-  <section id="showcase-inner" class="py-5 text-white">
-    {% block title %}{% endblock %}
-  </section>
-
- 
-
-  <section id="dashboard" class="py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-           <!-- Breadcrumb -->
-          <section id="bc" class="mt-3">
-            <div class="container">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">      
-                    <li><a class="nav-link filter" href="{{ url_for('specsdeets') }}">Table</a></li>
-                    <li><a class="nav-link filter" href="{{ url_for('images_grid') }}">Gallery</a></li>
-                    <li><a class="nav-link filter" href="">Map</a></li>
-                    <li><a class="nav-link filter" href="">Analysis</a></li>
-                    <li><a class="nav-link disable-links" href="">Download</a></li>
-                </ol>
-              </nav>
+            <div class="tab-content" id="myTabContent">
+              <div
+                style="padding: 10px"
+                class="tab-pane fade show active"
+                id="Table"
+                role="tabpanel"
+                aria-labelledby="Table-tab"
+              >
+                {% block table %}{% endblock %}
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Gallery"
+                role="tabpanel"
+                aria-labelledby="Gallery-tab"
+              >
+                {% block gallery %}{% endblock %}
+              </div>
+              <div
+                style="
+                  align-content: center;
+                  background: linear-gradient(to right, #56ab2f, #a8e063);
+                  border-radius: 8px;
+                  margin-top: 10px;
+                "
+                class="tab-pane fade container"
+                id="Map"
+                role="tabpanel"
+                aria-labelledby="Map-tab"
+              >
+                <h5
+                  style="
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 30px;
+                    padding-top: 10px;
+                  "
+                >
+                  DISTRIBUTION OF SKIPPER BUTTERFLIES PAN INDIA
+                </h5>
+                {% block map %}{% endblock %}
+                <!-- <div class="embed-responsive embed-responsive-21by9">
+                  <iframe
+                  id="map"
+                    src="http://127.0.0.1:5000/map"
+                    height="500px"
+                    class="embed-responsive-item"
+                    frameborder="0"
+                    style="width: 100%; padding-bottom: 20px"
+                  ></iframe>
+                </div> -->
+                <!-- <div class="embed-responsive embed-responsive-21by9">
+                  <iframe
+                  id="map_filter"
+                    src="http://127.0.0.1:5000/map_filter"
+                    height="500px"
+                    class="embed-responsive-item"
+                    frameborder="0"
+                    style="width: 100%; padding-bottom: 20px;display: none;"
+                  ></iframe>
+                </div> -->
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Analysis"
+                role="tabpanel"
+                aria-labelledby="Analysis-tab"
+              >
+                ...
+              </div>
+              <div
+                style="padding: 10px"
+                class="tab-pane fade"
+                id="Download"
+                role="tabpanel"
+                aria-labelledby="Download-tab"
+              >
+                ..ss.
+              </div>
             </div>
-          </section>
-          {% block content %}{% endblock %}
+          </div>
+          <!-- {% block content %}{% endblock %} -->
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer id="main-footer" class="py-4 bg-primary text-white text-center">
-    Copyright &copy;
-    <span class="year"></span> Patang Abhidani
-  </footer>
+    <!-- Footer -->
+    <!-- Java Script
+    ================================================== -->
+    <script src="./static/js/jquery-3.2.1.min.js"></script>
+    <script src="./static/js/plugins.js"></script>
+    <script src="./static/js/citizen_main.js"></script>
+    <footer
+      class="page-footer font-small blue pt-4"
+      style="
+        align-items: center;
+        align-content: center;
+        background-color: black;
+      "
+    >
+      <!-- Footer Links -->
+      <div
+        class="container-fluid text-center text-md-center"
+        style="align-items: center; align-content: center"
+      >
+        <div class="row" style="align-items: center; align-content: center">
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h1 class="text-uppercase" style="color: aliceblue">
+              Patanga Abhidani
+            </h1>
+            <p style="color: #00a650">
+              A compelete guide on skipper butterflies
+            </p>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h5 class="linke" style="color: aliceblue">Get help</h5>
+            <h5 class="linke" style="color: aliceblue">Email: XYZ@abc</h5>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h5 class="linke" style="color: aliceblue">
+              Contact us: 9876543210
+            </h5>
+            <h5 class="linke" style="color: aliceblue">Follow us: icon</h5>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-3">
+            <h5 class="linke" style="color: aliceblue">Made by: VESIT</h5>
+            <h5 class="linke" style="color: aliceblue">
+              In association with: Greenworks trust
+            </h5>
+          </div>
+          <!-- Grid column -->
 
-  <script src="./static/js/jquery-3.3.1.min.js "></script>
-  <script src="./static/js/bootstrap.bundle.min.js "></script>
-  <script src="./static/js/main.js "></script>
-  <style>
-    #analysis {
-      display: none;
-    }
-  </style>
-  <script>
-    function myFunction() {
-      var x = document.getElementById("analysis");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
+          <hr class="clearfix w-100 d-md-none pb-3" />
+        </div>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <script src="./static/js/jquery-3.3.1.min.js "></script>
+    <!-- <script src="./static/js/bootstrap.bundle.min.js "></script> -->
+    <script src="./static/js/main.js "></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      #analysis {
+        display: none;
       }
-    }
-  </script>
-</body>
-
+    </style>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("analysis");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+    </script>
+  </body>
 </html>
