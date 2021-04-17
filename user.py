@@ -142,6 +142,14 @@ def updateTable():
     spec = request.form.getlist("spec")
     ssfam = request.form.getlist("ssfam")
     sfam = request.form.getlist("sfam")
+    mnth = request.form.get("mnth")
+  
+    year = mnth[0:4]
+    month = mnth[5:]
+
+    fdate  = str(str(month) + "-" + str(year))
+
+    print(fdate)
 
     if len(places) == 1:
         places = tuple(tuple(places) + tuple(places))
@@ -228,25 +236,46 @@ def updateTable():
 
     cur = mysql.connection.cursor()
 
-    #data for filtered display of database
-    if len(places) > 1 and len(sub_spec) == 0:
-        cur.execute("SELECT * from butterflydata where city in {}".format(places))
-        data = cur.fetchall()
-    elif len(sub_spec) > 1 and len(places) == 0:
-        cur.execute(
-            "SELECT * from butterflydata where sub_species in {}".format(sub_spec)
-        )
-        data = cur.fetchall()
-    elif len(places) > 1 and len(sub_spec) > 1:
-        cur.execute(
-            "SELECT * from butterflydata where city in {} and sub_species in {}".format(
-                places, sub_spec
+    if fdate != "-":
+        #data for filtered display of database
+        if len(places) > 1 and len(sub_spec) == 0:
+            cur.execute("SELECT * from butterflydata where city in {} AND SUBSTRING(date,-7) = (%s)".format(places),(fdate,))
+            data = cur.fetchall()
+        elif len(sub_spec) > 1 and len(places) == 0:
+            cur.execute(
+                "SELECT * from butterflydata where sub_species in {} AND SUBSTRING(date,-7) = (%s)".format(sub_spec),(fdate,)
             )
-        )
-        data = cur.fetchall()
+            data = cur.fetchall()
+        elif len(places) > 1 and len(sub_spec) > 1:
+            cur.execute(
+                "SELECT * from butterflydata where city in {} and sub_species in {} AND SUBSTRING(date,-7) = (%s)".format(
+                    places, sub_spec
+                ),(fdate,)
+            )
+            data = cur.fetchall()
+        else:
+            cur.execute("SELECT * FROM butterflydata WHERE SUBSTRING(date,-7) = (%s)",(fdate,))
+            data = cur.fetchall()
     else:
-        cur.execute("SELECT * from butterflydata")
-        data = cur.fetchall()
+        #data for filtered display of database
+        if len(places) > 1 and len(sub_spec) == 0:
+            cur.execute("SELECT * from butterflydata where city in {}".format(places))
+            data = cur.fetchall()
+        elif len(sub_spec) > 1 and len(places) == 0:
+            cur.execute(
+                "SELECT * from butterflydata where sub_species in {}".format(sub_spec)
+            )
+            data = cur.fetchall()
+        elif len(places) > 1 and len(sub_spec) > 1:
+            cur.execute(
+                "SELECT * from butterflydata where city in {} and sub_species in {}".format(
+                    places, sub_spec
+                )
+            )
+            data = cur.fetchall()
+        else:
+            cur.execute("SELECT * from butterflydata")
+            data = cur.fetchall()
 
     #data for filter options
     cur.execute("SELECT * FROM location")
@@ -272,6 +301,7 @@ def updateTable():
         spec = spec,
         ssfam = ssfam,
         sfam = sfam,
+        mnth = mnth,
         species=species,
         species_name=species_name,
         sub_sub_family=sub_sub_family,

@@ -540,6 +540,15 @@
                     {% endfor %}
                   </ul>
                 </li>
+                <li>
+                  <p>Month Filter</p>
+                  {{mnth}}<br>
+                  {% if mnth != "" %}
+                  <input type="month" name="mnth" id="mnth" value="{{mnth}}" />
+                  {% else %}
+                  <input type="month" name="mnth" id="mnth" />
+                  {% endif %}
+                </li>
               </ul>
             </div>
             <button class="button"  type="submit"> Go</button>
