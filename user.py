@@ -137,19 +137,22 @@ def images_grid():
 @app.route("/updateTable", methods=["POST"])
 def updateTable():
     places = request.form.getlist("locn")
+    state_f = request.form.getlist("st")
     sub_spec = request.form.getlist("sub_spec")
+    spec = request.form.getlist("spec")
+    ssfam = request.form.getlist("ssfam")
+    sfam = request.form.getlist("sfam")
 
     if len(places) == 1:
         places = tuple(tuple(places) + tuple(places))
     else:
         places = tuple(places)
-    
 
     if len(sub_spec) == 1:
         sub_spec = tuple(tuple(sub_spec) + tuple(sub_spec))
     else:
         sub_spec = tuple(sub_spec)
-   
+       
     plcs = list(places)
     spcs = list(sub_spec)
     cur = mysql.connection.cursor()
@@ -158,19 +161,19 @@ def updateTable():
     df = pd.DataFrame(data)
     for i in range(len(spcs)):
         spcs[i]=spcs[i].lower()
-    print(spcs)
+    #print(spcs)
     if (len(plcs)!=0):
         df1 = df.loc[df[3].isin(plcs)]
     else:
         df1=df
-    print(df1)
+    #print(df1)
     if (len(spcs)!=0):
         df2 = df.loc[df[8].isin(spcs)]
     else:
         df2=df
-    print(df2)
+    #print(df2)
     df = df1.merge(df2, how="inner", indicator=False)
-    print(df)
+    #print(df)
     m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
 
     def get_frame(url, width, height, loc, datee, sn, cb):
@@ -213,18 +216,19 @@ def updateTable():
         popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
         iframe = branca.element.IFrame(html=popup, width=200, height=200)
         popup = folium.Popup(iframe, max_width=200)
-        if (lat!="" and lon!=""):
+        '''if (lat!="" and lon!=""):
             lat=float(lat)
             lon=float(lon)
             marker = folium.Marker([lat, lon], popup=popup)
 
         marker.add_to(m)
 
-    m.save("./templates/Heatmap_filter.html")
+    m.save("./templates/Heatmap_filter.html")'''
     url = "http://127.0.0.1:5000/map_filter"
 
     cur = mysql.connection.cursor()
 
+    #data for filtered display of database
     if len(places) > 1 and len(sub_spec) == 0:
         cur.execute("SELECT * from butterflydata where city in {}".format(places))
         data = cur.fetchall()
@@ -243,9 +247,8 @@ def updateTable():
     else:
         cur.execute("SELECT * from butterflydata")
         data = cur.fetchall()
-    """cur.execute("SELECT * from butterflydata where city in {}".format(places))
-    data = cur.fetchall()"""
 
+    #data for filter options
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
     cur.execute("SELECT DISTINCT state FROM location ")
@@ -264,7 +267,11 @@ def updateTable():
     return render_template(
         "images_grid.html",
         places=places,
+        state_f = state_f,
         sub_spec=sub_spec,
+        spec = spec,
+        ssfam = ssfam,
+        sfam = sfam,
         species=species,
         species_name=species_name,
         sub_sub_family=sub_sub_family,
