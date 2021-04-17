@@ -432,16 +432,16 @@ document.getElementById("bdg").innerHTML=tr.length-1;})</script>
 
 <div class="container">
   <main class="grid">
-    
-    
-    {%for i in data%}
+
+    {%for i in gallery_data %}
     <article>
       <img src="../static/img/butterfly/{{i[0]}}" class="card-img-top" alt="..." height="250px" />
       <div class="text">
         <h3>{{i[7]}}</h3>
         <p>Photographer:-{{i[6]}}</p>
         <p>Date: {{i[1]}}</p>
-        <p>Location: {{i[2]}}</p>        
+        <p>Location: {{i[2]}}</p> 
+        <p>Count: {{i[2]}}</p>       
       </div>
     </article>
     {%endfor%}
@@ -461,3 +461,4 @@ document.getElementById("bdg").innerHTML=tr.length-1;})</script>
                   ></iframe>
                 </div>
 {% endblock %}
+
