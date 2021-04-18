@@ -151,6 +151,31 @@ def images_grid():
         plot = bar,
     )
 
+def create_plot(gallery_data):
+    
+    df = pd.DataFrame(gallery_data)
+    data1 = [
+        go.Bar(
+            marker_color = '#32a852',
+            x = df[7],
+            y = df[14]
+        )
+    ]
+    graphJSON = json.dumps(data1, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
+
+def locn_plot(locinfo):
+    
+    df = pd.DataFrame(locinfo)
+    data2 = [
+        go.Bar(
+            marker_color = '#32a852',
+            x = df[0],
+            y = df[1]
+        )
+    ]
+    graphJSON = json.dumps(data2, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
 
 @app.route("/updateTable", methods=["POST"])
 def updateTable():
@@ -301,6 +326,8 @@ def updateTable():
     #bar = []
     bar = create_plot(gallery_data, 7, 14)
 
+    
+
     #data for filter options
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
@@ -315,7 +342,16 @@ def updateTable():
     species_name = cur.fetchall()
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
+    cur.execute("SELECT location, COUNT(location) from butterflydata GROUP BY location")
+    locinfo = cur.fetchall()
     cur.close()
+
+    #Data for data analysis
+    bar = create_plot(gallery_data)
+    
+    
+    locndeets = locn_plot(locinfo)
+
     global session
     return render_template(
         "images_grid.html",
@@ -336,6 +372,8 @@ def updateTable():
         state=state,
         user="LoggedIn",
         url=url,
+        plot = bar,
+        locndeets = locndeets,
         sess=session,
         plot = bar,
     )
