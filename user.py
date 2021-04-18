@@ -157,12 +157,26 @@ def locn_plot(locinfo):
     df = pd.DataFrame(locinfo)
     data2 = [
         go.Bar(
-            marker_color = '#32a852',
+            marker_color = 'forestgreen',
             x = df[0],
             y = df[1]
         )
+        
     ]
     graphJSON = json.dumps(data2, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
+def locnvsspecies(locn_data):
+    
+    df = pd.DataFrame(locn_data)
+    data3 = [
+        go.Scatter  (
+            marker_color = 'forestgreen',
+            x = df[4],
+            y = df[8],
+            mode='markers'
+        )
+    ]
+    graphJSON = json.dumps(data3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
 @app.route("/updateTable", methods=["POST"])
@@ -304,7 +318,7 @@ def updateTable():
         elif len(places) > 1 and len(sub_spec) > 1:
             cur.execute("SELECT * from butterflydata where city in {} and sub_species in {}".format(places, sub_spec))
             data = cur.fetchall()
-            cur.execute("SELECT *, COUNT (*) from butterflydata where city in {} and sub_species in {} GROUP BY sub_species".format(places, sub_spec))
+            cur.execute("SELECT *, COUNT(*) from butterflydata where city in {} and sub_species in {} GROUP BY sub_species".format(places, sub_spec))
             gallery_data = cur.fetchall()
         else:
             cur.execute("SELECT * from butterflydata")
@@ -334,9 +348,8 @@ def updateTable():
 
     #Data for data analysis
     bar = create_plot(gallery_data)
-    
-    
     locndeets = locn_plot(locinfo)
+    locnspecies = locnvsspecies(data)
 
     global session
     return render_template(
@@ -360,6 +373,7 @@ def updateTable():
         url=url,
         plot = bar,
         locndeets = locndeets,
+        locnspecies = locnspecies,
         sess=session,
     )
 

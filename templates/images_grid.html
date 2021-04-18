@@ -60,7 +60,7 @@
 {%block title %}
 <div class="container">
   <div class="row text-center">
-    <div class="col-md-12">
+    <div class="analysis">
       <h1 style="color: #fff;">Meet the family of skippers</h1>
       <p style="color: #fff;">Tabular format, Gallery format, Map based filtering</p>
     </div>
@@ -468,22 +468,54 @@ function exportTableToCSV(filename) {
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 
-<div class="container">
-  <h3>Species v/s Count</h3>
-  <div class="chart" id="bargraph">
-    <script>
-        var graphs = {{plot | safe}};
-        Plotly.plot('bargraph',graphs,{});
-    </script>
-  </div>
-  
-  <h3>Location v/s Count</h3>
-  <div class="chart" id="locnvscount">
+<style>
+  .chart{
+    border: #00a650;
+    border-width: 2px;
+    border-style: groove;
+    border-radius: 8px;
+    box-shadow: 5px 10px #888888;
+  }
 
-    <script>
-        var lgraphs = {{locndeets | safe}};
-        Plotly.plot('locnvscount',lgraphs,{});
-    </script>
+  .viz{
+    padding:10px;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="viz">
+      <h3>Species v/s Count</h3>
+      <div class="chart" id="bargraph">
+        <script>
+            var graphs = {{plot | safe}};
+            Plotly.plot('bargraph',graphs,{});
+        </script>
+      </div>
+    </div>
+    <div class="viz">
+      <h3>Location v/s Count</h3>
+      <div class="chart" id="locnvscount">
+
+        <script>
+            var lgraphs = {{locndeets | safe}};
+            Plotly.plot('locnvscount',lgraphs,{});
+        </script>
+      </div>
+    </div>
+
+    <div class="viz">
+      <h3>Location v/s Species</h3>
+      <div class="chart" id="locnvsspecies">
+
+        <script>
+            var lgraphs = {{locnspecies | safe}};
+            Plotly.plot('locnvsspecies',lgraphs,{});
+        </script>
+      </div>
+    </div>  
+
+
   </div>
 </div>
 {% endblock %}
