@@ -11,7 +11,9 @@ from keras.preprocessing import image
 from numpy import loadtxt
 from keras.models import load_model
 import tensorflow as tf
-
+import plotly
+import plotly.graph_objs as go
+import json
 
 UPLOAD_FOLDER = "C:/xampp/htdocs/butterfly"
 ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
@@ -98,6 +100,17 @@ def specsdeets():
         user="LoggedIn",
     )
 
+def create_plot(data, x, y):
+    df = pd.DataFrame(data) # creating a sample dataframe
+    data1 = [
+        go.Bar(
+            x=df[x], # assign x as the dataframe column 'x'
+            y=df[y],
+            marker_color = "red"
+        )
+    ]
+    graphJSON = json.dumps(data1, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
 
 @app.route("/images")
 def images_grid():
@@ -119,6 +132,7 @@ def images_grid():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
+    bar = create_plot(gallery_data, 7, 14)
     url = "http://127.0.0.1:5000/map"
     global session
     return render_template(
@@ -134,6 +148,7 @@ def images_grid():
         user="LoggedIn",
         url=url,
         sess=session,
+        plot = bar,
     )
 
 
@@ -283,6 +298,8 @@ def updateTable():
             data = cur.fetchall()
             cur.execute("SELECT *, COUNT(*) from butterflydata GROUP BY sub_species")
             gallery_data = cur.fetchall()
+    #bar = []
+    bar = create_plot(gallery_data, 7, 14)
 
     #data for filter options
     cur.execute("SELECT * FROM location")
@@ -320,6 +337,7 @@ def updateTable():
         user="LoggedIn",
         url=url,
         sess=session,
+        plot = bar,
     )
 
 

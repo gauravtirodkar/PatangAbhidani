@@ -464,7 +464,15 @@ document.getElementById("bdg").innerHTML=tr.length-1;})</script>
 {% endblock %}
 
 {% block analysis %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
 <div class="container">
-  <p>hii</p>
+  <div class="chart" id="bargraph">
+    <script>
+        var graphs = {{plot | safe}};
+        Plotly.plot('bargraph',graphs,{});
+    </script>
+</div>
 </div>
 {% endblock %}
