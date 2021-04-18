@@ -104,7 +104,7 @@ def images_grid():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * from butterflydata")
     data = cur.fetchall()
-    cur.execute("SELECT * from butterflydata GROUP BY sub_species")
+    cur.execute("SELECT *,COUNT(*) from butterflydata GROUP BY sub_species")
     gallery_data = cur.fetchall()
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
@@ -244,22 +244,22 @@ def updateTable():
         if len(places) > 1 and len(sub_spec) == 0:
             cur.execute("SELECT * from butterflydata where city in {} AND SUBSTRING(date,-7) = (%s)".format(places),(fdate,))
             data = cur.fetchall()
-            cur.execute("SELECT * from butterflydata where city in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(places),(fdate,))
+            cur.execute("SELECT *, COUNT(*) from butterflydata where city in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(places),(fdate,))
             gallery_data = cur.fetchall()
         elif len(sub_spec) > 1 and len(places) == 0:
             cur.execute("SELECT * from butterflydata where sub_species in {} AND SUBSTRING(date,-7) = (%s)".format(sub_spec),(fdate,))
             data = cur.fetchall()
-            cur.execute("SELECT * from butterflydata where sub_species in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(sub_spec),(fdate,))
+            cur.execute("SELECT *, COUNT(*) from butterflydata where sub_species in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(sub_spec),(fdate,))
             gallery_data = cur.fetchall()
         elif len(places) > 1 and len(sub_spec) > 1:
             cur.execute("SELECT * from butterflydata where city in {} and sub_species in {} AND SUBSTRING(date,-7) = (%s)".format(places, sub_spec),(fdate,))
             data = cur.fetchall()
-            cur.execute("SELECT * from butterflydata where city in {} and sub_species in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(places, sub_spec),(fdate,))
+            cur.execute("SELECT *, COUNT(*) from butterflydata where city in {} and sub_species in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(places, sub_spec),(fdate,))
             gallery_data = cur.fetchall()
         else:
             cur.execute("SELECT * FROM butterflydata WHERE SUBSTRING(date,-7) = %s",(fdate,))
             data = cur.fetchall()
-            cur.execute("SELECT * FROM butterflydata WHERE SUBSTRING(date,-7) = %s GROUP BY sub_species",(fdate,))
+            cur.execute("SELECT *, COUNT(*) FROM butterflydata WHERE SUBSTRING(date,-7) = %s GROUP BY sub_species",(fdate,))
             gallery_data = cur.fetchall()
     else:
         #data for filtered display of database

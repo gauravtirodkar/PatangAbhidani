@@ -627,7 +627,7 @@
                 </button>
               </li>
 
-              <!-- <li class="nav-item" role="presentation">
+              <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
                   id="Analysis-tab"
@@ -640,7 +640,8 @@
                 >
                   Analysis
                 </button>
-              </li> -->
+              </li>  
+
               <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
@@ -732,7 +733,7 @@
                 role="tabpanel"
                 aria-labelledby="Analysis-tab"
               >
-                ...
+              {% block analysis %}{% endblock %}
               </div>
               <div
                 style="padding: 10px"
