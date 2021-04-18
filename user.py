@@ -100,7 +100,7 @@ def specsdeets():
         user="LoggedIn",
     )
 
-def create_plot(data, x, y):
+'''def create_plot(data):
     df = pd.DataFrame(data) # creating a sample dataframe
     data1 = [
         go.Bar(
@@ -110,7 +110,7 @@ def create_plot(data, x, y):
         )
     ]
     graphJSON = json.dumps(data1, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
+    return graphJSON'''
 
 @app.route("/images")
 def images_grid():
@@ -132,7 +132,7 @@ def images_grid():
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
     cur.close()
-    bar = create_plot(gallery_data, 7, 14)
+    bar = create_plot(gallery_data)
     url = "http://127.0.0.1:5000/map"
     global session
     return render_template(
@@ -156,9 +156,10 @@ def create_plot(gallery_data):
     df = pd.DataFrame(gallery_data)
     data1 = [
         go.Bar(
-            marker_color = '#32a852',
+            mode = 'markers',
             x = df[7],
-            y = df[14]
+            y = df[14],
+            marker_color = df[14]
         )
     ]
     graphJSON = json.dumps(data1, cls=plotly.utils.PlotlyJSONEncoder)
@@ -316,17 +317,13 @@ def updateTable():
         elif len(places) > 1 and len(sub_spec) > 1:
             cur.execute("SELECT * from butterflydata where city in {} and sub_species in {}".format(places, sub_spec))
             data = cur.fetchall()
-            cur.execute("SELECT *, COUNT (*) from butterflydata where city in {} and sub_species in {} GROUP BY sub_species".format(places, sub_spec))
+            cur.execute("SELECT *, COUNT(*) from butterflydata where city in {} and sub_species in {} GROUP BY sub_species".format(places, sub_spec))
             gallery_data = cur.fetchall()
         else:
             cur.execute("SELECT * from butterflydata")
             data = cur.fetchall()
             cur.execute("SELECT *, COUNT(*) from butterflydata GROUP BY sub_species")
-            gallery_data = cur.fetchall()
-    #bar = []
-    bar = create_plot(gallery_data, 7, 14)
-
-    
+            gallery_data = cur.fetchall() 
 
     #data for filter options
     cur.execute("SELECT * FROM location")
@@ -348,7 +345,6 @@ def updateTable():
 
     #Data for data analysis
     bar = create_plot(gallery_data)
-    
     
     locndeets = locn_plot(locinfo)
 
@@ -375,7 +371,6 @@ def updateTable():
         plot = bar,
         locndeets = locndeets,
         sess=session,
-        plot = bar,
     )
 
 
