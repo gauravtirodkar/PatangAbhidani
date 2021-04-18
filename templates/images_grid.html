@@ -258,16 +258,6 @@ function exportTableToCSV(filename) {
 </script>  
 
 <style>
-  th {
-    border: 1px solid black;
-    overflow: hidden;
-    width: 170px;
-  }
-  td {
-    border: 1px solid black;
-    overflow: inherit;
-    width: fit-content;
-  }
 
   table th,
   table td {
@@ -275,12 +265,13 @@ function exportTableToCSV(filename) {
   }
 
   table tr:nth-child(even) {
-    background-color: #ffffff;
+    background-color: rgb(233, 253, 209);
   }
 
   th {
-    color: #333;
+    color: rgba(8, 99, 23, 0.767);
     background: #fff;
+    font-size: large;
   }
 
   .pagination {
@@ -348,17 +339,7 @@ function exportTableToCSV(filename) {
 <div id="TableData" class="container">
   <div class="header_wrap">
     <div class="num_rows">
-      <!-- <div class="form-group">
-        <select class="form-control" name="state" id="maxRows">
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="70">70</option>
-          <option value="100">100</option>
-          <option value="5000">Show ALL Rows</option>
-        </select>
-      </div> -->
+      
     </div>
     <div class="input-group input-group-sm mb-3 ">
       <div class="input-group-prepend">
@@ -387,9 +368,9 @@ function exportTableToCSV(filename) {
 </script>
 <div class="container-fluid table-responsive-xl">
   <table
-    class="table  table-hover table-borderless"
+    class="table  table-hover "
     id="table-id"
-    style="table-layout: fixed; max-width: 300px" 
+    style="table-layout: fixed; " 
   >
   <thead class="thead-dark">
     <tr>
@@ -403,7 +384,7 @@ function exportTableToCSV(filename) {
   <tbody>
     
     {% for data in data %}
-    <tr  style="background: linear-gradient(to right, #56ab2f, #a8e063); color: #eee; font-weight: bold;">
+    <tr  style=" color: #56ab2f; font-weight: bold;">
     <td>{{data[2]}}</td>
     <td>{{data[1]}}</td>
     <td>{{data[5]}}</td>
@@ -474,7 +455,8 @@ function exportTableToCSV(filename) {
     border-width: 2px;
     border-style: groove;
     border-radius: 8px;
-    box-shadow: 5px 10px #888888;
+    box-shadow: 5px 10px #7ebd7b;
+    padding:10px;
   }
 
   .viz{
@@ -493,6 +475,7 @@ function exportTableToCSV(filename) {
         </script>
       </div>
     </div>
+
     <div class="viz">
       <h3>Location v/s Count</h3>
       <div class="chart" id="locnvscount">
@@ -509,8 +492,8 @@ function exportTableToCSV(filename) {
       <div class="chart" id="locnvsspecies">
 
         <script>
-            var lgraphs = {{locnspecies | safe}};
-            Plotly.plot('locnvsspecies',lgraphs,{});
+            var sgraphs = {{locnspecies | safe}};
+            Plotly.plot('locnvsspecies',sgraphs,{});
         </script>
       </div>
     </div>  

@@ -100,17 +100,80 @@ def specsdeets():
         user="LoggedIn",
     )
 
-'''def create_plot(data):
-    df = pd.DataFrame(data) # creating a sample dataframe
-    data1 = [
-        go.Bar(
-            x=df[x], # assign x as the dataframe column 'x'
-            y=df[y],
-            marker_color = "red"
-        )
-    ]
-    graphJSON = json.dumps(data1, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON'''
+def create_plot(gallery_data):
+    
+    df = pd.DataFrame(gallery_data)
+
+    fig = go.Figure(go.Bar(
+    marker_color = '#32a852',
+            x = df[7],
+            y = df[14]))
+
+    fig.update_layout(
+    title={
+        'text': "Species vs Count",
+        'y':0.9,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+    xaxis_title="Species",
+    yaxis_title="Count",
+    xaxis_tickangle=45
+    )
+
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
+
+def locn_plot(locinfo):
+    
+    df = pd.DataFrame(locinfo)
+    
+    data2 = go.Figure(go.Bar(
+            marker_color = 'forestgreen',
+            x = df[0],
+            y = df[1]
+        ))
+
+    data2.update_layout(
+    title={
+        'text': "Location vs Count",
+        'y':0.9,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+    xaxis_title="Location",
+    yaxis_title="Count",
+    xaxis_tickangle=45
+    )
+
+    graphJSON = json.dumps(data2, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
+
+def locnvsspecies(locn_data):
+    
+    df = pd.DataFrame(locn_data)
+    
+    data3 = go.Figure(go.Scatter  (
+            marker_color = 'forestgreen',
+            x = df[3],
+            y = df[8],
+            mode='markers'
+        ))
+
+    data3.update_layout(
+    title={
+        'text': "Location vs Species",
+        'y':0.9,
+        'x':0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+    xaxis_title="Location",
+    yaxis_title="Species",
+    xaxis_tickangle=45
+    )
+
+    graphJSON = json.dumps(data3, cls=plotly.utils.PlotlyJSONEncoder)
+    return graphJSON
 
 @app.route("/images")
 def images_grid():
@@ -131,8 +194,14 @@ def images_grid():
     species_name = cur.fetchall()
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
+    cur.execute("SELECT city, COUNT(city) from butterflydata GROUP BY city")
+    locinfo = cur.fetchall()
     cur.close()
+
     bar = create_plot(gallery_data)
+    locndeets = locn_plot(locinfo)
+    locnspecies = locnvsspecies(data)
+
     url = "http://127.0.0.1:5000/map"
     global session
     return render_template(
@@ -147,50 +216,11 @@ def images_grid():
         state=state,
         user="LoggedIn",
         url=url,
-        sess=session,
         plot = bar,
+        locndeets = locndeets,
+        locnspecies = locnspecies,
+        sess=session
     )
-
-def create_plot(gallery_data):
-    
-    df = pd.DataFrame(gallery_data)
-    data1 = [
-        go.Bar(
-            mode = 'markers',
-            x = df[7],
-            y = df[14],
-            marker_color = df[14]
-        )
-    ]
-    graphJSON = json.dumps(data1, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
-
-def locn_plot(locinfo):
-    
-    df = pd.DataFrame(locinfo)
-    data2 = [
-        go.Bar(
-            marker_color = 'forestgreen',
-            x = df[0],
-            y = df[1]
-        )
-        
-    ]
-    graphJSON = json.dumps(data2, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
-def locnvsspecies(locn_data):
-    
-    df = pd.DataFrame(locn_data)
-    data3 = [
-        go.Scatter  (
-            marker_color = 'forestgreen',
-            x = df[4],
-            y = df[8],
-            mode='markers'
-        )
-    ]
-    graphJSON = json.dumps(data3, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
 
 @app.route("/updateTable", methods=["POST"])
 def updateTable():
@@ -353,7 +383,7 @@ def updateTable():
     species_name = cur.fetchall()
     cur.execute("SELECT DISTINCT sub_family FROM species")
     sub_family = cur.fetchall()
-    cur.execute("SELECT location, COUNT(location) from butterflydata GROUP BY location")
+    cur.execute("SELECT city, COUNT(city) from butterflydata GROUP BY city")
     locinfo = cur.fetchall()
     cur.close()
 
