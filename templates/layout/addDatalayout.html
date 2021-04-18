@@ -28,11 +28,11 @@
       {% block title %}{% endblock %}
     </section>
 
-    <section id="dashboard" class="py-4">
-      <div class="container">
+    <section id="dashboard" class="py-4" >
+      <div class="container" style="padding: 8px; margin: 32px;">
         <div class="row">
-          <div class="col-md-3 filter">
-            <h3 style="font-family: 'Roboto Slab';"> FILTER </h3>
+          <div class="col-md-3 filter" style="padding: 0%; margin: 0%;">
+            <h3 style="font-family: 'Roboto Slab';"> Apply Filter </h3>
 
           <!-- Required Stylesheets -->
           <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,18 +42,40 @@
           <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
           <script src="https://cdn.jsdelivr.net/gh/hummingbird-dev/hummingbird-treeview@v2.1.7/hummingbird-treeview.min.js"></script>
           
-          <div class="dropdown">
-            <div class="input-group stylish-input-group">
-          <input id="search_input" type="text" class="form-control" placeholder="Search" onclick="this.select()">
-          <span class="input-group-addon" style="border-left:0">
-              <button type="submit" id="search_button">
-            <span class="glyphicon glyphicon-search"></span>
-              </button>
-          </span>
-          <ul class="dropdown-menu h-scroll" id="search_output">
+          <style>
+            .fsearch{
+              width: 130px;
+              box-sizing: border-box;
+              border: 2px solid #ccc;
+              border-radius: 4px;
+              font-size: 16px;
+              background-color: white;
+              background-image: url('searchicon.png');
+              background-position: 10px 10px; 
+              background-repeat: no-repeat;
+              padding: 12px 20px 12px 40px;
+              -webkit-transition: width 0.4s ease-in-out;
+              transition: width 0.4s ease-in-out;
+            }
+
+            .fsearch:focus{
+              width: 90%;
+            }
+
+            hr.fhr{
+              border: 1px rgb(11, 83, 131);
+              opacity: 1;
+              border-style: dashed;
+              width: 90%;
+            }
+          </style>
+          <ul>
+            <li>
+              <!-- <input type="text" name="search" placeholder="Search.." class="fsearch"> -->
+              <hr class="fhr">
+            </li>
           </ul>
-            </div>
-        </div>
+          
 
           <form action="{{url_for('updateTable')}}" method="POST">
             <div id="treeview_container1" class="hummingbird-treeview" >
@@ -477,6 +499,7 @@
                     {% endfor %}
                   </ul>
                 </li>
+
                 <li data-id="location">
                   <i class="fa fa-plus"></i>
                   <label>
@@ -540,29 +563,38 @@
                     {% endfor %}
                   </ul>
                 </li>
+                
+                <hr class="fhr">
+
                 <li>
                   <!-- Select Month & Year -->
+                  <h3>Choose Month & Year</h3>
                   <!-- {{mnth}}<br> -->
-                  {% if mnth != "" %}
-                  <input type="month" name="mnth" id="mnth" value="{{mnth}}" />
-                  {% else %}
-                  <input type="month" name="mnth" id="mnth" />
-                  {% endif %}
+                  <input type="month" name="mnth" id="mnth" value="{{mnth}}" />          
                 </li>
               </ul>
             </div>
-            <button class="button"  type="submit"> Go</button>
-            <a class="button2 refreshpage" href="{{url_for('images_grid')}}">Clear</a>
+            <div class="goclear" style="margin-top: 25px;">
+              <ul>
+                <li>
+                  <button class="button"  type="submit"> Go</button>
+                  <a class="button2 refreshpage" href="{{url_for('images_grid')}}">Clear</a>
+                </li>
+              </ul>
+            </div>
+            
           </form>
           <script>
             $(document).ready(function() {
               $("#treeview").hummingbird();
               $("#treeview").hummingbird("search",{treeview_container:"treeview_container1", search_input:"search_input", search_output:"search_output", search_button:"search_button", scrollOffset:-515, onlyEndNodes:true});
-
+              document.getElementById("mnth").defaultValue = "2020-10";
             })
           </script>
-
+          
+          </script>
           </div>
+          
           <div class="col-md-9">
             <ul class="nav nav-pills" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
@@ -607,6 +639,7 @@
                   >
                 </button>
               </li>
+
               <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
@@ -662,6 +695,7 @@
                 </button>
               </li>
             </ul>
+            <hr class="fhr">
 
             <div class="tab-content" id="myTabContent">
               <div
