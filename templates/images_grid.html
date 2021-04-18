@@ -341,12 +341,18 @@ function exportTableToCSV(filename) {
     <div class="num_rows">
       
     </div>
-    <div class="input-group input-group-sm mb-3 ">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
-      </div>
-      <input type="text" class="form-control" id="search_input_all" onkeyup="FilterkeyWord_all_table()" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-    </div>
+
+        <div class="input-group input-group-sm mb-1 ">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+          </div>
+          <input type="text" class="form-control" id="search_input_all" onkeyup="FilterkeyWord_all_table()" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+
+        <div class="">
+          <span > <h6> Total count : <span id="bdg"></span> </h6></span>
+        </div>
+    
     <!-- <div class="tb_search">
       <input
         type="text"
@@ -357,8 +363,7 @@ function exportTableToCSV(filename) {
       />
     </div> -->
   </div>
-  <div class="container">
-  <span>Total count : <span id="bdg"></span></span></div>
+  
   <script>  $(document).ready(function(){
     table = document.getElementById("table-id");
     tr = table.getElementsByTagName("tr");
