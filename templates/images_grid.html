@@ -223,39 +223,39 @@
   }
 </script>
 <script>  
-  //user-defined function to download CSV file  
-  function downloadCSV(csv, filename) {  
-      var csvFile;  
-      var downloadLink;  
-       
-      //define the file type to text/csv  
-      csvFile = new Blob([csv], {type: 'text/csv'});  
-      downloadLink = document.createElement("a");  
-      downloadLink.download = filename;  
-      downloadLink.href = window.URL.createObjectURL(csvFile);  
-      downloadLink.style.display = "none";  
+//user-defined function to download CSV file  
+function downloadCSV(csv, filename) {  
+    var csvFile;  
+    var downloadLink;  
+      
+    //define the file type to text/csv  
+    csvFile = new Blob([csv], {type: 'text/csv'});  
+    downloadLink = document.createElement("a");  
+    downloadLink.download = filename;  
+    downloadLink.href = window.URL.createObjectURL(csvFile);  
+    downloadLink.style.display = "none";  
+  
+    document.body.appendChild(downloadLink);  
+    downloadLink.click();  
+}  
+  
+//user-defined function to export the data to CSV file format  
+function exportTableToCSV(filename) {  
+    //declare a JavaScript variable of array type  
+    var csv = [];  
+    var rows = document.querySelectorAll("table tr");  
     
-      document.body.appendChild(downloadLink);  
-      downloadLink.click();  
-  }  
-    
-  //user-defined function to export the data to CSV file format  
-  function exportTableToCSV(filename) {  
-     //declare a JavaScript variable of array type  
-     var csv = [];  
-     var rows = document.querySelectorAll("table tr");  
-     
-     //merge the whole data in tabular form   
-     for(var i=0; i<rows.length; i++) {  
-      var row = [], cols = rows[i].querySelectorAll("td, th");  
-      for( var j=0; j<cols.length; j++)  
-         row.push(cols[j].innerText);  
-      csv.push(row.join(","));  
-     }   
-     //call the function to download the CSV file  
-     downloadCSV(csv.join("\n"), filename);  
-  }  
-  </script>  
+    //merge the whole data in tabular form   
+    for(var i=0; i<rows.length; i++) {  
+    var row = [], cols = rows[i].querySelectorAll("td, th");  
+    for( var j=0; j<cols.length; j++)  
+        row.push(cols[j].innerText);  
+    csv.push(row.join(","));  
+    }   
+    //call the function to download the CSV file  
+    downloadCSV(csv.join("\n"), filename);  
+}  
+</script>  
 
 <style>
   th {
@@ -380,10 +380,11 @@
   <span>Total count : <span id="bdg"></span></span></div>
   <script>  $(document).ready(function(){
     table = document.getElementById("table-id");
-tr = table.getElementsByTagName("tr");
-console.log("HI");
-console.log(tr.length);
-document.getElementById("bdg").innerHTML=tr.length-1;})</script>
+    tr = table.getElementsByTagName("tr");
+    console.log("HI");
+    console.log(tr.length);
+    document.getElementById("bdg").innerHTML=tr.length-1;})
+</script>
 <div class="container-fluid table-responsive-xl">
   <table
     class="table  table-hover table-borderless"
@@ -426,19 +427,17 @@ document.getElementById("bdg").innerHTML=tr.length-1;})</script>
   <div class="rows_count">Showing 11 to 20 of 91 entries</div>
 </div>
 <!-- 		End of Container -->
-
 {% endblock %} 
+
 {% block gallery %}
-
-
-
 <div class="container">
   <main class="grid">
 
     {%for i in gallery_data %}
     <article>
       <!-- {{i}} -->
-      <img src="../static/img/butterfly/{{i[0]}}" class="card-img-top" alt="..." height="250px" />
+      <!-- onerror replace with sample image.-->
+      <img src="../static/img/butterfly/{{i[0]}}" class="card-img-top" onerror="this.src='../static/img/butterfly1.jpg'" height="250px" />
       <div class="text">
         <h3>{{i[7]}}</h3>
         <!-- <p>Photographer:-{{i[6]}}</p> -->
@@ -450,8 +449,8 @@ document.getElementById("bdg").innerHTML=tr.length-1;})</script>
     {%endfor%}
   </main>
 </div>
-
 {% endblock %}
+
 {% block map %}
 <div class="embed-responsive embed-responsive-21by9">
                   <iframe
@@ -466,7 +465,25 @@ document.getElementById("bdg").innerHTML=tr.length-1;})</script>
 {% endblock %}
 
 {% block analysis %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
 <div class="container">
-  <p>hii</p>
+  <h3>Species v/s Count</h3>
+  <div class="chart" id="bargraph">
+    <script>
+        var graphs = {{plot | safe}};
+        Plotly.plot('bargraph',graphs,{});
+    </script>
+  </div>
+  
+  <h3>Location v/s Count</h3>
+  <div class="chart" id="locnvscount">
+
+    <script>
+        var lgraphs = {{locndeets | safe}};
+        Plotly.plot('locnvscount',lgraphs,{});
+    </script>
+  </div>
 </div>
 {% endblock %}
