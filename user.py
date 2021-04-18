@@ -284,6 +284,8 @@ def updateTable():
             cur.execute("SELECT *, COUNT(*) from butterflydata GROUP BY sub_species")
             gallery_data = cur.fetchall()
 
+    
+
     #data for filter options
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
