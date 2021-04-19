@@ -258,7 +258,7 @@ function exportTableToCSV(filename) {
 </script>  
 
 <style>
-
+  
   table th,
   table td {
     text-align: center;
@@ -269,8 +269,8 @@ function exportTableToCSV(filename) {
   }
 
   th {
-    color: rgba(8, 99, 23, 0.767);
-    background: #fff;
+    background-color: #4CAF50 !important; 
+    color: white;
     font-size: large;
   }
 
@@ -336,7 +336,7 @@ function exportTableToCSV(filename) {
 
 </style>
 
-<div id="TableData" class="container">
+<div id="TableData" class="container-fluid">
   <div class="header_wrap">
     <div class="num_rows">
       
@@ -373,11 +373,11 @@ function exportTableToCSV(filename) {
 </script>
 <div class="container-fluid table-responsive-xl">
   <table
-    class="table  table-hover "
+    class="table table-hover"
     id="table-id"
     style="table-layout: fixed; " 
   >
-  <thead class="thead-dark">
+  <thead>
     <tr>
       <th>Location</th>
       <th>Date</th>
@@ -416,7 +416,7 @@ function exportTableToCSV(filename) {
 {% endblock %} 
 
 {% block gallery %}
-<div class="container">
+<div class="container-fluid">
   <main class="grid">
 
     {%for i in gallery_data %}
@@ -469,7 +469,7 @@ function exportTableToCSV(filename) {
   }
 </style>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="viz">
       <h3>Species v/s Count</h3>

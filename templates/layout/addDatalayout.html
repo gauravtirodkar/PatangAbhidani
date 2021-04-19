@@ -29,7 +29,7 @@
     </section>
 
     <section id="dashboard" class="py-4" >
-      <div class="container" style="padding: 8px; margin: 32px;">
+      <div class="container-fluid" style="padding: 8px; margin: 32px;">
         <div class="row">
           <div class="col-md-3 filter" style="padding: 0%; margin: 0%;">
             <h3 style="font-family: 'Roboto Slab';"> Apply Filter </h3>
@@ -591,11 +591,9 @@
               document.getElementById("mnth").defaultValue = "2020-10";
             })
           </script>
-          
-          </script>
           </div>
           
-          <div class="col-md-9">
+          <div class="col-md-9" >
             <ul class="nav nav-pills" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
@@ -699,7 +697,7 @@
 
             <div class="tab-content" id="myTabContent">
               <div
-                style="padding: 10px"
+                style="padding: 10px; margin-right: 100px;"
                 class="tab-pane fade show active"
                 id="Table"
                 role="tabpanel"
@@ -708,7 +706,7 @@
                 {% block table %}{% endblock %}
               </div>
               <div
-                style="padding: 10px"
+                style="padding: 10px; margin-right: 100px;"
                 class="tab-pane fade"
                 id="Gallery"
                 role="tabpanel"
@@ -722,8 +720,9 @@
                   background: linear-gradient(to right, #56ab2f, #a8e063);
                   border-radius: 8px;
                   margin-top: 10px;
+                  margin-right: 100px;
                 "
-                class="tab-pane fade container"
+                class="tab-pane fade"
                 id="Map"
                 role="tabpanel"
                 aria-labelledby="Map-tab"
@@ -761,7 +760,7 @@
                 </div> -->
               </div>
               <div
-                style="padding: 10px"
+                style="padding: 10px; margin-right: 100px;"
                 class="tab-pane fade"
                 id="Analysis"
                 role="tabpanel"
@@ -770,7 +769,7 @@
               {% block analysis %}{% endblock %}
               </div>
               <div
-                style="padding: 10px"
+                style="padding: 10px; margin-right: 50px;"
                 class="tab-pane fade"
                 id="Download"
                 role="tabpanel"
