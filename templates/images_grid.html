@@ -265,13 +265,19 @@ function exportTableToCSV(filename) {
   }
 
   table tr:nth-child(even) {
-    background-color: rgb(233, 253, 209);
+    background-color: rgb(218, 248, 182);
   }
 
   th {
     background-color: #4CAF50 !important; 
     color: white;
     font-size: large;
+    border:1px solid #3b8a3e ;
+  }
+
+  td {
+    border-left: 1px solid #4CAF50;
+    border-right: 1px solid #4CAF50;
   }
 
   .pagination {
@@ -334,13 +340,24 @@ function exportTableToCSV(filename) {
   padding: 20px;
 }
 
+.card{
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+cursor: pointer;
+}
+
+.card:hover{
+  transform: scale(1.05);
+box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
 </style>
 
 <div id="TableData" class="container-fluid">
-  <div class="header_wrap">
-    <div class="num_rows">
-      
-    </div>
+  <!-- <div class="header_wrap">
+    
 
         <div class="input-group input-group-sm mb-1 ">
           <div class="input-group-prepend">
@@ -351,9 +368,9 @@ function exportTableToCSV(filename) {
 
         <div class="">
           <span > <h6> Total count : <span id="bdg"></span> </h6></span>
-        </div>
+        </div> 
     
-    <!-- <div class="tb_search">
+    <div class="tb_search">
       <input
         type="text"
         id="search_input_all"
@@ -361,16 +378,23 @@ function exportTableToCSV(filename) {
         placeholder="Search.."
         class="form-control"
       />
-    </div> -->
-  </div>
-  
+    </div>
+  </div> -->
+<!--   
   <script>  $(document).ready(function(){
     table = document.getElementById("table-id");
     tr = table.getElementsByTagName("tr");
     console.log("HI");
     console.log(tr.length);
     document.getElementById("bdg").innerHTML=tr.length-1;})
-</script>
+</script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" /> -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" />
+<!-- <script type="text/javascript" src= "https://code.jquery.com/jquery-3.5.1.js"></script>  -->
+<script type="text/javascript" src= "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src= "https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script> 
+
+
 <div class="container-fluid table-responsive-xl">
   <table
     class="table table-hover"
@@ -402,38 +426,135 @@ function exportTableToCSV(filename) {
 
   </table>
 </div>
-  <!--		Start Pagination -->
-  <div class="pagination-container">
-    <nav>
-      <ul class="pagination">
-        <!--	Here the JS Function Will Add the Rows -->
-      </ul>
-    </nav>
-  </div>
-  <div class="rows_count">Showing 11 to 20 of 91 entries</div>
+<script>
+  $(document).ready(function(){
+    $('#table-id').dataTable();
+});
+</script>
+  
 </div>
 <!-- 		End of Container -->
 {% endblock %} 
 
 {% block gallery %}
-<div class="container-fluid">
-  <main class="grid">
+<div id="cards_landscape_wrap-2">
+  <div class="container-fluid">
+    <div class="row">
+      <style>
+        /*----  Main Style  ----*/
+  #cards_landscape_wrap-2{
+    text-align: center;
+    background: #F7F7F7;
+  }
+  #cards_landscape_wrap-2 .container{
+    padding-top: 80px; 
+    padding-bottom: 100px;
+  }
+  #cards_landscape_wrap-2 a{
+    text-decoration: none;
+    outline: none;
+  }
+  #cards_landscape_wrap-2 .card-flyer {
+    border-radius: 5px;
+    height: 450px;
+  }
+  #cards_landscape_wrap-2 .card-flyer .image-box{
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.50);
+    border-radius: 5px;
+  }
+  #cards_landscape_wrap-2 .card-flyer .image-box img{
+    -webkit-transition:all .9s ease; 
+    -moz-transition:all .9s ease; 
+    -o-transition:all .9s ease;
+    -ms-transition:all .9s ease; 
+    width: 100%;
+    height: 250px;
+  }
+  #cards_landscape_wrap-2 .card-flyer:hover .image-box img{
+    opacity: 0.7;
+    -webkit-transform:scale(1.15);
+    -moz-transform:scale(1.15);
+    -ms-transform:scale(1.15);
+    -o-transform:scale(1.15);
+    transform:scale(1.15);
+  }
+  #cards_landscape_wrap-2 .card-flyer .text-box{
+    text-align: center;
+  }
+  #cards_landscape_wrap-2 .card-flyer .text-box .text-container{
+    padding: 30px 18px;
+  }
+  #cards_landscape_wrap-2 .card-flyer{
+    background: #FFFFFF;
+    margin-top: 50px;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+  }
+  #cards_landscape_wrap-2 .card-flyer:hover{
+    background: #fff;
+    box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    margin-top: 50px;
+  }
+  #cards_landscape_wrap-2 .card-flyer .text-box p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 0px; 
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #000000;
+  }
+  #cards_landscape_wrap-2 .card-flyer .text-box h6{
+    margin-top: 0px;
+    margin-bottom: 4px; 
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Roboto Black', sans-serif;
+    letter-spacing: 1px;
+    color: #3e9c07f5;
+  }
+      </style>
 
-    {%for i in gallery_data %}
-    <article>
-      <!-- {{i}} -->
-      <!-- onerror replace with sample image.-->
-      <img src="../static/img/butterfly/{{i[0]}}" class="card-img-top" onerror="this.src='../static/img/butterfly1.jpg'" height="250px" />
-      <div class="text">
-        <h3>{{i[7]}}</h3>
-        <!-- <p>Photographer:-{{i[6]}}</p>
-        <p>Date: {{i[1]}}</p>
-        <p>Location: {{i[2]}}</p>  -->
-        <p>Count: {{i[14]}}</p>       
+      {%for i in gallery_data %}
+      
+      
+
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="">
+          <div class="card-flyer">
+            <div class="text-box">
+              <div class="image-box">
+                  <img src="../static/img/butterfly/{{i[0]}}" onerror="this.src='../static/img/butterfly1.jpg'" />
+              </div>
+              <div class="text-container">
+                  <h6>{{i[7]}}</h6>
+                  <p>Count: {{i[14]}}</p>
+              </div>
+              <div>
+                <a href="#" class="btn btn-outline-success btn-icon-right">
+                  <span>View More
+                    <img src="https://static3.avast.com/1/web/i/v2/components/arrow-m-right-orange.png" height="24">
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
-    </article>
-    {%endfor%}
-  </main>
+      {%endfor%}
+    </div>
+  </div>
 </div>
 {% endblock %}
 

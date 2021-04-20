@@ -588,7 +588,7 @@
             $(document).ready(function() {
               $("#treeview").hummingbird();
               $("#treeview").hummingbird("search",{treeview_container:"treeview_container1", search_input:"search_input", search_output:"search_output", search_button:"search_button", scrollOffset:-515, onlyEndNodes:true});
-              document.getElementById("mnth").defaultValue = "2020-10";
+              //document.getElementById("mnth").defaultValue = "2020-10";
             })
           </script>
           </div>
@@ -597,7 +597,7 @@
             <ul class="nav nav-pills" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link active"
+                  class="btn btn-primary btn-lg nav-link active"
                   id="Table-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#Table"
@@ -608,7 +608,6 @@
                 >
                   <a
                     href="#"
-                    class="teacher"
                     data-toggle="tooltip"
                     title="Data in tabular format"
                     id="btnnn"
@@ -619,7 +618,7 @@
 
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="btn btn-primary btn-lg nav-link"
                   id="Gallery-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#Gallery"
@@ -640,7 +639,7 @@
 
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="btn btn-primary btn-lg nav-link"
                   id="Map-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#Map"
@@ -660,7 +659,7 @@
 
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="btn btn-primary btn-lg nav-link"
                   id="Analysis-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#Analysis"
@@ -669,13 +668,18 @@
                   aria-controls="Analysis"
                   aria-selected="false"
                 >
-                  Analysis
+                <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Click to view Analysis of Data"
+                    >
+                  Analysis</a>
                 </button>
               </li>  
 
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="btn btn-primary btn-lg nav-link"
                   id="Analysis-tab"
                   type="button"
                   role="tab"
@@ -697,7 +701,7 @@
 
             <div class="tab-content" id="myTabContent">
               <div
-                style="padding: 10px; margin-right: 100px;"
+                style="padding: 10px; margin-right: 50px;"
                 class="tab-pane fade show active"
                 id="Table"
                 role="tabpanel"
