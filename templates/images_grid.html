@@ -528,10 +528,8 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 
       {%for i in gallery_data %}
       
-      
-
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-        <a href="">
+        <a href="{{url_for('speciesgallery', species_name=i[9], sub_species=i[8])}}">
           <div class="card-flyer">
             <div class="text-box">
               <div class="image-box">

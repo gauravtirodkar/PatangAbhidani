@@ -418,6 +418,17 @@ def updateTable():
         sess=session,
     )
 
+@app.route("/speciesgallery/<string:species_name>/<string:sub_species>/")
+def speciesgallery(species_name, sub_species):
+    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * from butterflydata where sub_species = %s",( sub_species,))
+    gallery_data = cur.fetchall()
+    cur.execute("SELECT * from species where sub_species = %s",( sub_species,))
+    breadcrumb = cur.fetchall()
+    #print(gallery_data.length())
+    cur.close()
+    return render_template("species_details.html",gallery_data=gallery_data, breadcrumb=breadcrumb)
 
 @app.route("/addData")
 def addData():
