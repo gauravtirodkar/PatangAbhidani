@@ -71,7 +71,14 @@ def car():
     c.close()
 
     return render_template("carousel.html",data=data)
+@app.route("/carou")
+def carou():
+    c = mysql.connection.cursor()
+    c.execute("SELECT * FROM butterflydata ORDER BY RAND() LIMIT 5;")
+    data = c.fetchall()
+    c.close()
 
+    return render_template("carou.html",data=data)
 @app.route("/map")
 def map():
     return render_template("Heatmap.html")
@@ -103,23 +110,48 @@ def specsdeets():
 def create_plot(gallery_data):
     
     df = pd.DataFrame(gallery_data)
+    if not (df.empty):
+        fig = go.Figure(go.Bar(
+        marker_color = '#32a852',
+                x = df[7],
+                y = df[14]))
+        
+        fig.update_layout(
+        title={
+            'text': "Species vs Count",
+            'y':0.9,
+            'x':0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis_title="Species",
+        yaxis_title="Count",
+        xaxis_tickangle=45
+        )
+    else:
+        fig = go.Figure()
 
-    fig = go.Figure(go.Bar(
-    marker_color = '#32a852',
-            x = df[7],
-            y = df[14]))
+        # Add trace
+        fig.add_trace(
+            go.Scatter(x=[0], y=[0])
+        )
 
-    fig.update_layout(
-    title={
-        'text': "Species vs Count",
-        'y':0.9,
-        'x':0.5,
-        'xanchor': 'center',
-        'yanchor': 'top'},
-    xaxis_title="Species",
-    yaxis_title="Count",
-    xaxis_tickangle=45
-    )
+        # Add images
+        fig.add_layout_image(
+                dict(
+                    source="static/img/2.jpg",
+                    xref="x",
+                    yref="y",
+                    x=-1,
+                    y=1,
+                    sizex=2,
+                    sizey=2,
+                    sizing="stretch",
+                    opacity=0.6,
+                    layer="below")
+        )
+
+        # Set templates
+        fig.update_layout(template="plotly_white")   
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -127,50 +159,99 @@ def create_plot(gallery_data):
 def locn_plot(locinfo):
     
     df = pd.DataFrame(locinfo)
-    
-    data2 = go.Figure(go.Bar(
-            marker_color = 'forestgreen',
-            x = df[0],
-            y = df[1]
-        ))
+    if not (df.empty):
+        data2 = go.Figure(go.Bar(
+                marker_color = 'forestgreen',
+                x = df[0],
+                y = df[1]
+            ))
 
-    data2.update_layout(
-    title={
-        'text': "Location vs Count",
-        'y':0.9,
-        'x':0.5,
-        'xanchor': 'center',
-        'yanchor': 'top'},
-    xaxis_title="Location",
-    yaxis_title="Count",
-    xaxis_tickangle=45
-    )
+        data2.update_layout(
+        title={
+            'text': "Location vs Count",
+            'y':0.9,
+            'x':0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis_title="Location",
+        yaxis_title="Count",
+        xaxis_tickangle=45
+        )
+    else:
+        data2 = go.Figure()
 
+        # Add trace
+        data2.add_trace(
+            go.Scatter(x=[0], y=[0])
+        )
+
+        # Add images
+        data2.add_layout_image(
+                dict(
+                    source="static/img/butterfly/3-1.jpg",
+                    xref="x",
+                    yref="y",
+                    x=-1,
+                    y=1,
+                    sizex=2,
+                    sizey=2,
+                    sizing="stretch",
+                    opacity=0.6,
+                    layer="below")
+        )
+
+        # Set templates
+        data2.update_layout(template="plotly_white") 
     graphJSON = json.dumps(data2, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
 
 def locnvsspecies(locn_data):
     
     df = pd.DataFrame(locn_data)
-    
-    data3 = go.Figure(go.Scatter  (
-            marker_color = 'forestgreen',
-            x = df[3],
-            y = df[8],
-            mode='markers'
-        ))
+    if not (df.empty):
+        data3 = go.Figure(go.Scatter  (
+                marker_color = 'forestgreen',
+                x = df[3],
+                y = df[8],
+                mode='markers'
+            ))
 
-    data3.update_layout(
-    title={
-        'text': "Location vs Species",
-        'y':0.9,
-        'x':0.5,
-        'xanchor': 'center',
-        'yanchor': 'top'},
-    xaxis_title="Location",
-    yaxis_title="Species",
-    xaxis_tickangle=45
-    )
+        data3.update_layout(
+        title={
+            'text': "Location vs Species",
+            'y':0.9,
+            'x':0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'},
+        xaxis_title="Location",
+        yaxis_title="Species",
+        xaxis_tickangle=45
+        )
+    else:
+        data3 = go.Figure()
+
+        # Add trace
+        data3.add_trace(
+            go.Scatter(x=[0], y=[0])
+        )
+
+        # Add images
+        data3.add_layout_image(
+                dict(
+                    source="static/img/1.jpg",
+                    xref="x",
+                    yref="y",
+                    x=-1,
+                    y=1,
+                    sizex=2,
+                    sizey=2,
+                    sizing="stretch",
+                    opacity=0.6,
+                    layer="below")
+        )
+
+        # Set templates
+        data3.update_layout(template="plotly_white") 
 
     graphJSON = json.dumps(data3, cls=plotly.utils.PlotlyJSONEncoder)
     return graphJSON
@@ -249,78 +330,28 @@ def updateTable():
     else:
         sub_spec = tuple(sub_spec)
        
-    plcs = list(places)
-    spcs = list(sub_spec)
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * from butterflydata")
-    data = cur.fetchall()
-    df = pd.DataFrame(data)
-    for i in range(len(spcs)):
-        spcs[i]=spcs[i].lower()
-    #print(spcs)
-    if (len(plcs)!=0):
-        df1 = df.loc[df[3].isin(plcs)]
-    else:
-        df1=df
-    #print(df1)
-    if (len(spcs)!=0):
-        df2 = df.loc[df[8].isin(spcs)]
-    else:
-        df2=df
-    #print(df2)
-    df = df1.merge(df2, how="inner", indicator=False)
+    # plcs = list(places)
+    # spcs = list(sub_spec)
+    # cur = mysql.connection.cursor()
+    # cur.execute("SELECT * from butterflydata")
+    # data = cur.fetchall()
+    # df = pd.DataFrame(data)
+    # for i in range(len(spcs)):
+    #     spcs[i]=spcs[i].lower()
+    # #print(spcs)
+    # if (len(plcs)!=0):
+    #     df1 = df.loc[df[3].isin(plcs)]
+    # else:
+    #     df1=df
+    # #print(df1)
+    # if (len(spcs)!=0):
+    #     df2 = df.loc[df[8].isin(spcs)]
+    # else:
+    #     df2=df
+    # #print(df2)
+    # df = df1.merge(df2, how="inner", indicator=False)
     #print(df)
-    m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
 
-    def get_frame(url, width, height, loc, datee, sn, cb):
-        html = (
-            """ 
-                <!doctype html>
-            <html>
-        
-            <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost:3000/butterfly/{}""".format(
-                width, height, url
-            )
-            + """ frameborder="0" ></img>
-            <p>scientific name :<b>{}</b>""".format(
-                sn
-            )
-            + """<br>date : <b>{}</b>""".format(datee)
-            + """<br>clicked by : <b>{}</b>""".format(cb)
-            + """<br>location : <b>{}</b>""".format(loc)
-            + """</p>
-        
-        
-            <style>
-        
-            .frame {
-
-                border: 0;
-                
-                overflow:hidden;
-            
-            }
-            </style>
-            </html>"""
-        )
-        return html
-
-    for img1, lat, lon, loc, datee, sn, cb in zip(
-        df[0], df[12], df[13], df[2], df[1], df[7], df[6]
-    ):
-
-        popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
-        iframe = branca.element.IFrame(html=popup, width=200, height=200)
-        popup = folium.Popup(iframe, max_width=200)
-        '''if (lat!="" and lon!=""):
-            lat=float(lat)
-            lon=float(lon)
-            marker = folium.Marker([lat, lon], popup=popup)
-
-        marker.add_to(m)
-
-    m.save("./templates/Heatmap_filter.html")'''
-    url = "http://127.0.0.1:5000/map_filter"
 
     cur = mysql.connection.cursor()
 
@@ -329,6 +360,7 @@ def updateTable():
         if len(places) > 1 and len(sub_spec) == 0:
             cur.execute("SELECT * from butterflydata where city in {} AND SUBSTRING(date,-7) = (%s)".format(places),(fdate,))
             data = cur.fetchall()
+            
             cur.execute("SELECT *, COUNT(*) from butterflydata where city in {} AND SUBSTRING(date,-7) = (%s) GROUP BY sub_species".format(places),(fdate,))
             gallery_data = cur.fetchall()
         elif len(sub_spec) > 1 and len(places) == 0:
@@ -368,7 +400,8 @@ def updateTable():
             data = cur.fetchall()
             cur.execute("SELECT *, COUNT(*) from butterflydata GROUP BY sub_species")
             gallery_data = cur.fetchall() 
-
+    df = pd.DataFrame(data)
+    
     #data for filter options
     cur.execute("SELECT * FROM location")
     location = cur.fetchall()
@@ -387,6 +420,59 @@ def updateTable():
     locinfo = cur.fetchall()
     cur.close()
 
+    m = folium.Map(location=[20.593684, 78.96288], zoom_start=5, disable_3d=True)
+
+    def get_frame(url, width, height, loc, datee, sn, cb):
+        html = (
+            """ 
+                <!doctype html>
+            <html>
+        
+            <img id="myIFrame" class="frame" width="{}px" height="{}px" src=http://localhost:3000/butterfly/{}""".format(
+                width, height, url
+            )
+            + """ frameborder="0" ></img>
+            <p>scientific name :<b>{}</b>""".format(
+                sn
+            )
+            + """<br>date : <b>{}</b>""".format(datee)
+            + """<br>clicked by : <b>{}</b>""".format(cb)
+            + """<br>location : <b>{}</b>""".format(loc)
+            + """</p>
+        
+        
+            <style>
+        
+            .frame {
+
+                border: 0;
+                
+                overflow:hidden;
+            
+            }
+            </style>
+            </html>"""
+        )
+        return html
+    if not (df.empty):
+        for img1, lat, lon, loc, datee, sn, cb in zip(
+            df[0], df[12], df[13], df[2], df[1], df[7], df[6]
+        ):
+
+            popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
+            iframe = branca.element.IFrame(html=popup, width=200, height=200)
+            popup = folium.Popup(iframe, max_width=200)
+            
+            if (lat!="" and lon!=""):
+                lat=float(lat)
+                lon=float(lon)
+                marker = folium.Marker([lat, lon], popup=popup)
+
+            marker.add_to(m)
+
+    m.save("./templates/Heatmap_filter.html")
+    url = "http://127.0.0.1:5000/map_filter"
+    
     #Data for data analysis
     bar = create_plot(gallery_data)
     locndeets = locn_plot(locinfo)
