@@ -15,7 +15,7 @@ import plotly
 import plotly.graph_objs as go
 import json
 
-UPLOAD_FOLDER = "C:/xampp/htdocs/butterfly"
+UPLOAD_FOLDER = "./upload_image/"
 ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
 """ from flask import Flask, url_for, render_template,request,session
 from flask_sqlalchemy import SQLAlchemy
@@ -537,18 +537,18 @@ def img():
         f = request.files["file"]
         f.filename=f.filename.replace(" ","_")
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], f.filename))
-        path = f'C:/xampp/htdocs/butterfly/{f.filename}'
+        path = f'./upload_image/{f.filename}'
         img = image.load_img(path, target_size=(64, 64))
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
-        model = load_model('E:/Project_TE/testing/PatangAbhidani/model.h5')
+        model = load_model('./model.h5')
         classes = model.predict(x)
         if classes[0]<0.5:
             result = request.form
             str1 = str(f.filename)
             str1 = str1.replace(" ", "_")
             lst = [
-                str1,
+                str1,   
                 result["text2"],
                 result["text3"],
                 result["text4"],
@@ -557,8 +557,14 @@ def img():
                 result["text7"],
                 result["text8"],
             ]
+
+            print(result["text6"])
+            res = result["text6"].split()
+            res[1].lower()
             c = mysql.connection.cursor()
-            c.execute("INSERT INTO butterflydata (img,date,location,sub_species,clicked_by,scientific_name,latitude,longitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s)",(str1,result["text2"],result["text3"],result["text4"],result["text5"],result["text6"],result["text7"],result["text8"]))
+            c.execute("SELECT * FROM species WHERE sub_species = %s", (res[1],))
+            d1 = c.fetchall()
+            c.execute("INSERT INTO butterflydata (img,date,location,species,clicked_by,scientific_name,sub_species,species_name,sub_sub_family,sub_family,latitude,longitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s,%s,%s,%s,%s)",(str1,result["text2"],result["text3"],result["text4"],result["text5"],result["text6"],d1[0][0],d1[0][1],d1[0][2],d1[0][3],result["text7"],result["text8"]))
             mysql.connection.commit()
             c.close()
             cur = mysql.connection.cursor()
