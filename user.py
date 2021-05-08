@@ -13,7 +13,7 @@ from keras.models import load_model
 import tensorflow as tf
 import plotly
 import plotly.graph_objs as go
-import json
+import requests, json
 
 UPLOAD_FOLDER = "./upload_image/"
 ALLOWED_EXTENSIONS = set(["png", "jpg", "jpeg", "gif"])
@@ -530,6 +530,15 @@ def upload():
     else:
         return new_login()
 
+def altitude(lat,long):
+  latlng = lat+" "+long
+  apikey="AIzaSyB3zdxKTqiIaCpBc_1Yaqzc3X6kNsiRips"
+  serviceURL = "https://maps.googleapis.com/maps/api/elevation/json?locations="+latlng+"&key="+apikey
+  r = requests.get(serviceURL)
+  y = json.loads(r.text)
+  for result in y["results"]:
+    elev=result["elevation"]
+    return elev
 
 @app.route("/img", methods=["GET", "POST"])
 def img():
@@ -557,14 +566,24 @@ def img():
                 result["text7"],
                 result["text8"],
             ]
+            
+            elevation = altitude(result["text7"], result["text8"])
 
-            print(result["text6"])
+            print(result["text2"])
+            date1 = result["text2"]
+            day = date1[8:]
+            month = date1[5:7]
+            year = date1[0:4]
+
+            fdate  = str(str(day) + "-" + str(month) + "-" + str(year))
+            print(fdate)
+            #print(result["text6"])
             res = result["text6"].split()
             res[1].lower()
             c = mysql.connection.cursor()
             c.execute("SELECT * FROM species WHERE sub_species = %s", (res[1],))
             d1 = c.fetchall()
-            c.execute("INSERT INTO butterflydata (img,date,location,species,clicked_by,scientific_name,sub_species,species_name,sub_sub_family,sub_family,latitude,longitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s,%s,%s,%s,%s)",(str1,result["text2"],result["text3"],result["text4"],result["text5"],result["text6"],d1[0][0],d1[0][1],d1[0][2],d1[0][3],result["text7"],result["text8"]))
+            c.execute("INSERT INTO butterflydata (img,date,location,species,clicked_by,scientific_name,sub_species,species_name,sub_sub_family,sub_family,latitude,longitude,altitude) VALUES (%s, %s, %s,%s, %s, %s,%s,%s,%s,%s,%s,%s,%s)",(str1,fdate,result["text3"],result["text4"],result["text5"],result["text6"],d1[0][0],d1[0][1],d1[0][2],d1[0][3],result["text7"],result["text8"],elevation))
             mysql.connection.commit()
             c.close()
             cur = mysql.connection.cursor()
