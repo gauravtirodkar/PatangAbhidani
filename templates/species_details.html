@@ -190,6 +190,10 @@
                   letter-spacing: 1px;
                   color: #3e9c07f5;
                 }
+                i{
+                  font-size: 26px;
+                  color:#3b8a3e 
+                }
                     </style>
               
                     {%for i in gallery_data %}
@@ -201,11 +205,12 @@
                             <div class="image-box">
                                 <img src="../../../static/img/butterfly/{{i[0]}}" onerror="this.src='../../../static/img/butterfly1.jpg'" />
                             </div>
-                            <div class="text-container">
-                                <h6>{{i[7]}}</h6>
-                                <p>Photo by {{i[6]}}</p>
-                                <p>Clicked on {{i[1]}}</p>
-                                <p>Location {{i[2]}}</p>
+                            <div class="text-container" style="padding: 2px;">
+                                <i>{{i[9]}} {{i[8]}}</i>
+                                <p style="text-transform: capitalize;">Common Name : {{i[5]}}</p>
+                                <!-- <p>Photo by : {{i[6]}}</p> -->
+                                <p>Clicked on : {{i[1]}}</p>
+                                <p>Location : {{i[2]}}</p>
                             </div>
                             
                           </div>
@@ -254,18 +259,18 @@
           </div>
           <div class="col-md-6 mt-md-0 mt-3">
             <h5 class="linke" style="color: aliceblue">Get help</h5>
-            <h5 class="linke" style="color: aliceblue">Email: XYZ@abc</h5>
+            <h5 class="linke" style="color: aliceblue">Email: greenworkstrust2016@gmail.com</h5>
           </div>
           <div class="col-md-6 mt-md-0 mt-3">
             <h5 class="linke" style="color: aliceblue">
-              Contact us: 9876543210
+              Contact us: 9819330222
             </h5>
             <h5 class="linke" style="color: aliceblue">Follow us: icon</h5>
           </div>
           <div class="col-md-6 mt-md-0 mt-3">
             <h5 class="linke" style="color: aliceblue">Made by: VESIT</h5>
             <h5 class="linke" style="color: aliceblue">
-              In association with: Greenworks trust
+              In association with: Greenworks Trust
             </h5>
           </div>
           <!-- Grid column -->

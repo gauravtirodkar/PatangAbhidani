@@ -5,9 +5,12 @@
   <input type="checkbox" id="nav-check" />
   <div class="nav-header">
     <div class="nav-title">
-      <h3 style="color: #00a650; margin: auto; margin-left: 30px">
+      <!-- <h3 style="color: #00a650; margin: auto; margin-left: 30px">
         Patang-Abhidani
-      </h3>
+      </h3> -->
+      <a class="navbar-brand" href="#" style="color: #00a650;">
+        <img src="../static/img/pfinal2-removebg-preview.png" width="220" height="50" alt="">
+      </a>
     </div>
   </div>
   <div class="nav-btn">
@@ -403,24 +406,25 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   >
   <thead>
     <tr>
+      <th>Date</th>
+      <th>Common Name</th>
+      <th>Scientific Name</th>
       <th>Location</th>
       <th>Elevation</th>
-      <th>Date</th>
-      <th>Species</th>
-      <th>Scientific Name</th>
-      <th>CopyRight</th>
+
+
     </tr>
   </thead>
   <tbody>
     
     {% for data in data %}
     <tr  style=" color: #56ab2f; font-weight: bold;">
-    <td>{{data[2]}}</td>
-    <td>{{data[14]}}</td>
     <td>{{data[1]}}</td>
-    <td>{{data[5]}}</td>
-    <td>{{data[7]}}</td>
-    <td>{{data[6]}}</td>
+    <td style="text-transform: capitalize;">{{data[5]}}</td>
+    <td> <i> {{data[9]}} {{data[8]}} </i></td>
+    <td>{{data[2]}}</td>
+    <td>{{'%0.2f'|format(data[14]|float)}}</td>
+
    </tr>
     {% endfor %}
     
@@ -526,6 +530,10 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     letter-spacing: 1px;
     color: #3e9c07f5;
   }
+  .gallery_sciname{
+    font-size: 26px;
+    color:#3b8a3e 
+  }
       </style>
 
       {%for i in gallery_data %}
@@ -538,16 +546,16 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
                   <img src="../static/img/butterfly/{{i[0]}}" onerror="this.src='../static/img/butterfly1.jpg'" />
               </div>
               <div class="text-container">
-                  <h6>{{i[7]}}</h6>
+                  <i class="gallery_sciname">{{i[9]}} {{i[8]}}</i>
                   <p>Count: {{i[15]}}</p>
               </div>
-              <div>
-                <a href="#" class="btn btn-outline-success btn-icon-right">
+              <!-- <div>
+                <a href="{{url_for('speciesgallery', species_name=i[9], sub_species=i[8])}}" class="btn btn-outline-success btn-icon-right">
                   <span>View More
                     <img src="https://static3.avast.com/1/web/i/v2/components/arrow-m-right-orange.png" height="24">
                   </span>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </a>
