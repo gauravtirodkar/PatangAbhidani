@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2021 at 08:51 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: May 13, 2021 at 08:19 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,18 +37,307 @@ CREATE TABLE `butterflydata` (
   `clicked_by` varchar(29) DEFAULT NULL,
   `scientific_name` varchar(25) DEFAULT NULL,
   `sub_species` varchar(11) DEFAULT NULL,
-  `species_name` varchar(11) DEFAULT NULL,
+  `species_name` varchar(12) DEFAULT NULL,
   `sub_sub_family` varchar(14) DEFAULT NULL,
   `sub_family` varchar(11) DEFAULT NULL,
   `latitude` varchar(8) DEFAULT NULL,
-  `longitude` varchar(11) DEFAULT NULL
+  `longitude` varchar(11) DEFAULT NULL,
+  `altitude` varchar(17) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `butterflydata`
 --
 
-INSERT INTO `butterflydata` (`img`, `date`, `location`, `city`, `state`, `species`, `clicked_by`, `scientific_name`, `sub_species`, `species_name`, `sub_sub_family`, `sub_family`, `latitude`, `longitude`) VALUES
+INSERT INTO `butterflydata` (`img`, `date`, `location`, `city`, `state`, `species`, `clicked_by`, `scientific_name`, `sub_species`, `species_name`, `sub_sub_family`, `sub_family`, `latitude`, `longitude`, `altitude`) VALUES
+('2-1.jpg', '12-12-2020', 'IGNOU Campus', 'New Delhi', 'Delhi', 'Indian Skipper', 'Kannan Sandeep', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5025', '77.1988', '247.5304870605469'),
+('2-2.jpg', '29-03-2020', 'IGNOU Campus', 'New Delhi', 'Delhi', 'Indian Skipper', 'Kannan Sandeep', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5025', '77.1988', '247.5304870605469'),
+('2-3.jpg', '22-09-2019', 'Aravalli Biodiversity Park', 'Gurgaon', 'Haryana', 'Grizzled Skipper', 'Nishand Venugopal', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.3736', '77.1709', '222.4669647216797'),
+('2-4.jpg', '20-08-2019', 'Sanjay Van,New Delhi', 'New Delhi', 'Delhi', 'Grizzled Skipper', 'Chandra Bhushan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5309', '77.1801', '249.7444763183594'),
+('2-5.jpg', '08-08-2019', 'Asola Bhatti Wildlife Sanctuary,New Delhi', 'New Delhi', 'Delhi', 'Light Pigmy Skipper', 'Conservation Education Centre', 'Gegenes nostrodamus', 'nostrodamus', 'Gegenes', 'Baorini', 'Hesperiinae', '28.4762', '77.23', '279.24951171875'),
+('2-6.jpg', '09-07-2019', 'Asola Bhatti Wildlife Sanctuary,New Delhi', 'New Delhi', 'Delhi', 'Light Pigmy Skipper', 'Lakhan Kohli', 'Gegenes nostrodamus', 'nostrodamus', 'Gegenes', 'Baorini', 'Hesperiinae', '28.4762', '77.23', '279.24951171875'),
+('2-7.jpg', '18-03-2019', 'Asola Bhatti Wildlife Sanctuary,New Delhi', 'New Delhi', 'Delhi', 'Indian Skipper', 'Conservation Education Centre', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.4762', '77.23', '279.24951171875'),
+('2-8.jpg', '15-09-2018', 'APS Dhaula Kuan', 'New Delhi', 'Delhi', 'Lesser Millet Skipper', 'Sandhya Phalke', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '28.6008', '77.1689', '248.6679382324219'),
+('2-9.jpg', '07-09-2018', 'Asola Bhatti Wildlife Sanctuary,New Delhi', 'New Delhi', 'Delhi', 'Light Pigmy Skipper', 'Sohail Madan', 'Gegenes nostrodamus', 'nostrodamus', 'Gegenes', 'Baorini', 'Hesperiinae', '28.4762', '77.23', '279.24951171875'),
+('2-10.jpg', '12-08-2018', 'Sanjay Van,New Delhi', 'New Delhi', 'Delhi', 'Grizzled Skipper', 'Chandra Bhushan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5309', '77.1801', '249.7444763183594'),
+('2-11.jpg', '29-07-2018', 'Mangar Forest Area,Faridabad,Haryana', 'Faridabad', 'Haryana', 'Indian Skipper', 'Fermin Jose', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.3736', '77.1709', '222.4669647216797'),
+('2-12.jpg', '29-07-2018', 'Mangar Forest Area,Faridabad,Haryana', 'Faridabad', 'Haryana', 'Indian Skipper', 'Fermin Jose', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.3736', '77.1709', '222.4669647216797'),
+('2-13.jpg', '07-10-2017', 'ABDP garden,Gurgaon', 'Gurgaon', 'Haryana', 'Indian Skipper', 'Pankaj Gupta', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.4818', '77.1116', '275.6393737792969'),
+('2-14.jpg', '22-09-2017', 'ABDP garden,Gurgaon', 'Gurgaon', 'Haryana', 'Grizzled Skipper', 'Abhishek Gulshan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.4818', '77.1116', '275.6393737792969'),
+('2-15.jpg', '16-09-2017', 'ABDP garden,Gurgaon', 'Gurgaon', 'Haryana', 'Indian Skipper', 'Pankaj Gupta', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.4818', '77.1116', '275.6393737792969'),
+('2-16.jpg', '16-09-2017', 'ABDP garden,Gurgaon', 'Gurgaon', 'Haryana', 'Indian Skipper', 'Pankaj Gupta', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.4818', '77.1116', '275.6393737792969'),
+('2-17.jpg', '15-09-2017', 'JNU,New Delhi', 'New Delhi', 'Delhi', 'Grizzled Skipper', 'Surya Prakash', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5402', '77.1662', '263.0400085449219'),
+('1-2.jpg', '01-10-2020', '', 'Rajapalayam', 'Tamilnadu', 'Spialia Galba -Grizzled Skipper', 'Sharan Venkatesh', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.4515', '77.5543', '165.8911285400391'),
+('bns.jpg', '26-09-2020', 'kerela', '', 'Kerala', 'Banana skipper ', 'Arun Kumar Krishnan', 'Erionota Thrax Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '10.8505', '76.2711', '46.77887344360352'),
+('3-1.jpg', '01-12-2020', 'Rajapalayam, Tamilnaidu', 'Rajapalayam', 'Tamilnadu', 'Gomalia Elma-African marbled skipper', 'Sharan Venkatesh', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '9.4515', '77.5543', '165.8911285400391'),
+('3-2.jpg', '29-08-2020', 'bengaluru', 'Bangalore', 'Karnataka', 'Gomalia Elma albofasciata-Asian marbled skipper', 'Nagraj Veeraswami', 'Gomalia Elma albofasciata', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('3-3.jpg', '31-12-2020', 'S-W bangalore', 'Bangalore', 'Karnataka', 'Grizzled Skipper. Pyrgus malvae', 'Debomita Chakrabarti', 'Pyrgus malvae', 'malvae', 'Pyrgus', 'Pyrgini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('grizz.jpg', '26-09-2020', 'Rajapalayam, Tamilnadu', 'Rajapalayam', 'Tamilnadu', 'Grizzled skipper ', 'Sharan Venkatesh', 'Pyrgus malvae', 'malvae', 'Pyrgus', 'Pyrgini', 'Pyrginae', '9.4515', '77.5543', '165.8911285400391'),
+('3-4.jpg', '31-07-2020', 'Karnataka ', '', 'Karnataka', 'African marbled skipper,Gomalia Elma', 'Ashwini Ashok', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '15.3173', '75.7139', '651.510986328125'),
+('3-5.jpg', '05-10-2020', 'Satara, Maharashtra', 'Satara', 'Maharashtra', 'lesser millet skipper Canon 200D with Tamron 90mm macro', 'Raag Anurag', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '17.6805', '74.0183', '689.0523681640625'),
+('3-6.jpg', '30-08-2020', 'Lucknow,UP ', 'Lucknow', 'UttarPradesh', 'grizzled skipper (Spialia Galba) ', 'Prakash Vir Singh', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.8467', '80.9462', '117.2565155029297'),
+('3-7.jpg', '19-07-2020', 'Rajshahi,Bangladesh.', '', 'Bangladesh', 'Grizzled Skipper (Spialia Galba) ', 'Md Kayes', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.3745', '88.6042', '22.01346588134766'),
+('3-8.jpg', '08-11-2020', 'Goregaon, Mumbai, Maharashtra', 'Mumbai', 'Maharashtra', 'Banana Skipper', 'Raju Kasambe', 'Erionota Thrax Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '19.1663', '72.8526', '17.05168724060059'),
+('3-9.jpg', '01-06-2020', 'Satargaon Rani Assam', '', 'Assam', 'Spialia Galba Fabricius', 'Prakash K K', 'Spialia Galba Fabricius', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '25.8', '91.27', '804.1657104492188'),
+('3-10.jpg', '26-07-2020', 'Nawabganj, Unnao(Uttar Pradesh)', '', 'UttarPradesh', 'Grizzled Skipper (Spialia Galba', 'Ratindra Pandey', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.621', '80.6683', '126.4671936035156'),
+('3-11.jpg', '07-11-2020', 'Bangalore', 'Bangalore', 'Karnataka', 'Asian Marbelled Skipper ', 'Kanishka Sarangi', 'Gomalia Elma albofasciata', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('3-12.jpg', '02-07-2020', 'Kannur, Kerala ', 'Kannur', 'Kerala', 'grizzled skipper ', 'A.V. Unnikrishnan Kalliad', 'Pyrgus malvae', 'malvae', 'Pyrgus', 'Pyrgini', 'Pyrginae', '11.8745', '75.3704', '19.25003623962402'),
+('3-13.jpg', '07-02-2020', 'Mysore ', 'Mysore', 'Karnataka', 'ASIAN MARBLED SKIPPER ( Gomalia Elma albofasciata ) ', 'Arun Urs', 'Gomalia Elma albofasciata', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.2958', '76.6394', '742.4743041992188'),
+('3-14.jpg', '02-07-2020', 'Kannur, Kerala ', 'Kannur', 'Kerala', 'Indian grizzled skipper', 'A.V. Unnikrishnan Kalliad', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.8745', '75.3704', '19.25003623962402'),
+('3-15.jpg', '08-09-2020', 'Kaiga,Uttara Kannada, Karnataka', '', 'Karnataka', 'Ganara Thyrsis', 'Puttaraju Kenchappa', 'Gangara Thyrsis Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '14.8661', '74.4394', '33.81752014160156'),
+('3-16.jpg', '22-10-2020', 'Pune, Maharashtra', 'Pune', 'Maharashtra', '', 'Nithin Belle', 'Hesperiidae', '', '', '', '', '18.5204', '73.8567', '559.929931640625'),
+('3-17.jpg', '12-04-2020', 'Bengaluru', 'Bangalore', 'Karnataka', '', 'Padmaraju Mysore Ranganath', 'Hesperiidae', '', '', '', '', '12.9716', '77.5946', '901.507568359375'),
+('3-18.jpg', '17-10-2020', 'Guwahati, Assam', 'Guwahati', 'Assam', 'Pothanthus mingo ', 'Kripaljyoti Mazumdar', 'Pothanthus mingo ', 'spp', 'Potanthus', 'Taractrocerini', 'Hesperiinae', '26.1445', '91.7362', '52.19330596923828'),
+('3-19.jpg', '12-02-2020', 'Singanallur lake, Coimbatore', 'Coimbatore', 'Tamilnadu', 'African Marbled skipper', 'Sadheeskumar K', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '10.9891', '77.0227', '387.7546997070312'),
+('3-20.jpg', '20-11-2020', 'Varanasi ', '', 'UttarPradesh', 'Indian grizzled skipper - Spialia Galba', 'Priyanka Kumari', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '25.3176', '82.9739', '81.07235717773438'),
+('3-21.jpg', '30-05-2020', 'Visakhapatnam ', '', 'AndhraPradesh', 'African Marbled Skipper(Gomalia Elma)', 'Rama Krishna', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '17.6868', '83.2185', '49.34665298461914'),
+('3-22.jpg', '17-10-2020', 'Uttarakannada, Karnataka ', '', 'Karnataka', 'Pygmy Scrub Hopper', 'Puttaraju Kenchappa', 'Aeromachus pygmaeus', 'pygmaeus', 'Aeromachus', 'Aeromachini', 'Hesperiinae', '14.7937', '74.6869', '565.30322265625'),
+('3-23.jpg', '07-11-2020', 'Bangalore', 'Bangalore', 'Karnataka', 'Asian Marbelled Skipper', 'Kanishka Sarangi', 'Gomalia Elma albofasciata', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('2-24.jpg', '02-09-2020', 'Davangere, Karnataka', '', 'Karnataka', 'African Marbled Skipper', 'Dr-Shishupala S', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '14.4644', '75.9218', '601.7635498046875'),
+('3-25.jpg', '19-06-2020', 'WB', '', 'WestBengal', 'Indian Grizzled Skipper ', 'Prosenjit Das', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.9868', '87.855', '26.76533317565918'),
+('3-26.jpg', '15-01-2020', 'Bandipur, Karnataka', 'Bandipur', 'Karnataka', 'Banana skipper', 'Nitin Marathe', 'Erionota Thrax Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '11.6677', '76.6326', '1002.031066894531'),
+('bns.jpg', '17-04-2020', 'Assam', '', 'Assam', 'banana skipper', 'Satyendra Dutta', 'Erionota Thrax Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '26.2006', '92.9376', '198.2107086181641'),
+('3-27.jpg', '26-01-2020', 'Sinhagad Valley, Pune, Maharashtra', 'Pune', 'Maharashtra', '', 'Pavan Damoor', 'Hesperiidae', '', '', '', '', '18.3759', '73.7692', '725.3456420898438'),
+('3-28.jpg', '22-05-2020', 'Kannur, Kerala ', 'Kannur', 'Kerala', 'indian Grizzled Skipper', 'A.V. Unnikrishnan Kalliad', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.8745', '75.3704', '19.25003623962402'),
+('3-29.jpg', '13-09-2020', 'Maharashtra', '', 'Maharashtra', 'Indian Skipper (Spialia Galba)', 'Laxmishankar Yadav', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.7515', '75.7139', '505.0779418945312'),
+('3-30.jpg', '16-08-2020', 'Jorhat, Assam', 'Jorhat', 'Assam', 'ndian Grizzled Skipper', 'Pankaj Baruah', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.7509', '94.2037', '94.11090087890625'),
+('3-31.jpg', '28-08-2020', 'Ranthambore', 'Ranthambore', 'Rajasthan', 'Asian Grizzled Skipper *Spialia Galba* ', 'Dharmendra Khandal', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.0173', '76.5026', '291.4588012695312'),
+('grizz.jpg', '10-12-2020', 'Goa', '', 'Goa', 'Indian grizzled skipper', 'Nicole Koshy', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15.2993', '74.124', '104.2120361328125'),
+('3-32.jpg', '29-11-2020', 'Pune, Maharashtra', 'Pune', 'Maharashtra', 'omaha', 'Swanand Oak', 'Potanthus omaha', '', 'Potanthus', 'Taractrocerini', 'Hesperiinae', '18.5204', '73.8567', '559.929931640625'),
+('3-33.jpg', '26-02-2020', 'Bangalore', 'Bangalore', 'Karnataka', 'INDIAN SKIPPER', 'Vikram Bellur', 'Hesperiidae', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('3-34.jpg', '24-02-2020', 'Vadodara Gujarat ', 'Vadodara Gujarat ', 'Gujarat', '', 'Deepti Patel Mehta', 'Hesperiidae', '', '', '', '', '22.3072', '73.1812', '33.9454345703125'),
+('3-35.jpg', '06-08-2020', 'Sriperumbudur, Tamilnadu ', '', 'Tamilnadu', 'Indian Skipper', 'Vijay', 'Hesperiidae', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9625', '79.9453', '43.37638092041016'),
+('3-36.jpg', '06-05-2020', 'Konalu, Dakshina Kannada', 'Karnataka', 'Kannada', 'Spialia Galba', 'Shubha Bhat', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.8406', '75.3823', '106.3260955810547'),
+('grizz.jpg', '20-02-2020', 'Sindhudurga , Maharashtra', 'Sindhudurg', 'Maharashtra', 'Parasitized Banana skipper ', 'Mangal Rane', 'Erionota Thrax Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '16.3492', '73.5594', '102.679801940918'),
+('3-37.jpg', '12-10-2020', 'Uttar Pradesh', '', 'UttarPradesh', 'Indian Grizzled Skipper (Spialia Galba ', 'Ratindra Pandey', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.8467', '80.9462', '117.2565155029297'),
+('3-38.jpg', '29-12-2020', 'west bengal', '', 'WestBengal', '', 'Riddha Roy Tubelight', 'Hesperiidae', '', '', '', '', '22.9868', '87.855', '26.76533317565918'),
+('3-39.jpg', '27-04-2020', '', '', 'Karnataka', 'Asian Grizzled Skipper', 'Shashank Pathour', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('3-40.jpg', '17-09-2020', 'Rajasthan', '', 'Rajasthan', 'Lesser Millet Skipper', 'Rajpal Singh Tanwar', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '27.0238', '74.2179', '344.2196350097656'),
+('3-41.jpg', '09-08-2020', 'Uttar Pradesh', '', 'UttarPradesh', 'Grizzled Skipper (Spialia Galba ', 'Ratindra Pandey', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.8467', '80.9462', '117.2565155029297'),
+('3-42.jpg', '06-09-2020', 'Bangalore', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper', 'Kanishka Sarangi', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('3-43.jpg', '12-07-2020', ' Punjab ', '', 'Punjab', 'Indian grizzled skipper Spialia Galba', 'Tanya Vinit Mishra', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '31.1471', '75.3412', '223.5751800537109'),
+('3-44.jpg', '18-06-2020', 'WB, India', '', 'WestBengal', 'Indian Grizzled Skipper ', 'Prosenjit Das', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.9868', '87.855', '26.76533317565918'),
+('3-45.jpg', '01-10-2020', 'Madhya Pradesh', '', 'MadhyaPradesh', 'Branded Skipper', 'Nikhil Jambhale', 'Hesperiidae', '', '', 'Hesperia', 'Hesperiinae', '22.9734', '78.6569', '333.6592102050781'),
+('grizz.jpg', '31-10-2020', 'Rajapalayam, TN', 'Rajapalayam', 'Tamilnadu', 'Indian Grizzled Skipper (Spialia Galba)', 'Sharan Venkatesh', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.4515', '77.5543', '165.8911285400391'),
+('4-1.jpg', '07-03-2020', 'Namdapha National Park, Arunachal Pradesh, India.', 'Changlang', 'ArunachalPradesh', 'Indian Skipper(Burara Amara)', 'Isaac Kehimkar', 'Burara Amara', 'amara', 'Burara', '', 'Coeliadinae', '27.4455', '96.5358', '1454.838134765625'),
+('4-2.jpg', '19-08-2020', 'Kadma,Bankura,West Bengal', 'Bankura', 'WestBengal', 'Coladenia indrani -Tricolour pied flat', 'Aniruddha singhamahapatra', 'Coladenia indrani indra', 'indrani', 'Coladenia', 'Tagiadini', 'Pyrginae', '22.9888', '87.0106', '105.5880584716797'),
+('4-3.jpg', '22-06-2020', 'Kadma,Bankura,West Bengal', 'Bankura', 'WestBengal', 'Hyarotis adrastus - Tree flitter', 'Aniruddha singhamahapatra', 'Hyarotis adrastus praba', 'adrastus', 'Hyarotis', 'Aeromachini', 'Hesperiinae', '22.9888', '87.0106', '105.5880584716797'),
+('4-4.jpg', '13-03-2020', 'Dosdewa Forest Trail, Karimganj, Assam, India', 'Karimganj', 'Assam', 'Indian Skipper', 'Makunda Nature Club', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.3527', '92.3448', '80.60284423828125'),
+('4-5.jpg', '06-06-2020', 'Makunda Christian Hospital,Karimganj, Assam, India', 'Karimganj', 'Assam', 'Indian Skipper', 'Makunda Nature Club', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.432', '92.3307', '48.53685760498047'),
+('4-6.jpg', '11-04-2020', 'Dosdewa Forest trail,Karimganj, Assam, India', 'Karimganj', 'Assam', 'Indian Skipper', 'Makunda Nature Club', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.3527', '92.3448', '80.60284423828125'),
+('4-7.jpg', '17-03-2020', 'Dosdewa Forest Trail,Karimganj, Assam, India', 'Karimganj', 'Assam', 'Indian Skipper', 'Makunda Nature Club', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.3527', '92.3448', '80.60284423828125'),
+('indian.jpg', '10-03-2020', 'Dosdewa Forest Trail,Karimganj, Assam, India', 'Karimganj', 'Assam', 'Indian Skipper', 'Makunda Nature Club', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.3527', '92.3448', '80.60284423828125'),
+('4-8.jpg', '10-01-2020', 'Makunda Forest Trail,Karimganj, Assam, India', 'Karimganj', 'Assam', 'Indian Skipper', 'Makunda Nature Club', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '24.3527', '92.3448', '80.60284423828125'),
+('4-9.jpg', '03-04-2020', 'Dosdewa Forest Trail,Karimganj, Assam, India', 'Karimganj', 'Assam', 'Banana Skipper', 'Makunda Nature Club', 'Erionota Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '24.3527', '92.3448', '80.60284423828125'),
+('6-1.jpg', '01-10-2019', 'Abloli, Chiplun', 'Chiplun', 'Maharashtra', 'Banana skipper (Erionota Torus)', 'Viraj Khorjuwekar', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '17.53231', '73.517792', '11.12243747711182'),
+('6-2.jpg', '10-11-2019', 'Tungareshwar WLS,Palghar District-Maharashtra.', 'Palghar', 'Maharashtra', 'Banana Skipper(Erionota Torus)', 'Sagar Sarang', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '19.40331', '72.95787', '373.9143371582031'),
+('6-3.jpg', '01-07-2019', 'Kadma, Bankura, West Bengal', 'Bankura', 'WestBengal', 'Indian Skipper (Spialia Galba)', 'Aniruddha Singhamahapatra', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.9888', '87.0106', '105.5880584716797'),
+('6-4.jpg', '12-08-2019', 'Palakkad, Kerala', 'Palakkad', 'Kerala', 'Skipper', 'Balachandran Puliyampotta', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.7867', '76.6548', '78.23558044433594'),
+('6-5.jpg', '01-09-2019', 'Gonikopalu,Karnataka.', 'Bangalore', 'Karnataka', 'Grizzled Skipper', 'Gopakumar VR Namboothiri', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.1843', '75.9263', '847.7648315429688'),
+('6-6.jpg', '16-06-2019', 'Ramdevara Bette,Bangalore,Karnataka.', 'Bangalore', 'Karnataka', 'African Marbled Skipper', 'Gopakumar VR Namboothiri', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.7532', '77.3014', '834.6605224609375'),
+('6-7.jpg', '29-07-2019', 'Ratnagiri, Maharashtra, India.', 'Ratnagiri', 'Maharashtra', 'Indian Grizzled skipper', 'Netra Palkar-Apte', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '16.9902', '73.312', '76.56632995605469'),
+('6-8.jpg', '11-10-2018', 'Reshi, Sikkim', '', 'Sikkim', 'Grizzled Skipper,', 'Krishna Nath Pandit', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '27.1818', '88.6507', '1271.808837890625'),
+('6-9.jpg', '26-08-2019', 'Gujrat', '', 'Gujarat', 'Rice skipper', 'Vanraj Odedra', 'Pelopidas P. Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '22.2587', '71.1924', '291.9539489746094'),
+('6-10.jpg', '19-05-2019', 'Sindhudurg, Maharashtra', 'Sindhudurg', 'Maharashtra', 'Indian Grizzled skipper', 'Mangal Rane', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '16.3492', '73.5594', '102.679801940918'),
+('6-11.jpg', '18-06-2019', 'Palakkad, Kerala', 'Palakkad', 'Kerala', 'Spialia Galba / Indian Skipper', 'Rajib Dey, Avinash Sant', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.7867', '76.6548', '78.23558044433594'),
+('6-12.jpg', '12-11-2019', 'Tungareshwar WLS, Palghar District, Maharashtra.', 'Palghar', 'Maharashtra', 'Banana Skipper(Erionota Torus)', 'Gaurav Tanvi Tushar Khule', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '19.40331', '72.95787', '373.9143371582031'),
+('6-13.jpg', '24-06-2019', 'Palakkad, Kerala', 'Palakkad', 'Kerala', 'Indian grizzled skipper', 'Vasudeesha Hosabettu', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.7867', '76.6548', '78.23558044433594'),
+('6-14.jpg', '08-12-2019', 'Harinavi, West Bengal', 'Harinavi', 'WestBengal', 'Erionota Torus – Rounded Palm-redeye or Banana Skipper', 'Sarpita Bose', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '22.4125', '88.4186', '11.03478050231934'),
+('grizz.jpg', '01-07-2019', 'bangalore', 'Bangalore', 'Karnataka', 'Skipper butterfly', 'Joyashree Saha Biswas', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('6-15.jpg', '15-08-2019', 'Palakkad, Kerala', 'Palakkad', 'Kerala', 'Skipper', 'Balachandran Puliyampotta', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.7867', '76.6548', '78.23558044433594'),
+('6-16.jpg', '04-01-2019', 'Dapoli, Maharashtra', 'Dapoli', 'Maharashtra', 'Spialia Galba Galba – Indian Grizzled Skipper', 'Paresh Churi', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '17.7677', '73.191', '188.2245178222656'),
+('6-17.jpg', '31-05-2019', 'Jammu', 'Jammu ', 'Jammu&Kashmir', 'Indian Skipper (Spialia Galba)', 'Shelly Jain', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '32.7266', '74.857', '304.9132385253906'),
+('6-18.jpg', '26-05-2019', 'Nagaon, Assam', 'Nagaon', 'Assam', 'Common Bush Hopper, Male,  Ampittia dioscorides (Fabricius, 1793)', 'Mann Kumar Thapa', 'Ampittia dioscorides', 'dioscorides', 'Ampittia', 'Aeromachini', 'Hesperiinae', '26.34800', '92.6838', '72.18272399902344'),
+('6-19.jpg', '13-11-2019', 'Amboli, Maharashtra', 'Amboli', 'Maharashtra', 'Rounded Palm-redeye', 'Hemant Ogale', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '15.9647', '74.0036', '694.2421264648438'),
+('6-20.jpg', '03-12-2019', 'Devrukh Maharashtra', 'Devrukh', 'Maharashtra', 'Rounded palm-redeye or banana skipper (Erionota Torus)', 'Prateik More', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '17.0686', '73.6242', '169.5907897949219'),
+('bns.jpg', '21-12-2019', 'Vagamon, Kerala', 'Vagamon', 'Kerala', 'skipper', 'Nayan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.6862', '76.9052', '1001.022216796875'),
+('6-21.jpg', '17-10-2019', 'Ahmednagar, Maharashtra', '', 'Maharashtra', 'Gomalia Elma (Trimen, 1862) – African Marbled Skipper', 'Pradeep Jaiswal', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '19.0948', '74.748', '657.911865234375'),
+('6-22.jpg', '16-01-2019', 'Lohegaon, Pune', 'Pune', 'Maharashtra', 'Borbo cinnara', 'B Savit', 'Borbo cinnara', 'cinnara', 'Borbo', 'Baorini', 'Hesperiinae', '18.5945', '73.9276', '591.203369140625'),
+('6-23.jpg', '07-11-2019', 'Khar West, Mumbai', 'Mumbai', 'Maharashtra', 'Skipper', 'Raghavendra Rajadhyaksha', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.07', '72.8338', '7.951889514923096'),
+('6-24.jpg', '28-09-2019', 'Gonikopalu, Karnataka', 'Gonikopalu', 'Karnataka', 'Grizzled Skipper', 'Gopakumar VR Namboothiri', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.1843', '75.9263', '847.7648315429688'),
+('6-25.jpg', '14-07-2019', 'Bengaluru', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('6-26.jpg', '07-07-2019', 'Bengaluru', 'Bangalore', 'Karnataka', 'Asian Grizzled Skipper', 'Nagraj Veeraswami', 'Gomalia Elma albofasciata', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('6-27.jpg', '28-07-2019', 'JP Forest, Banglore, KA', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper', 'VC Balakrishnan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('6-28.jpg', '31-03-2019', 'Nalabanta,Aska, Odisha', 'Aska', 'Odisha', 'Indian skipper butterfly', 'Tara Mahapatra', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.61159', '84.664486', '41.95740509033203'),
+('6-29.jpg', '21-10-2019', 'Bangalore', 'Bangalore', 'Karnataka', 'Banana skipper', 'Akhilesh Sharma', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9716', '77.5946', '901.507568359375'),
+('6-30.jpg', '28-09-2019', 'Coimbatore, Tamilnadu', 'Coimbatore', 'Tamilnadu', 'African marbled skipper, Gomalia Elma', 'Hari', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '11.0168', '76.9558', '425.3655700683594'),
+('6-31.jpg', '28-10-2019', '', '', 'Tamilnadu', 'Common red-eye skipper', 'Sayantam Jana', 'Matapa aria', 'aria', 'Matapa', 'Aeromachini', 'Hesperiinae', '', '', ''),
+('6-32.jpg', '11-07-2019', 'Doresanipalya reserve forest, Bangalore', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper', 'Vikram Bellur', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.8918', '77.592', '920.1218872070312'),
+('6-33.jpg', '08-07-2019', 'Palakkad, Kerala', 'Palakkad', 'Kerala', 'Skipper', 'Balachandran Puliyampotta', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.7867', '76.6548', '78.23558044433594'),
+('6-34.jpg', '05-06-2019', 'Bokakhat, Assam', 'Bokakhat', 'Assam', 'Indian Skipper', 'Sasanka Dhaval Saikia', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.6215', '93.6116', '82.05955505371094'),
+('6-35.jpg', '17-11-2017', 'Goa University Campus', 'Panaji', 'Goa', 'Grizzled skipper (Spialia Galba)', 'Saish Borkar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15.4588', '73.8342', '55.10152053833008'),
+('6-36.jpg', '19-06-2019', 'md.bazar, birbhum, west Bengal', '', 'WestBengal', 'Indian grizzled skipper', 'Sarbajit Attmik Chatterjee', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '23.9168', '87.517', '78.40174102783203'),
+('6-37.jpg', '18-08-2019', 'Wayanad, Boy\'s town', '', 'Kerala', 'Skipper', 'Nishad Manathana', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.8402', '75.9187', '741.4332275390625'),
+('6-38.jpg', '30-07-2019', 'Kadma, Bankura, West Bengal', 'Bankura', 'WestBengal', 'Indian Skipper (Spialia Galba)', 'Aniruddha Singhamahapatra', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.9888', '87.0106', '105.5880584716797'),
+('6-39.jpg', '06-07-2019', 'Savandurga,Bangalore', 'Bangalore', 'Karnataka', 'African Marbled skipper', 'Harisha Achar', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.91965', '77.292881', '1186.794555664062'),
+('6-40.jpg', '30-09-2019', 'Lohegaon, Pune', 'Pune', 'Maharashtra', 'Pelopidas sp. P. Mathias', 'B Savit', 'Pelopidas P. Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '18.5945', '73.9276', '591.203369140625'),
+('6-41.jpg', '15-02-2019', 'Jharkhand', '', 'Jharkhand', 'skipper', 'Tanya Vinit Mishra', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '23.6102', '85.2799', '412.9898071289062'),
+('6-42.jpg', '11-03-2019', 'Lalitha Mahal Palace area, Mysore', 'Mysore', 'Karnataka', 'ASIAN MARBLED SKIPPER ( Gomalia Elma albofasciata )', 'Arun Urs', 'Gomalia Elma albofasciata', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.2983', '76.6926', '785.9356689453125'),
+('6-43.jpg', '31-01-2019', 'South Goa', '', 'Goa', 'Pygmy Scrub Hopper( Aeromachus pygmaeus)', 'John Mann', 'Aeromachus pygmaeus', 'pygmaeus', 'Aeromachus', 'Aeromachini', 'Hesperiinae', '15.1177', '74.124', '54.89596557617188'),
+('6-44.jpg', '28-04-2019', 'Barpeta, Assam', 'Barpeta', 'Assam', 'Erionota Thrax Linnaeus, 1767 – Palm Redeye( Banana Skipper)', 'David Das', 'Erionota Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '26.3216', '90.9821', '40.75550842285156'),
+('6-45.jpg', '14-07-2019', 'BNHS Butterfly Garden, At Cec Bnhs, Goregaon, Mumbai', 'Mumbai', 'Maharashtra', 'skipper', 'Raju Kasambe', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.1632', '72.8926', '90.50274658203125'),
+('6-46.jpg', '07-10-2019', 'Tiruppur', 'Tiruppur', 'Tamilnadu', 'Indian Grizzled Skipper', 'Darshan M. Trivedi', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.1085', '77.3411', '302.6272583007812'),
+('6-47.jpg', '21-07-2019', 'Triplicane, Chennai', 'Chennai', 'Tamilnadu', 'African Marbled skipper', 'Supraja Narasimhan', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '13.0588', '80.2756', '8.027496337890625'),
+('6-48.jpg', '02-09-2019', 'Lohegaon, Pune', 'Pune', 'Maharashtra', 'Melanitis leda, Common evening brown', 'B Savit', 'Melanitis leda', '', '', '', '', '18.5945', '73.9276', '591.203369140625'),
+('6-49.jpg', '26-09-2019', 'Devrukh MH', 'Devrukh', 'Maharashtra', 'Grass Demon (Udaspes folus)', 'Prateik More', 'Udaspes folus', 'folus', 'Udaspes', 'Aeromachini', 'Hesperiinae', '17.0686', '73.6242', '169.5907897949219'),
+('redeye.jpg', '27-11-2019', 'Baripada, Odisha', 'Baripada', 'Odisha', 'Common red eye (Matapa aria)', 'Bapu Behera', 'Matapa aria', 'aria', 'Matapa', 'Aeromachini', 'Hesperiinae', '21.932', '86.7466', '50.0936393737793'),
+('6-50.jpg', '10-09-2019', 'Kolhapur, Maharashtra', 'Kolhapur', 'Maharashtra', 'Plum dart Skipper', 'Pranav Datar', 'Pelopidas subochracea', 'subochracea', 'Pelopidas', 'Baorini', 'Hesperiinae', '16.705', '74.2433', '564.009521484375'),
+('pierrot.jpg', '03-11-2019', 'Borsul East Bardhaman, Southern West Bengal, Eastern India', 'Southern West Bengal', 'WestBengal', 'Common Pierrot', 'Purab Chowdhury', 'Castalius rosimon', '', '', '', '', '23.23251', '87.863419', '38.0'),
+('grizz.jpg', '20-10-2019', 'Jaguli Grassland Nadia, Southern West Bengal, Eastern India', 'Southern West Bengal', 'WestBengal', 'Indian Grizzled Skipper', 'Debjit Mondal', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.955', '88.5375', '11.0'),
+('6-51.jpg', '07-07-2019', 'Kannur, Kottamchuram', 'Kannur', 'Karnataka', 'Skipper', 'Nishad Manathana', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.87447', '75.370369', '19.2507438659668'),
+('1-1.jpg', '05-09-2020', 'Paleri,Kozhikode,Kerala,India', 'Kozhikode', 'Kerala', 'Indian Grizzled Skipper,Spialia Galba Galba', 'Abdulla Paleri', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.648', '75.7495', '18.75900459289551'),
+('1-2.jpg', '30-10-2020', 'Rajapalayam, Tamilnadu', 'Rajapalayam', 'Tamilnadu', 'Spialia Galba (Fabricius, 1793)', 'Sharan Venkatesh', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.448815', '77.557175', '168.9706115722656'),
+('1-3.jpg', '17-10-2020', 'Uttarakannada, Karnataka', 'Uttarakannada', 'Karnataka', 'Skipper Pygmy Scrub Hopper', 'Puttaraju Kenchappa', 'Aeromachus pygmaeus', 'pygmaeus', 'Aeromachus', 'Aeromachini', 'Hesperiinae', '14.65807', '74.311776', '12.83796215057373'),
+('1-5.jpg', '07-05-2020', 'Idukki', 'Idukki', 'Kerala', 'Banana Skipper (Erionota Torus)', 'Rijo BabyKumbalamthanam', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.08916', '77.059723', '1449.481323242188'),
+('1-6.jpg', '01-07-2020', 'Thrissur', 'Thrissur', 'Kerala', 'Blank swift , Caltoris kumara kumara', 'Rajesh Vinu', 'Caltoris kumara', 'kumara', 'Caltoris', 'Baorini', 'Hesperiinae', '10.52557', '76.171127', '15.64261245727539'),
+('1-7.jpg', '01-07-2019', 'Trivandrum', 'Trivandrum', 'Kerala', 'Indian skipper,Spialia Galba', 'Ashley Shaji', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '8.524139', '76.936638', '9.37698745727539'),
+('1-8.jpg', '01-09-2020', 'Kaiga, Uttara Kannada, Karnataka', 'Uttarakannada', 'Karnataka', 'Giant Red Eye - Ganara Thyrsis', 'Puttaraju Kenchappa', 'Ganara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '14.8523', '74.4265', '246.2952575683594'),
+('pelopidas.jpg', '24-08-2020', '', '', 'Kerala', 'Pelopidas sp., Branded swift or millet skippers.', 'Ashwin G', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '', '', ''),
+('1-10.jpg', '19-10-2020', 'calicut', 'Calicut', 'Kerala', 'African marbled skipper', 'Ashique Tdy', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '11.25875', '75.780411', '7.275277137756348'),
+('1-11.jpg', '22-08-2020', 'Malappuram', 'Malappuram', 'Kerala', 'small branded swift', 'Najiya V Usman', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '11.07203', '76.074005', '18.28874397277832'),
+('1-13.jpg', '10-09-2019', 'Agali, Attappad', 'Palakkad', 'Kerala', 'Indian Skipper', 'Pj George', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.99324', '76.4609924', '75.49485778808594'),
+('1-14.jpg', '13-07-2019', 'Trivandrum', 'Trivandrum', 'Kerala', 'Grass demon (Udaspes folus)', 'Bala Chandran V', 'Udaspes folus', 'folus', 'Udaspes', 'Aeromachini', 'Hesperiinae', '8.524139', '76.936638', '9.37698745727539'),
+('1-15.jpg', '01-06-2019', 'calicut beach', 'Calicut', 'Kerala', 'indian grizzled skipper', 'Muhammed Aslamkk', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.25875', '75.780411', '7.275277137756348'),
+('1-16.jpg', '01-07-2018', 'Attappadi', 'Palakkad', 'Kerala', 'Indian Skipper or Indian Grizzled Skipper.', 'Pj George', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.1053', '76.5566', '1289.779907226562'),
+('1-17.jpg', '28-04-2018', 'Calicut', 'Calicut', 'Kerala', 'Pelopidas sp', 'U Anand Subbaram', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '11.25875', '75.780411', '7.275277137756348'),
+('1-18.jpg', '17-11-2021', 'Mayyil, KL', 'Kannur', 'Kerala', 'P.Mathias', 'Vinaya Raj V R', 'Pelopidas Mathias', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '25.662', '25.6533', '384.3505554199219'),
+('1-19.jpg', '14-10-2017', 'Attappadi', 'Palakkad', 'Kerala', 'Indian Skipper', 'Pj George', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.1053', '76.5566', '1289.779907226562'),
+('1-20.jpg', '03-08-2017', 'Neeravil, Kollam', 'Kollam', 'Kerala', 'Banana Skipper', 'Sreejith Bharathan', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '8.928751', '76.593611', '15.13202095031738'),
+('1-22.jpg', '17-06-2021', 'Thenmala, Kollam', 'Thenmala', 'Kerala', 'Indian grizzled skipper', 'Sreejith Bharathan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.04833', '77.10984', '553.4964599609375'),
+('1-24.jpg', '12-09-2017', 'Attappadi', 'Palakkad', 'Kerala', 'Indian skipper', 'Pj George', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.1053', '76.5566', '1289.779907226562'),
+('1-25.jpg', '10-06-2016', 'Kadavoor', 'Kadavoor', 'Kerala', 'Banana Skipper', 'Jeevan Jose', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.0', '76.7416', '32.73179626464844'),
+('1-26.jpg', '01-11-2016', 'idukki', 'Idukki', 'Kerala', 'Banana skipper/Erionota Torus', 'Muhammed Aslamkk', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.08916', '77.059723', '1449.481323242188'),
+('1-27.jpg', '26-11-2016', 'Kuzhikunnu valanchery', 'Valanchery', 'Kerala', 'Spialia Galba', 'Naeem Pamparambil', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.8749', '75.3594', '9.744975090026855'),
+('1-28.jpg', '17-09-2016', 'Idukki', 'Idukki', 'Kerala', 'Banana Skipper / Erionota Torus.', 'Arun Lal', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.08916', '77.059723', '1449.481323242188'),
+('1-29.jpg', '14-08-2016', 'Wayanad', '', 'Kerala', 'Indian Grizzled Skipper (Spialia Galba)', 'Rajesh Gopinath', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.6287', '76.081251', '762.931884765625'),
+('1-30.jpg', '18-05-2016', 'Kattappana', 'Kattappana', 'Kerala', 'Indian grizzled skipper', 'Muhammed Aslamkk', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.756835', '77.116867', '890.4848022460938'),
+('1-31.jpg', '24-06-2016', 'Kottiyoor', 'Kannur', 'Kerala', 'Indian Grizzled Skipper (Spialia Galba)', 'Sunilck Sun', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.8845', '75.888', '477.3430786132812'),
+('1-32.jpg', '26-01-2016', 'Kattappana', 'Kattappana', 'Kerala', 'Indian Grizzled skipper', 'Muhammed Aslamkk', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '9.756835', '77.116867', '890.4848022460938'),
+('5-1.jpg', '01-11-2018', 'Westbengal', '', 'WestBengal', 'Banana Skipper & Common Jezebel Paschim', 'Satadeep Mandal', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.97862', '87.747803', '23.99961280822754'),
+('grizz.jpg', '22-07-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Spialia Galba', 'Haneesh Km', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-2.jpg', '16-09-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Spialia Galba', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-3.jpg', '29-07-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Spialia Galba', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-4.jpg', '24-04-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Spialia Galba Fabricius,', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-5.jpg', '24-09-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Banana Skipper', 'Haneesh Km', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-6.jpg', '12-06-2018', 'Lonavla', 'Lonavala', 'Maharashtra', 'Indian skipper', 'Sagar Chandane', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '18.74806', '73.407219', '623.0906372070312'),
+('5-7.jpg', '19-01-2018', 'Tamil Nadu', '', 'Tamilnadu', 'Indian grizzled skipper', 'Vishvajit Kadam', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.12712', '78.656891', '138.0'),
+('grizz.jpg', '30-10-2018', '', '', 'Karnataka', 'Asian Grizzled Skipper', 'Suhas Kumar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('5-8.jpg', '08-10-2018', 'Karnataka', '', 'Karnataka', 'Giant Redeye - Gangara Thyrsis', 'Gopal Krishna Baliga', 'Gangara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '15.31727', '75.71389', '651.4381713867188'),
+('5-9.jpg', '17-10-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Spialia Galba', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('indian.jpg', '09-01-2018', '', '', 'Karnataka', 'Indian Skipper Purulia', 'Rahul Mishra', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('5-10.jpg', '07-07-2018', 'Andhra Pradesh', '', 'AndhraPradesh', 'ndian Grizzled skipper', 'Appanna Saragada', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '16.51509', '80.632095', '20.88360214233398'),
+('5-11.jpg', '06-08-2018', 'Haryana', '', 'Haryana', 'Grizzled skipper', 'Ajay Kumar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '29.06577', '76.040497', '218.9043884277344'),
+('5-12.jpg', '06-08-2018', 'Kerala', '', 'Kerala', 'Skipper', 'Balachandran Puliyampotta', 'Hesperiidae', '', '', '', '', '10.85051', '76.27108', '46.69960784912109'),
+('5-13.jpg', '01-09-2018', 'Viralimalai', 'Viralimalai', 'Tamilnadu', 'African Marbled Skipper', 'Muthu Krishnan', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '10.60368', '78.546211', '145.3437805175781'),
+('5-14.jpg', '24-11-2018', 'GOA', '', 'Goa', 'Indian grizzled skipper', 'Marvelyn Dias', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15.49677', '73.827827', '11.52166366577148'),
+('5-15.jpg', '21-06-2018', 'Andhra Pradesh', '', 'AndhraPradesh', 'India skipper', 'Appanna Saragada', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '16.51509', '80.632095', '20.88360214233398'),
+('5-16.jpg', '08-11-2018', 'Pune', 'Pune', 'Maharashtra', 'Grizzled skipper (Spialia Galba)', 'B Savit', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '18.51672', '73.856255', '561.0719604492188'),
+('5-17.jpg', '02-06-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Indian skipper', 'Harisha Achar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-18.jpg', '17-11-2018', 'N.Delhi', 'New Delhi', 'Delhi', 'Grass Skipper', 'Amrik Singh Uppal', 'Hesperiidae', '', '', '', 'Hesperiinae', '28.64235', '77.21711', '219.3627471923828'),
+('5-19.jpg', '03-10-2018', 'Viralimalai', 'Viralimalai', 'Tamilnadu', 'Indian Skipper', 'Muthu Krishnan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.60368', '78.1462', ''),
+('5-20.jpg', '15-03-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-21.jpg', '01-04-2018', 'Pondicherry', '', 'Puducherry', 'Asian Marbled Skipper - Gomalia Elma', 'Gandhi Sankar', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '11.91606', '79.812325', '2.330238580703735'),
+('5-22.jpg', '01-06-2018', 'Maharashtra', '', 'Maharashtra', 'Indian grizzled skipper', 'Ratindra Pandey', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.66328', '75.300293', '505.9999084472656'),
+('bns.jpg', '27-10-2018', 'West Bengal', '', 'WestBengal', 'Banana skipper (Erionota Thrax) - Caterpillar', 'Aniruddha Singhamahapatra', 'Erionota Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '22.97862', '87.747803', '23.99961280822754'),
+('5-23.jpg', '08-04-2018', 'Pune', 'Pune', 'Maharashtra', 'Grizzled skipper', 'B Savit', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '18.51672', '73.856255', '561.0719604492188'),
+('african.jpg', '27-09-2018', '', '', 'Karnataka', 'African Marbled Skipper- Kallar', 'Franklin Sukumar', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('5-24.jpg', '01-05-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Skipper on banana leaf', 'Akhilesh Sharma', 'Hesperiidae', '', '', '', '', '12.97243', '77.580643', '915.3076171875'),
+('5-25.jpg', '15-02-2018', 'Mettupalyam, TN', 'Mettupalyam', 'Tamilnadu', 'African Marbled Skipper', 'Nagaraj Shastri', 'Nagaraj Shastri', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '11.28908', '76.940971', '335.4902038574219'),
+('5-26.jpg', '26-08-2018', 'Amirdhi, T.N', 'Amirdhi', 'Tamilnadu', 'African Marbled Skipper', 'Kalai Chelvan', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.8816', '79.1207', '222.90185546875'),
+('bns.jpg', '01-11-2018', 'Medinipur, WB', 'Medinipur', 'WestBengal', 'Banana Skipper', 'Surajit Mondal', 'Erionota Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '22.43088', '87.321487', '53.39787292480469'),
+('indian.jpg', '27-09-2018', '', '', 'Karnataka', 'Indian Grizzled Skipper - Kallar', 'Franklin Sukumar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('5-27.jpg', '30-10-2018', 'Chandigarh', 'Chandigarh', 'Maharashtra', 'Indian Grizzled skipper', 'Upendra Goswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '30.74148', '76.768066', '340.5606079101562'),
+('5-28.jpg', '17-08-2018', 'Kerala', '', 'Kerala', 'Skipper', 'Balachandran Puliyampotta', 'Hesperiidae', '', '', '', '', '10.85051', '76.27108', '46.69960784912109'),
+('5-29.jpg', '22-10-2018', 'karnataka', '', 'Karnataka', 'Asian marbled skipper', 'Akhilesh Sharma', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '15.31727', '75.71389', '651.4381713867188'),
+('5-30.jpg', '29-08-2018', 'Bhaderwah', 'Bhaderwah', 'Jammu&Kashmir', 'Plain Marbled Skipper', 'Neeraj Sharma', 'Carcharodus alceae', 'alceae', 'Carcharodus', 'Carcharodini', 'Pyrginae', '32.98302', '75.710983', '1614.4169921875'),
+('5-31.jpg', '28-03-2018', 'Mysore', 'Mysore', 'Karnataka', 'Asian Marbled Skipper', 'Arun Urs', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.31181', '76.652985', '746.72607421875'),
+('5-32.jpg', '16-11-2018', 'Kerala', '', 'Kerala', 'Skipper Kozhikode', 'Balachandran Puliyampotta', 'Hespriidae', '', '', '', '', '10.85051', '76.27108', '46.69960784912109'),
+('5-33.jpg', '03-01-2018', 'Gujarat', '', 'Gujarat', 'Indian Skipper', 'Mayur H Variya', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.30942', '72.13623', '9.751494407653809'),
+('5-34.jpg', '30-06-2018', 'Assam', '', 'Assam', 'Banana Skipper (Erionota Torus)', 'Arjun Sharma', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '26.14803', '91.731377', '54.85357284545898'),
+('5-35.jpg', '20-09-2018', 'Coimbatore', 'Coimbatore', 'Tamilnadu', 'African Marbled Skipper', 'Muthu Krishnan', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '11.00455', '76.961632', '412.3534240722656'),
+('redeye.jpg', '04-08-2018', 'Salcete, Goa', '', 'Goa', 'Giant Red eye Skipper caterpillar', 'Wilma DCosta', 'Gangara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '15.3', '73.95', '2.510802268981934'),
+('5-36.jpg', '08-07-2018', 'Kerala', '', 'Kerala', 'Skipper Palakkad', 'Balachandran Puliyampotta', 'Hespriidae', '', '', '', '', '10.85051', '76.27108', '46.69960784912109'),
+('5-37.jpg', '08-12-2018', 'Assam', '', 'Assam', 'Matapa aria', 'Abhishek Dutta Choudhury', 'matapa aria moore', 'aria', 'Matapa', 'Aeromachini', 'Hesperiinae', '26.14803', '91.731377', '54.85357284545898'),
+('5-38.jpg', '13-02-2018', 'Tamilnadu', '', 'Tamilnadu', 'Spialia Galba', 'Muhammed Shaheerbabu', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.05982', '78.387451', '123.9997482299805'),
+('grizz.jpg', '05-04-2018', '', '', 'UttarPradesh', 'Pongamia Skipper', 'Kavyashree A Gowda', 'Hasura Chromus', 'chromus', 'Hasora', '', 'Coeliadinae', '', '', ''),
+('5-39.jpg', '10-12-2018', 'medinipur', 'Medinipur', 'WestBengal', 'Brown skipper butterfly', 'Arnab Kumar', 'Hesperiidae', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '', '', ''),
+('5-40.jpg', '03-03-2018', 'Kerala', '', 'Kerala', 'Giant Red Eye Skipper', 'Pournami Vijayan', 'Gangara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '10.85051', '76.27108', '46.69960784912109'),
+('5-41.jpg', '26-05-2018', 'Kerala', '', 'Kerala', 'Skipper on Nityakalyani / Sadabahar', 'Balachandran Puliyampotta', 'Hesperiidae', '', '', '', '', '10.85051', '76.27108', '46.69960784912109'),
+('5-42.jpg', '23-02-2018', 'valanchery', 'Valanchery', 'Kerala', 'Banana skipper', 'Naeem Pamparambil', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('5-43.jpg', '29-07-2018', 'Haryana', '', 'Haryana', 'Grass Skipper', 'Ajay Kumar', '', '', '', '', 'Hesperiinae', '', '', ''),
+('5-44.jpg', '20-08-2018', 'West Bengal', '', 'WestBengal', 'Grizzled Skipper Spialia Galba', 'Rajib Maulick', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '22.97862', '87.747803', '23.99961280822754'),
+('1-17.jpg', '28-04-2018', 'Calicut', 'Calicut', 'Kerala', '', 'U Anand Subbaram', '', '', '', '', '', '', '', ''),
+('5-45.jpg', '29-10-2018', 'Maharashtra', '', 'Maharashtra', 'Grizzled skipper Spialia Galba', 'Varsha Koli', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.66328', '75.300293', '505.9999084472656'),
+('5-46.jpg', '23-02-2018', 'Pondicherry', '', 'Puducherry', 'Indian Grizzled Skipper (Spialia Galba)', 'Gandhi Sankar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.91606', '79.812325', '2.330238580703735'),
+('5-47.jpg', '09-02-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper [Spialia Galba', 'Nagesh Ramamurthy', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-48.jpg', '15-04-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Spialia Galba', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97243', '77.580643', '915.3076171875'),
+('5-49.jpg', '22-06-2018', 'Gujarat', '', 'Gujarat', 'Potanthus', 'Dharmesh Padhiyar', 'Pothantus hetaerus', '', 'Potanthus', 'Taractrocerini', 'Hesperiinae', '22.30942', '72.13623', '9.751494407653809'),
+('5-50.jpg', '23-05-2018', 'Pondicherry', 'Pondicherry', 'Puducherry', 'indian grizzled skipper', 'Surendiran Ryan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '11.91606', '79.812325', '2.330238580703735'),
+('5-51.jpg', '28-05-2018', 'Mangalore', 'Mangalore', 'Karnataka', 'Grizzled Skipper', 'Vasudeesha Hosabettu', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.9156', '74.855965', '25.21979331970215'),
+('bns.jpg', '15-01-2018', 'Maharashtra', '', 'Maharashtra', 'banana skipper', 'Tushar Bhagwat', 'Erionota Torus', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.66328', '75.300293', '505.9999084472656'),
+('5-52.jpg', '14-08-2018', 'Madhya Pradesh', '', 'MadhyaPradesh', 'Indian Grizzled Skipper Spialia Galba', 'Nayan Singh Dungriyal', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '23.47332', '77.947998', '422.0');
+INSERT INTO `butterflydata` (`img`, `date`, `location`, `city`, `state`, `species`, `clicked_by`, `scientific_name`, `sub_species`, `species_name`, `sub_sub_family`, `sub_family`, `latitude`, `longitude`, `altitude`) VALUES
+('5-53.jpg', '07-06-2018', 'Maharashtra', '', 'Maharashtra', 'Indian Grizzled Skipper', 'Prateik More', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.66328', '75.300293', '505.9999084472656'),
+('5-54.jpg', '15-04-2018', 'Jammu,J&K', 'Jammu ', 'Jammu&Kashmir', 'Pelopidas mathia and Suastus gremius', 'Shakha Sharma', 'pelopidas mathia', 'mathias', 'Pelopidas', 'Baorini', 'Hesperiinae', '32.73299', '74.864273', '347.3699340820312'),
+('grizz.jpg', '17-10-2018', 'Bangladesh', '', 'Bangladesh', 'Indian grizzled skipper', 'Saiful Islam', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '', '', ''),
+('5-55.jpg', '01-24-2018', 'Savandurga', 'Bangalore', 'Karnataka', 'African Marbled Skipper', 'Vasudeesha Hosabettu', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '12.9197', '77.2929', '1188.101440429688'),
+('5-56.jpg', '14-08-2018', 'Gujarat', '', 'Gujarat', 'Telicota', 'Dharmesh Padhiyar', 'Telicota Bambusae', 'bambusae', 'Telicota', 'Taractrocerini', 'Hesperiinae', '22.30942', '72.13623', '9.751494407653809'),
+('5-57.jpg', '20-08-2018', 'Kerala', '', 'Kerala', 'Hesperiinae (Grass Skippers)', 'Paul Pop', 'Grass Skipper', '', '', '', 'Hesperiinae', '10.85051', '76.27108', '46.69960784912109'),
+('5-58.jpg', '13-08-2018', 'Kerala', '', 'Kerala', 'Caltoris canaraica', 'Muhammed Shaheerbabu', 'Caltoris canaraica', 'canaraica', 'Caltoris', 'Baorini', 'Hesperiinae', '10.85051', '76.27108', '46.69960784912109'),
+('5-59.jpg', '22-03-2018', 'Arunachal Pradesh', '', 'ArunachalPradesh', 'Frosted duskywing (Erynnis Pelias) Kibithoo', 'Balaji P Balachandran', 'Erynnis pelias', 'pelias', 'Erynnis', 'Erynnini', 'Pyrginae', '27.84514', '95.247345', '131.0'),
+('5-60.jpg', '05-10-2018', 'Mangalore', 'Mangalore', 'Karnataka', 'Grass demon Sammilan', 'Sharan Venkatesh', 'Udaspes folus', 'folus', 'Udaspes', 'Aeromachini', 'Hesperiinae', '12.9156', '74.855965', '25.21979331970215'),
+('5-61.jpg', '10-07-2018', 'Kerala', '', 'Kerala', 'Bevans swift.', 'Roopa Raj', 'Borbo bevani Moore', 'bevani', 'Borbo', 'Baorini', 'Hesperiinae', '10.85051', '76.27108', '46.69960784912109'),
+('5-61.jpg', '18-06-2018', 'Maharashtra', '', 'Maharashtra', 'Giant redeye Ratnagiri', 'Mangal Rane', 'Gangara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '19.66328', '75.300293', '505.9999084472656'),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '75', '19', NULL),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '75.15', '19', NULL),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '75.15', '19', NULL),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '75.15', '19', NULL),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '75', '19', NULL),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'Erionota Torus', 'torus', 'Erionota', 'Aeromachini', 'Hesperiinae', '75', '19', NULL),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('butterfly2.jp', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'grizzled', 'gayatri', 'erionota thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '75', '29', NULL),
+('butterfly.jpg', '2021-04-28', 'Andhra Pradesh', NULL, NULL, 'spailia galba', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('butterfly.jpg', '2021-04-28', 'Andhra Pradesh', NULL, NULL, 'spailia galba', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('butterfly.jpg', '2021-04-28', 'Himachal Pradesh', NULL, NULL, 'spialia galba', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('1.jpg', '2021-04-30', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('1.jpg', '2021-04-30', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('butterfly2.jp', '2021-05-06', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19', NULL),
+('butterfly2.jp', '2021-05-06', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15.91', '79.739', NULL),
+('butterfly2.jp', '2021-05-06', 'Maharashtra', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.7515', '75.7139', '505.0779418945312'),
+('butterfly1.jp', '07-05-2021', 'Maharashtra', NULL, NULL, 'indian skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.7515', '75.7139', '505.0779418945312'),
+('butterfly.jpg', '13-05-2021', 'Andhra Pradesh', NULL, NULL, 'indian skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15', '79', '186.1185150146484'),
+('butterfly.jpg', '13-05-2021', 'Andhra Pradesh', NULL, NULL, 'indian skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15', '79', '186.1185150146484'),
+('butterfly2.jp', '13-05-2021', 'Andhra Pradesh', NULL, NULL, 'skipper ', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15', '79', '186.1185150146484'),
+('2.jpg', '13-05-2021', 'Andhra Pradesh', NULL, NULL, 'indian skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '15', '79', '186.1185150146484');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `butterflydata1`
+--
+
+CREATE TABLE `butterflydata1` (
+  `img` varchar(13) DEFAULT NULL,
+  `date` varchar(10) DEFAULT NULL,
+  `location` varchar(59) DEFAULT NULL,
+  `city` varchar(20) DEFAULT NULL,
+  `state` varchar(16) DEFAULT NULL,
+  `species` varchar(65) DEFAULT NULL,
+  `clicked_by` varchar(29) DEFAULT NULL,
+  `scientific_name` varchar(25) DEFAULT NULL,
+  `sub_species` varchar(11) DEFAULT NULL,
+  `species_name` varchar(11) DEFAULT NULL,
+  `sub_sub_family` varchar(14) DEFAULT NULL,
+  `sub_family` varchar(11) DEFAULT NULL,
+  `latitude` varchar(11) DEFAULT NULL,
+  `longitude` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `butterflydata1`
+--
+
+INSERT INTO `butterflydata1` (`img`, `date`, `location`, `city`, `state`, `species`, `clicked_by`, `scientific_name`, `sub_species`, `species_name`, `sub_sub_family`, `sub_family`, `latitude`, `longitude`) VALUES
 ('2-1.jpg', '12-12-2020', 'IGNOU Campus', 'New Delhi', 'Delhi', 'Indian Skipper', 'Kannan Sandeep', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5025', '77.1988'),
 ('2-2.jpg', '29-03-2020', 'IGNOU Campus', 'New Delhi', 'Delhi', 'Indian Skipper', 'Kannan Sandeep', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.5025', '77.1988'),
 ('2-3.jpg', '22-09-2019', 'Aravalli Biodiversity Park', 'Gurgaon', 'Haryana', 'Grizzled Skipper', 'Nishand Venugopal', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '28.3736', '77.1709'),
@@ -233,7 +522,7 @@ INSERT INTO `butterflydata` (`img`, `date`, `location`, `city`, `state`, `specie
 ('5-16.jpg', '08-11-2018', 'Pune', 'Pune', 'Maharashtra', 'Grizzled skipper (Spialia Galba)', 'B Savit', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '18.51672', '73.856255'),
 ('5-17.jpg', '02-06-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Indian skipper', 'Harisha Achar', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97244', '77.580643'),
 ('5-18.jpg', '17-11-2018', 'N.Delhi', 'New Delhi', 'Delhi', 'Grass Skipper', 'Amrik Singh Uppal', 'Hesperiidae', '', '', '', 'Hesperiinae', '28.64236', '77.21711'),
-('5-19.jpg', '03-10-2018', 'Viralimalai', 'Viralimalai', 'Tamilnadu', 'Indian Skipper', 'Muthu Krishnan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.60368', 'Viralimalai'),
+('5-19.jpg', '03-10-2018', 'Viralimalai', 'Viralimalai', 'Tamilnadu', 'Indian Skipper', 'Muthu Krishnan', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '10.60368', '78.546211'),
 ('5-20.jpg', '15-03-2018', 'Bengaluru', 'Bangalore', 'Karnataka', 'Indian Grizzled Skipper', 'Nagraj Veeraswami', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '12.97244', '77.580643'),
 ('5-21.jpg', '01-04-2018', 'Pondicherry', '', 'Puducherry', 'Asian Marbled Skipper - Gomalia Elma', 'Gandhi Sankar', 'Gomalia Elma', 'elma', 'Gomalia', 'Carcharodini', 'Pyrginae', '11.91606', '79.812325'),
 ('5-22.jpg', '01-06-2018', 'Maharashtra', '', 'Maharashtra', 'Indian grizzled skipper', 'Ratindra Pandey', 'Spialia Galba', 'galba', 'Spialia', 'Carcharodini', 'Pyrginae', '19.66328', '75.300293'),
@@ -285,27 +574,13 @@ INSERT INTO `butterflydata` (`img`, `date`, `location`, `city`, `state`, `specie
 ('5-59.jpg', '22-03-2018', 'Arunachal Pradesh', '', 'ArunachalPradesh', 'Frosted duskywing (Erynnis Pelias) Kibithoo', 'Balaji P Balachandran', 'Erynnis pelias', 'pelias', 'Erynnis', 'Erynnini', 'Pyrginae', '27.84514', '95.247345'),
 ('5-60.jpg', '05-10-2018', 'Mangalore', 'Mangalore', 'Karnataka', 'Grass demon Sammilan', 'Sharan Venkatesh', 'Udaspes folus', 'folus', 'Udaspes', 'Aeromachini', 'Hesperiinae', '12.91560', '74.855965'),
 ('5-61.jpg', '10-07-2018', 'Kerala', '', 'Kerala', 'Bevans swift.', 'Roopa Raj', 'Borbo bevani Moore', 'bevani', 'Borbo', 'Baorini', 'Hesperiinae', '10.85051', '76.27108'),
-('5-61.jpg', '18-06-2018', 'Maharashtra', '', 'Maharashtra', 'Giant redeye Ratnagiri', 'Mangal Rane', 'Gangara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '19.66328', '75.300293');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `details`
---
-
-CREATE TABLE `details` (
-  `id` varchar(15) NOT NULL,
-  `scientificName` varchar(100) DEFAULT NULL,
-  `locationArea` varchar(50) DEFAULT NULL,
-  `genus` varchar(100) DEFAULT NULL,
-  `species` varchar(50) DEFAULT NULL,
-  `subspecies` varchar(50) DEFAULT NULL,
-  `copyrightOf` varchar(50) DEFAULT NULL,
-  `coordinates` varchar(25) DEFAULT NULL,
-  `month` int(10) DEFAULT NULL,
-  `year` int(10) DEFAULT NULL,
-  `imgPath` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+('5-61.jpg', '18-06-2018', 'Maharashtra', '', 'Maharashtra', 'Giant redeye Ratnagiri', 'Mangal Rane', 'Gangara Thyrsis', 'thyrsis', 'Gangara', 'Aeromachini', 'Hesperiinae', '19.66328', '75.300293'),
+('1-8.jpg', '2021-04-29', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'Spialia Galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19'),
+('1-8.jpg', '2021-04-29', 'Andhra Pradesh', NULL, NULL, 'banana skipper', 'gayatri', 'Erionota Thrax', 'thrax', 'Erionota', 'Aeromachini', 'Hesperiinae', '75', '19'),
+('butterfly.jpg', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'Banana Skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19'),
+('2.jpg', '2021-04-30', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19'),
+('2.jpg', '2021-04-30', 'Andhra Pradesh', NULL, NULL, 'indian grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19'),
+('butterfly2.jp', '2021-05-01', 'Andhra Pradesh', NULL, NULL, 'grizzled skipper', 'gayatri', 'spialia galba', 'Galba', 'Spialia', 'Carcharodini', 'Pyrginae', '75', '19');
 
 -- --------------------------------------------------------
 
@@ -669,12 +944,6 @@ INSERT INTO `user` (`name`, `email`, `password`, `user_id`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `details`
---
-ALTER TABLE `details`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
