@@ -22,7 +22,7 @@
     <a href="http://127.0.0.1:5000/">Home</a>
     <a href="http://127.0.0.1:5000/">About</a>
     <a class="" href="{{ url_for('images_grid') }}">Data</a>
-    <a class="" href="{{ url_for('upload') }}">Upload</a>
+    <a class="" href="{{url_for('upload')}}">Upload</a>
     {% if sess==false %}
     <a
       class="regbtn"
@@ -539,7 +539,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
               </div>
               <div class="text-container">
                   <h6>{{i[7]}}</h6>
-                  <p>Count: {{i[14]}}</p>
+                  <p>Count: {{i[15]}}</p>
               </div>
               <div>
                 <a href="#" class="btn btn-outline-success btn-icon-right">

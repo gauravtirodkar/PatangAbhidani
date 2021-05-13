@@ -595,7 +595,7 @@
           
           <div class="col-md-9" >
             <ul class="nav nav-pills" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
+              <!-- <li class="nav-item" role="presentation">
                 <button
                   class="btn btn-primary btn-lg nav-link active"
                   id="Table-tab"
@@ -614,18 +614,18 @@
                     >Table</a
                   >
                 </button>
-              </li>
+              </li> -->
 
               <li class="nav-item" role="presentation">
                 <button
-                  class="btn btn-primary btn-lg nav-link"
+                  class="btn btn-primary btn-lg nav-link active"
                   id="Gallery-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#Gallery"
                   type="button"
                   role="tab"
                   aria-controls="Gallery"
-                  aria-selected="false"
+                  aria-selected="true"
                 >
                   <a
                     href="#"
@@ -653,6 +653,27 @@
                     data-toggle="tooltip"
                     title="Click to view distribution of Skippers pan India"
                     >Map</a
+                  >
+                </button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                <button
+                  class="btn btn-primary btn-lg nav-link"
+                  id="Table-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#Table"
+                  type="button"
+                  role="tab"
+                  aria-controls="Table"
+                  aria-selected="false"
+                >
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    title="Data in tabular format"
+                    id="btnnn"
+                    >Table</a
                   >
                 </button>
               </li>
@@ -701,17 +722,8 @@
 
             <div class="tab-content" id="myTabContent">
               <div
-                style="padding: 10px; margin-right: 50px;"
-                class="tab-pane fade show active"
-                id="Table"
-                role="tabpanel"
-                aria-labelledby="Table-tab"
-              >
-                {% block table %}{% endblock %}
-              </div>
-              <div
                 style="padding: 10px; margin-right: 100px;"
-                class="tab-pane fade"
+                class="tab-pane fade show active"
                 id="Gallery"
                 role="tabpanel"
                 aria-labelledby="Gallery-tab"
@@ -763,6 +775,17 @@
                   ></iframe>
                 </div> -->
               </div>
+
+              <div
+                style="padding: 10px; margin-right: 50px;"
+                class="tab-pane fade"
+                id="Table"
+                role="tabpanel"
+                aria-labelledby="Table-tab"
+              >
+                {% block table %}{% endblock %}
+              </div>
+              
               <div
                 style="padding: 10px; margin-right: 100px;"
                 class="tab-pane fade"

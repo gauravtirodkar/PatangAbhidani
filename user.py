@@ -565,8 +565,13 @@ def img():
                 result["text6"],
                 result["text7"],
                 result["text8"],
+                result["search"],
+                result["lat"],
+                result["lng"]
             ]
-            
+            print(result["search"])
+            print(result["lat"], result["lng"])
+
             elevation = altitude(result["text7"], result["text8"])
 
             print(result["text2"])
