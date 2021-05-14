@@ -432,12 +432,12 @@ def updateTable():
                 width, height, url
             )
             + """ frameborder="0" ></img>
-            <p>scientific name :<b>{}</b>""".format(
+            <p> Scientific Name : <i> <b>{}</b> </i>""".format(
                 sn
             )
-            + """<br>date : <b>{}</b>""".format(datee)
-            + """<br>clicked by : <b>{}</b>""".format(cb)
-            + """<br>location : <b>{}</b>""".format(loc)
+            + """<br>Date : <b>{}</b>""".format(datee)
+            # + """<br>Clicked by : <b>{}</b>""".format(cb)
+            + """<br>Location : <b>{}</b>""".format(loc)
             + """</p>
         
         
@@ -455,8 +455,10 @@ def updateTable():
         )
         return html
     if not (df.empty):
+        sci_name = df[9] + " " + df[8]
+        print("Show this : ", sci_name)
         for img1, lat, lon, loc, datee, sn, cb in zip(
-            df[0], df[12], df[13], df[2], df[1], df[7], df[6]
+            df[0], df[12], df[13], df[2], df[1], sci_name, df[6]
         ):
 
             popup = get_frame(img1, 150, 150, loc, datee, sn, cb)
@@ -609,7 +611,7 @@ def img():
                     <p>scientific name :<b>{}</b>""".format(
                         sn
                     )
-                    + """<br>date : <b>{}</b>""".format(datee)
+                    + """<br>datse : <b>{}</b>""".format(datee)
                     + """<br>clicked by : <b>{}</b>""".format(cb)
                     + """<br>location : <b>{}</b>""".format(loc)
                     + """</p>
