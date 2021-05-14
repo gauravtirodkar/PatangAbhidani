@@ -1,6 +1,7 @@
 {% extends 'layout/addDatalayout.html' %} 
 
 {% block nav %}
+
 <div class="nav1">
   <input type="checkbox" id="nav-check" />
   <div class="nav-header">
@@ -24,7 +25,7 @@
   <div class="nav-links">
     <a href="http://127.0.0.1:5000/">Home</a>
     <a href="http://127.0.0.1:5000/">About</a>
-    <a class="" href="{{ url_for('images_grid') }}">Data</a>
+    <a class="" href="{{ url_for('images_grid') }}">Occurrences</a>
     <a class="" href="{{url_for('upload')}}">Upload</a>
     {% if sess==false %}
     <a
@@ -37,6 +38,7 @@
         padding-top: 7px;
         padding-bottom: 7px;
         margin-top: 5px;
+        border-radius: 12px;
       "
       >Register/Login</a
     >
@@ -64,8 +66,8 @@
 <div class="container">
   <div class="row text-center">
     <div class="analysis">
-      <h1 style="color: #fff;">Meet the family of skippers</h1>
-      <p style="color: #fff;">Tabular format, Gallery format, Map based filtering</p>
+      <h1 style="color: #fff;">Meet the family of Skippers</h1>
+      <p style="color: #fff;">(Tabular format, Gallery format, Map based filtering)</p>
     </div>
   </div>
 </div>
@@ -264,7 +266,7 @@ function exportTableToCSV(filename) {
   
   table th,
   table td {
-    text-align: center;
+    text-align: left;
   }
 
   table tr:nth-child(even) {
@@ -418,12 +420,12 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   <tbody>
     
     {% for data in data %}
-    <tr  style=" color: #56ab2f; font-weight: bold;">
-    <td>{{data[1]}}</td>
-    <td style="text-transform: capitalize;">{{data[5]}}</td>
-    <td> <i> {{data[9]}} {{data[8]}} </i></td>
-    <td>{{data[2]}}</td>
-    <td>{{'%0.2f'|format(data[14]|float)}}</td>
+    <tr  style=" color: #56ab2f; font-weight: bold; ">
+    <td style="text-align: center;">{{data[1]}}</td>
+    <td style="text-transform: capitalize;text-align: left;">{{data[5]}}</td>
+    <td style="text-align: left;"> <i> {{data[9]}} {{data[8]}} </i></td>
+    <td style="text-align: left;">{{data[2]}}</td>
+    <td style="text-align: center;">{{'%0.2f'|format(data[14]|float)}}</td>
 
    </tr>
     {% endfor %}
@@ -449,7 +451,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
       <style>
         /*----  Main Style  ----*/
   #cards_landscape_wrap-2{
-    text-align: center;
+    text-align: left;
     background: #F7F7F7;
   }
   #cards_landscape_wrap-2 .container{
@@ -487,7 +489,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     transform:scale(1.15);
   }
   #cards_landscape_wrap-2 .card-flyer .text-box{
-    text-align: center;
+    text-align: left;
   }
   #cards_landscape_wrap-2 .card-flyer .text-box .text-container{
     padding: 30px 18px;
@@ -547,7 +549,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
               </div>
               <div class="text-container">
                   <i class="gallery_sciname">{{i[9]}} {{i[8]}}</i>
-                  <p>Count: {{i[15]}}</p>
+                  <p style="font-size: 24px; ">Count : {{i[15]}}</p>
               </div>
               <!-- <div>
                 <a href="{{url_for('speciesgallery', species_name=i[9], sub_species=i[8])}}" class="btn btn-outline-success btn-icon-right">
@@ -601,7 +603,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 <div class="container-fluid">
   <div class="row">
     <div class="viz">
-      <h3>Species v/s Count</h3>
+      <h3> <b>Species v/s Count </b></h3>
       <div class="chart" id="bargraph">
         <script>
             var graphs = {{plot | safe}};
@@ -611,7 +613,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     </div>
 
     <div class="viz">
-      <h3>Location v/s Count</h3>
+      <h3> <b> Location v/s Count </b></h3>
       <div class="chart" id="locnvscount">
 
         <script>
@@ -622,7 +624,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     </div>
 
     <div class="viz">
-      <h3>Location v/s Species</h3>
+      <h3> <b>Location v/s Species</b></h3>
       <div class="chart" id="locnvsspecies">
 
         <script>

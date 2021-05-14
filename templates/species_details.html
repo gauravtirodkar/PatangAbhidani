@@ -10,10 +10,15 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Patang Abhidani</title>
   </head>
 
   <link rel="stylesheet" href="../../../static/css/navbar.css" />
+  <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="../static/img/pabhifinal.png" type="image/x-icon">
+    <link rel="icon" href="../static/img/pabhifinal.png" type="image/x-icon">
 
   <body id="body" style="overflow-x: hidden">
     <div class="nav1">
@@ -35,7 +40,7 @@
         <div class="nav-links">
           <a href="http://127.0.0.1:5000/">Home</a>
           <a href="http://127.0.0.1:5000/">About</a>
-          <a class="" href="{{ url_for('images_grid') }}">Data</a>
+          <a class="" href="{{ url_for('images_grid') }}">Occurrences</a>
           <a class="" href="{{ url_for('upload') }}">Upload</a>
           {% if sess==false %}
           <a
@@ -48,6 +53,7 @@
               padding-top: 7px;
               padding-bottom: 7px;
               margin-top: 5px;
+              border-radius: 12px;
             "
             >Register/Login</a
           >
@@ -81,7 +87,7 @@
         <div class="row text-center">
           <div class="analysis">
             <h1 style="color: #fff;">Meet {{breadcrumb[0][1]}} {{breadcrumb[0][0]}}</h1>
-            <p style="color: #fff;">Entire Data in Gallery Format</p>
+            <p style="color: #fff;">(Entire Data in Gallery Format)</p>
           </div>
         </div>
       </div>
@@ -251,27 +257,31 @@
         <div class="row" style="align-items: center; align-content: center">
           <div class="col-md-6 mt-md-0 mt-3">
             <h1 class="text-uppercase" style="color: aliceblue">
-              Patanga Abhidani
+              Patang Abhidani
             </h1>
-            <p style="color: #00a650">
-              A compelete guide on skipper butterflies
+            <p style="color: #00a650; font-size: 18px;">
+              A complete guide on skipper butterflies 
             </p>
           </div>
           <div class="col-md-6 mt-md-0 mt-3">
-            <h5 class="linke" style="color: aliceblue">Get help</h5>
-            <h5 class="linke" style="color: aliceblue">Email: greenworkstrust2016@gmail.com</h5>
+            <h5 class="linke" style="color: aliceblue">For Enquiries</h5>
+            <h6 class="linke" style="color: aliceblue"> <i class="fa fa-envelope" aria-hidden="true" style="color: aliceblue;"></i> Email: greenworkstrust2016@gmail.com</h6>
           </div>
           <div class="col-md-6 mt-md-0 mt-3">
             <h5 class="linke" style="color: aliceblue">
-              Contact us: 9819330222
+              <i class="fa fa-phone" style="color: aliceblue;"></i> Contact us: 9819330222
             </h5>
-            <h5 class="linke" style="color: aliceblue">Follow us: icon</h5>
+            <h5 class="linke" style="color: aliceblue">Follow us: 
+              <a href="http://twitter.com/greenworkstrust" target="_blank" style="color: aliceblue;" > <i class="fa fa-twitter" style="color: aliceblue;"></i></a>
+              <a href="https://www.facebook.com/GreenWorksTrust/" target="_blank" style="color: aliceblue;"> <i class="fa fa-facebook-f" aria-hidden="true" style="color: aliceblue;"></i></a>
+            </h5>
           </div>
           <div class="col-md-6 mt-md-0 mt-3">
-            <h5 class="linke" style="color: aliceblue">Made by: VESIT</h5>
-            <h5 class="linke" style="color: aliceblue">
-              In association with: Greenworks Trust
-            </h5>
+
+            <h6 class="linke" style="color: aliceblue">Developed by: Dept. of Computer Engineering, Vivekanand Education Society's Institute Of Technology</h6>
+            <h6 class="linke" style="color: aliceblue">
+              In association with: GreenWorks Trust
+            </h6>
           </div>
           <!-- Grid column -->
 
@@ -280,6 +290,8 @@
       </div>
       <!-- Copyright -->
     </footer>
+
+    
 
     <!-- <script src="./static/js/bootstrap.bundle.min.js "></script> -->
     <script src="../../../static/js/main.js "></script>
