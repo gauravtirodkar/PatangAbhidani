@@ -10,6 +10,9 @@
     <title>PatangAbhidani</title>
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="../../static/css/navbar.css" />
+
+
 
     <!-- mobile specific metas
     ================================================== -->
@@ -43,40 +46,58 @@
 
     <!-- header 
     ================================================== -->
-    <header class="s-header">
-
-        <div class="header-logo" style="margin-bottom: 10px;">
-            <a class="site-logo" href="" style="margin-right:20px">
-                <img src="../static/img/pfinal2-removebg-preview.png" alt="Logo" style="height:50px;">
-                <!-- <h3 style="color: #00a650; margin: auto; ">Patang-Abhidani</h3> -->
-            </a>
+    <div class="nav1 ">
+        <input type="checkbox" id="nav-check" />
+        <a class="navbar-brand" href="#" style="padding: 0%; margin-top: 5px;">
+            <img src="../static/img/pabhifinal.png" alt="Logo" style="height:50px;">
+          </a>
+        
+        <div class="nav-btn">
+          <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
         </div>
-
-        <nav class="row header-nav-wrap wide">
-            <ul class="header-main-nav">
-                <li class="current"><a class="smoothscroll" href="#home" title="intro">Home</a></li>
-                <li><a class="smoothscroll" href="#about" title="about">About</a></li>
-                <li><a class="smoothscroll" href="#info" title="info">Info</a></li>
-                <li><a class="" href="{{ url_for('images_grid') }}">Data</a></li>
-                <li><a class="" href="{{url_for('upload')}}">Upload</a></li>
-                
-            </ul>
-            {% if sess==false %}
-            <ul class="header-social">
-                <li><a class="" href="{{url_for('new_login')}}">Register/Login</a></li>
-            </ul>
-            {% endif %}
-            {% if sess==true %}
-            <ul class="header-social">
-                <li><a class="" href="{{url_for('logout')}}" style="background-color: transparent; color: #eee;">Log out</a></li>
-            </ul>
-            {% endif %}
-        </nav>
-
-        <a class="header-menu-toggle" href="#"><span>Menu</span></a>
-
-    </header> <!-- end header -->
-
+      
+        <div class="nav-links" style="margin-bottom: 8px;">
+            <a href="" > Patang-Abhidani</a>
+          <a style="padding: 0px;" href="http://127.0.0.1:5000/">Home</a>
+          <a href="http://127.0.0.1:5000/">About</a>
+          <a class="" href="{{ url_for('images_grid') }}">Data</a>
+          <a class="" href="{{url_for('upload')}}">Upload</a>
+          {% if sess==false %}
+          <a
+            class="regbtn"
+            href="{{url_for('new_login')}}"
+            style="
+              float: right;
+              background-color: #00a650;
+              margin-right: 60px;
+              padding-top: 7px;
+              padding-bottom: 7px;
+              margin-top: 5px;
+            "
+            >Register/Login</a
+          >
+          {% endif %}
+          {% if sess==true %}
+          <a
+            class="regbtn"
+            style="
+              float: right;
+              background-color: transparent;
+              margin-right: 60px;
+              padding-top: 7px;
+              padding-bottom: 7px;
+              margin-top: 5px;
+              color: #eee;
+            " href="{{url_for('logout')}}"
+            >Log out</a
+          >
+          {% endif %}
+        </div>
+      </div>
     <section id="home" class="s-home target-section">
 
        
@@ -213,7 +234,7 @@
                 </h5>
             </div>
             <div>
-                <h4>contact us: 9876543210 </h4>
+                <h4>contact us: 9819330222 </h4>
             </div>
 
         </div>
@@ -247,17 +268,17 @@
             </div>
             <div class="col-md-6 mt-md-0 mt-3"  > 
                 <h5 class="linke" style="color:aliceblue">Get help</h5>
-                <h5 class="linke" style="color:aliceblue">Email: XYZ@abc</h5>
+                <h5 class="linke" style="color:aliceblue">Email: greenworkstrust2016@gmail.com</h5>
             </div>
             <div class="col-md-6 mt-md-0 mt-3" > 
                 
-                <h5 class="linke" style="color:aliceblue">Contact us: 9876543210</h5>
+                <h5 class="linke" style="color:aliceblue">Contact us: 9819330222</h5>
                 <h5 class="linke" style="color:aliceblue">Follow us: icon</h5>
             </div>
             <div class="col-md-6 mt-md-0 mt-3" > 
                 
                 <h5 class="linke" style="color:aliceblue">Made by: VESIT</h5>
-                <h5 class="linke" style="color:aliceblue">In association with: Greenworks trust</h5>
+                <h5 class="linke" style="color:aliceblue">In association with: Greenworks Trust</h5>
             </div>
             <!-- Grid column -->
       
